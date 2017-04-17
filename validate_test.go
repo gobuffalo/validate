@@ -1,6 +1,8 @@
 package validate_test
 
 import (
+	"encoding/xml"
+	"fmt"
 	"testing"
 
 	. "github.com/markbates/validate"
@@ -29,4 +31,21 @@ func TestValidate(t *testing.T) {
 	r.Equal(errors.Errors["v2"], []string{"there's an error with v2"})
 
 	r.Equal(errors.String(), `{"errors":{"v1":["there's an error with v1"],"v2":["there's an error with v2"]}}`)
+}
+
+func Test_ErrorsXML(t *testing.T) {
+	r := require.New(t)
+
+	errors := Errors{
+		Errors: map[string][]string{
+			"name":  []string{"name1", "name2"},
+			"email": []string{"emailA", "emailB"},
+		},
+	}
+
+	x, err := xml.Marshal(errors)
+	r.NoError(err)
+	fmt.Printf("### x -> %+v\n", string(x))
+	r.Contains(string(x), "<errors>")
+	r.Contains(string(x), "<email><message>emailA")
 }

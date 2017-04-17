@@ -2,6 +2,7 @@ package validate
 
 import (
 	"encoding/json"
+	"encoding/xml"
 	"strings"
 	"sync"
 
@@ -11,8 +12,38 @@ import (
 // Errors holds onto all of the error messages
 // that get generated during the validation process.
 type Errors struct {
-	Errors map[string][]string `json:"errors"`
+	Errors map[string][]string `json:"errors" xml:"errors"`
 	Lock   *sync.RWMutex       `json:"-"`
+}
+
+func (e Errors) MarshalXML(enc *xml.Encoder, start xml.StartElement) error {
+	start.Name = xml.Name{Local: "errors"}
+	tokens := []xml.Token{start}
+
+	for name, messages := range e.Errors {
+		outer := xml.StartElement{Name: xml.Name{Local: name}}
+
+		tks := []xml.Token{outer}
+		for _, m := range messages {
+			t := xml.StartElement{Name: xml.Name{Local: "message"}}
+			tks = append(tks, t, xml.CharData(m), xml.EndElement{Name: xml.Name{Local: "message"}})
+		}
+
+		tokens = append(tokens, tks...)
+		tokens = append(tokens, xml.EndElement{Name: outer.Name})
+	}
+
+	tokens = append(tokens, xml.EndElement{Name: start.Name})
+
+	for _, t := range tokens {
+		err := enc.EncodeToken(t)
+		if err != nil {
+			return err
+		}
+	}
+
+	// flush to ensure tokens are written
+	return enc.Flush()
 }
 
 // Validator must be implemented in order to pass the
