@@ -1,5 +1,5 @@
 # github.com/markbates/validate
-
+[![Build Status](https://travis-ci.org/MrEhbr/validate.svg?branch=master)](https://travis-ci.org/MrEhbr/validate)
 This package provides a framework for writing validations for Go applications. It does not, however, provide you with any actual validators, that part is up to you.
 
 ## Installation
