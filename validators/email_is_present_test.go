@@ -5,7 +5,7 @@ import (
 
 	"github.com/markbates/validate"
 	"github.com/stretchr/testify/require"
-	. "gitlab.com/MrEhbr/validate/validators"
+	. "github.com/MrEhbr/validate/validators"
 )
 
 
