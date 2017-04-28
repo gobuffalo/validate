@@ -2,8 +2,8 @@ package validators_test
 
 import (
 	"testing"
-	"github.com/MrEhbr/validate"
-	. "github.com/MrEhbr/validate/validators"
+	"github.com/markbates/validate"
+	. "github.com/markbates/validate/validators"
 	"github.com/stretchr/testify/require"
 	"fmt"
 )

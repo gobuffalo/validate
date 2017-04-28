@@ -1,7 +1,7 @@
 package validators
 
 import (
-	"github.com/MrEhbr/validate"
+	"github.com/markbates/validate"
 	"fmt"
 	"unicode/utf8"
 )
