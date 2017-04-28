@@ -15,12 +15,12 @@ type EmailIsPresent struct {
 	Message string
 }
 
-// IsValid performs the validation based on the regexp match.
+// IsValid performs the validation based on the email regexp match.
 func (v *EmailIsPresent ) IsValid(errors *validate.Errors) {
 	r := regexp.MustCompile(rxEmail)
 	if !r.Match([]byte(v.Field)) {
 		if v.Message == "" {
-			v.Message = fmt.Sprintf("%s does not match the expected format.", v.Name)
+			v.Message = fmt.Sprintf("%s does not match the email format.", v.Name)
 		}
 		errors.Add(GenerateKey(v.Name), v.Message)
 	}

@@ -14,7 +14,7 @@ type StringLengthInRange struct {
 	Message string
 }
 
-// StringLengthInRange validator checks that string in range of min:max
+// IsValid checks that string in range of min:max
 // if max not present or it equal to 0 it will be equal to string length
 func (v *StringLengthInRange) IsValid(errors *validate.Errors) {
 	strLength := utf8.RuneCountInString(v.Field)
