@@ -33,6 +33,13 @@ func TestValidate(t *testing.T) {
 	r.Equal(errors.String(), `{"errors":{"v1":["there's an error with v1"],"v2":["there's an error with v2"]}}`)
 }
 
+func TestErrorsKeys(t *testing.T) {
+	r := require.New(t)
+	errors := Validate(&v1{}, &v2{})
+	r.Contains(errors.Keys(), "v1")
+	r.Contains(errors.Keys(), "v2")
+}
+
 func Test_ErrorsXML(t *testing.T) {
 	r := require.New(t)
 

@@ -124,6 +124,16 @@ func (v *Errors) String() string {
 	return string(b)
 }
 
+// Keys return all field names which have error
+func (v *Errors) Keys() []string {
+	keys := []string{}
+	for key := range v.Errors {
+		keys = append(keys, key)
+	}
+
+	return keys
+}
+
 // Validate takes in n number of Validator objects and will run
 // them and return back a point to a Errors object that
 // will contain any errors.
