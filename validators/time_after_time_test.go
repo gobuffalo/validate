@@ -9,10 +9,10 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_TimeIsAfterTime(t *testing.T) {
+func Test_TimeAfterTime(t *testing.T) {
 	r := require.New(t)
 	now := time.Now()
-	v := TimeIsAfterTime{
+	v := TimeAfterTime{
 		FirstName: "Opens At", FirstTime: now.Add(100000),
 		SecondName: "Now", SecondTime: now,
 	}
