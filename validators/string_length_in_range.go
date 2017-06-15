@@ -1,16 +1,16 @@
 package validators
 
 import (
-	"github.com/markbates/validate"
 	"fmt"
+	"github.com/markbates/validate"
 	"unicode/utf8"
 )
 
 type StringLengthInRange struct {
-	Name string
-	Field string
-	Min int
-	Max int
+	Name    string
+	Field   string
+	Min     int
+	Max     int
 	Message string
 }
 
@@ -25,6 +25,6 @@ func (v *StringLengthInRange) IsValid(errors *validate.Errors) {
 		v.Message = fmt.Sprintf("String not in range(%s, %s)", v.Min, v.Max)
 	}
 	if !(strLength >= v.Min && strLength <= v.Max) {
-		errors.Add(v.Name, v.Message)
+		errors.Add(GenerateKey(v.Name), v.Message)
 	}
 }
