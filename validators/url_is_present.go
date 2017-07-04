@@ -13,7 +13,7 @@ type URLIsPresent struct {
 	Message string
 }
 
-// IsValid performs the validation based on the email regexp match.
+// IsValid performs the validation to check if URL is formatted correctly
 // uses net/url ParseRequestURI to check validity
 func (v *URLIsPresent) IsValid(errors *validate.Errors) {
 	if v.Field == "http://" || v.Field == "https://" {

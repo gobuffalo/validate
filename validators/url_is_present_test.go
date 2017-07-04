@@ -1,7 +1,6 @@
 package validators
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/markbates/validate"
@@ -29,7 +28,6 @@ func Test_URLIsPresent(t *testing.T) {
 	for _, test := range tests {
 		v := URLIsPresent{Name: "URL", Field: test.url}
 		errors := validate.NewErrors()
-		fmt.Println(errors)
 		v.IsValid(errors)
 		r.Equal(test.valid, !errors.HasAny())
 	}
