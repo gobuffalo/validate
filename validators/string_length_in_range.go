@@ -1,16 +1,17 @@
 package validators
 
 import (
-	"github.com/markbates/validate"
 	"fmt"
 	"unicode/utf8"
+
+	"github.com/markbates/validate"
 )
 
 type StringLengthInRange struct {
-	Name string
-	Field string
-	Min int
-	Max int
+	Name    string
+	Field   string
+	Min     int
+	Max     int
 	Message string
 }
 

@@ -4,17 +4,16 @@ import (
 	"testing"
 
 	"github.com/markbates/validate"
-	"github.com/stretchr/testify/require"
 	. "github.com/markbates/validate/validators"
+	"github.com/stretchr/testify/require"
 )
-
 
 func Test_EmailIsPresent(t *testing.T) {
 	r := require.New(t)
 
 	var tests = []struct {
-		email    string
-		valid    bool
+		email string
+		valid bool
 	}{
 		{"", false},
 		{"foo@bar.com", true},
