@@ -2,6 +2,7 @@ package validators
 
 import (
 	"fmt"
+	"github.com/markbates/validate"
 	"unicode/utf8"
 
 	"github.com/markbates/validate"
@@ -26,6 +27,6 @@ func (v *StringLengthInRange) IsValid(errors *validate.Errors) {
 		v.Message = fmt.Sprintf("String not in range(%s, %s)", v.Min, v.Max)
 	}
 	if !(strLength >= v.Min && strLength <= v.Max) {
-		errors.Add(v.Name, v.Message)
+		errors.Add(GenerateKey(v.Name), v.Message)
 	}
 }
