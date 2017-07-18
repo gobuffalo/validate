@@ -27,12 +27,15 @@ func (v *EmailIsPresent) IsValid(errors *validate.Errors) {
 	}
 }
 
+// EmailLike checks that email has two parts (username and domain separated by @)
+// Also it check that domain have domain zone (don`t check that zone is valid)
 type EmailLike struct {
 	Name    string
 	Field   string
 	Message string
 }
 
+// IsValid performs the validation based on email struct (username@domain)
 func (v *EmailLike) IsValid(errors *validate.Errors) {
 	parts := strings.Split(v.Field, "@")
 	if len(parts) != 2 || len(parts[0]) == 0 || len(parts[1]) == 0{
