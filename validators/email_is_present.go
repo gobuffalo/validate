@@ -2,8 +2,8 @@ package validators
 
 import (
 	"fmt"
-
 	"regexp"
+	"strings"
 
 	"github.com/markbates/validate"
 )
@@ -27,5 +27,33 @@ func (v *EmailIsPresent) IsValid(errors *validate.Errors) {
 			v.Message = fmt.Sprintf("%s does not match the email format.", v.Name)
 		}
 		errors.Add(GenerateKey(v.Name), v.Message)
+	}
+}
+
+// EmailLike checks that email has two parts (username and domain separated by @)
+// Also it check that domain have domain zone (don`t check that zone is valid)
+type EmailLike struct {
+	Name    string
+	Field   string
+	Message string
+}
+
+// IsValid performs the validation based on email struct (username@domain)
+func (v *EmailLike) IsValid(errors *validate.Errors) {
+	parts := strings.Split(v.Field, "@")
+	if len(parts) != 2 || len(parts[0]) == 0 || len(parts[1]) == 0{
+		if v.Message == "" {
+			v.Message = fmt.Sprintf("%s does not match the email format.", v.Name)
+		}
+		errors.Add(GenerateKey(v.Name), v.Message)
+	} else if len(parts) == 2 {
+		domain := parts[1]
+		// Check that domain is valid
+		if len(strings.Split(domain, ".")) < 2 {
+			if v.Message == "" {
+				v.Message = fmt.Sprintf("%s does not match the email format (email domain).", v.Name)
+			}
+			errors.Add(GenerateKey(v.Name), v.Message)
+		}
 	}
 }
