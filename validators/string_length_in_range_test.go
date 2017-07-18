@@ -1,11 +1,12 @@
 package validators_test
 
 import (
+	"fmt"
 	"testing"
+
 	"github.com/markbates/validate"
 	. "github.com/markbates/validate/validators"
 	"github.com/stretchr/testify/require"
-	"fmt"
 )
 
 func Test_StringLengthInRange(t *testing.T) {
@@ -27,7 +28,7 @@ func Test_StringLengthInRange(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		v := StringLengthInRange{Name: "email", Field: test.value, Min: test.min, Max:test.max}
+		v := StringLengthInRange{Name: "email", Field: test.value, Min: test.min, Max: test.max}
 		errors := validate.NewErrors()
 		v.IsValid(errors)
 		r.Equal(test.expected, !errors.HasAny(), fmt.Sprintf("Value: %s, Min:%d, Max:%d", test.value, test.min, test.max))
