@@ -21,7 +21,9 @@ func Test_URLIsPresent(t *testing.T) {
 		{"google.com", false},
 		{"http://www.google.com", true},
 		{"http://google.com", true},
+		{"google.com", false},
 		{"https://www.google.cOM", true},
+		{"ht123tps://www.google.cOM", false},
 		{"https://golang.Org", true},
 		{"https://invalid#$%#$@.Org", false},
 	}
@@ -29,6 +31,6 @@ func Test_URLIsPresent(t *testing.T) {
 		v := URLIsPresent{Name: "URL", Field: test.url}
 		errors := validate.NewErrors()
 		v.IsValid(errors)
-		r.Equal(test.valid, !errors.HasAny())
+		r.Equal(test.valid, !errors.HasAny(), test.url, errors.Error())
 	}
 }
