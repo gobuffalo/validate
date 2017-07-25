@@ -13,7 +13,7 @@ type StringsMatch struct {
 	Message string
 }
 
-// IsValid performs the validation of two strings.
+// IsValid performs the validation equality of two strings.
 func (v *StringsMatch) IsValid(errors *validate.Errors) {
 	if strings.TrimSpace(v.Field) != strings.TrimSpace(v.Field2) {
 		if v.Message == "" {
