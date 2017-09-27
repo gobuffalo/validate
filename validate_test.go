@@ -2,7 +2,6 @@ package validate_test
 
 import (
 	"encoding/xml"
-	"fmt"
 	"testing"
 
 	. "github.com/markbates/validate"
@@ -52,7 +51,6 @@ func Test_ErrorsXML(t *testing.T) {
 
 	x, err := xml.Marshal(errors)
 	r.NoError(err)
-	fmt.Printf("### x -> %+v\n", string(x))
 	r.Contains(string(x), "<errors>")
 	r.Contains(string(x), "<email><message>emailA")
 }
