@@ -1,10 +1,11 @@
 package validators_test
 
 import (
+	"testing"
+
 	"github.com/markbates/validate"
 	"github.com/markbates/validate/validators"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_StringsMatch_IsValid(t *testing.T) {

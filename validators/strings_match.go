@@ -2,8 +2,9 @@ package validators
 
 import (
 	"fmt"
-	"github.com/markbates/validate"
 	"strings"
+
+	"github.com/markbates/validate"
 )
 
 type StringsMatch struct {

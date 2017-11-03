@@ -23,7 +23,7 @@ func (v *StringLengthInRange) IsValid(errors *validate.Errors) {
 		v.Max = strLength
 	}
 	if v.Message == "" {
-		v.Message = fmt.Sprintf("String not in range(%d, %d)", v.Min, v.Max)
+		v.Message = fmt.Sprintf("%s not in range(%d, %d)", v.Name, v.Min, v.Max)
 	}
 	if !(strLength >= v.Min && strLength <= v.Max) {
 		errors.Add(GenerateKey(v.Name), v.Message)
