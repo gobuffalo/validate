@@ -3,7 +3,7 @@ package validators
 import (
 	"testing"
 
-	"github.com/markbates/validate"
+	"github.com/gobuffalo/validate"
 	"github.com/stretchr/testify/require"
 )
 

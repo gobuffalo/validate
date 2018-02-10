@@ -3,8 +3,8 @@ package validators
 import (
 	"fmt"
 
+	"github.com/gobuffalo/validate"
 	"github.com/markbates/going/defaults"
-	"github.com/markbates/validate"
 )
 
 type FuncValidator struct {

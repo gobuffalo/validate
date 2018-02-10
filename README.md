@@ -1,12 +1,12 @@
-# github.com/markbates/validate
-[![Build Status](https://travis-ci.org/markbates/validate.svg?branch=master)](https://travis-ci.org/markbates/validate)
+# github.com/gobuffalo/validate
+[![Build Status](https://travis-ci.org/gobuffalo/validate.svg?branch=master)](https://travis-ci.org/gobuffalo/validate)
 
 This package provides a framework for writing validations for Go applications. It does not, however, provide you with any actual validators, that part is up to you.
 
 ## Installation
 
 ```bash
-$ go get github.com/markbates/validate
+$ go get github.com/gobuffalo/validate
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ package main
 import (
 	"log"
 
-	v "github.com/markbates/validate"
+	v "github.com/gobuffalo/validate"
 )
 
 type User struct {
@@ -56,7 +56,7 @@ import (
 	"log"
 	"strings"
 
-	v "github.com/markbates/validate"
+	v "github.com/gobuffalo/validate"
 )
 
 type User struct {

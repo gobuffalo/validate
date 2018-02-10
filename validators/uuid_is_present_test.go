@@ -3,16 +3,17 @@ package validators_test
 import (
 	"testing"
 
-	"github.com/markbates/validate"
-	. "github.com/markbates/validate/validators"
-	uuid "github.com/satori/go.uuid"
+	uuid "github.com/gobuffalo/uuid"
+	"github.com/gobuffalo/validate"
+	. "github.com/gobuffalo/validate/validators"
 	"github.com/stretchr/testify/require"
 )
 
 func Test_UUIDIsPresent(t *testing.T) {
 	r := require.New(t)
 
-	id := uuid.NewV4()
+	id, err := uuid.NewV4()
+	r.NoError(err)
 	v := UUIDIsPresent{"Name", id}
 	errors := validate.NewErrors()
 	v.IsValid(errors)

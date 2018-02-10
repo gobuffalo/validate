@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/markbates/validate"
+	"github.com/gobuffalo/validate"
 )
 
 type TimeIsBeforeTime struct {

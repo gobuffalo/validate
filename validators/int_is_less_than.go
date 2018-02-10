@@ -3,7 +3,7 @@ package validators
 import (
 	"fmt"
 
-	"github.com/markbates/validate"
+	"github.com/gobuffalo/validate"
 )
 
 type IntIsLessThan struct {

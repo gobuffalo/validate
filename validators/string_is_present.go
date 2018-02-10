@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/markbates/validate"
+	"github.com/gobuffalo/validate"
 )
 
 type StringIsPresent struct {

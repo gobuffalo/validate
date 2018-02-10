@@ -3,8 +3,8 @@ package validators_test
 import (
 	"testing"
 
-	"github.com/markbates/validate"
-	. "github.com/markbates/validate/validators"
+	"github.com/gobuffalo/validate"
+	. "github.com/gobuffalo/validate/validators"
 	"github.com/stretchr/testify/require"
 )
 

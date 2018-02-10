@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/markbates/validate"
+	"github.com/gobuffalo/validate"
 )
 
 // RegexMatch specifies the properties needed by the validation.
