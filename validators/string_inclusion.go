@@ -14,6 +14,7 @@ type StringInclusion struct {
 	Message string
 }
 
+// IsValid adds an error if the field is not one of the allowed values.
 func (v *StringInclusion) IsValid(errors *validate.Errors) {
 	found := false
 	for _, l := range v.List {
