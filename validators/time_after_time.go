@@ -21,7 +21,7 @@ func (v *TimeAfterTime) IsValid(errors *validate.Errors) {
 		return
 	}
 
-	if len(v.Message) == 0 {
+	if len(v.Message) > 0 {
 		errors.Add(GenerateKey(v.FirstName), v.Message)
 		return
 	}
