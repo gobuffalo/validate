@@ -79,13 +79,13 @@ func main() {
 	u := User{Name: "", Email: ""}
 	errors := v.Validate(&PresenceValidator{"Email", u.Email}, &PresenceValidator{"Name", u.Name})
 	log.Println(errors.Errors)
-  // map[name:[Name must not be blank!] email:[Email must not be blank!]]
+        // map[name:[Name must not be blank!] email:[Email must not be blank!]]
 }
 ```
 
 That's really it. Pretty simple and straight-forward Just a nice clean framework for writing your own validators. Use in good health.
 
-## Built-in validators
+## Built-in Validators
 
 To make it even simpler, this package has a children package with some nice built-in validators.
 
@@ -118,20 +118,6 @@ func main() {
 
 All fields are required for each validators, except Message (every validator has a default error message).
 
-### Validators available
+### Available Validators
 
-* BytesArePresent {Name string, Field []byte, Message string}
-* EmailIsPresent {Name string, Field string, Message string}
-* EmailLike struct {Name string, Field string, Message string}
-* IntArrayIsPresent {Name string, Field []int, Message string}
-* IntIsGreaterThan {Name string, Field int, Compared int, Message string}
-* IntIsLessThan {Name string, Field int, Compared int, Message string}
-* IntIsPresent {Name string, Field int, Message string}
-* RegexMatch {Name string, Field string, Expr string, Message string}
-* StringIsPresent {Name string, Field string, Message string}
-* StringLengthInRange {Name string, Field string, Min int, Max int, Message string}
-* StringsMatch {Name string, Field string, Field2 string, Message string}
-* TimeAfterTime {FirstName string, FirstTime time.Time, SecondName string, SecondTime time.Time, Message string}
-* TimeIsPresent {Name string, Field time.Time, Message string}
-* URLIsPresent {Name string, Field string, Message string}
-* UUIDIsPresent {Name string, Field uuid.UUID, Message string}
+A full list of available validators can be found at [https://godoc.org/github.com/gobuffalo/validate/validators](https://godoc.org/github.com/gobuffalo/validate/validators).
