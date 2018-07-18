@@ -18,7 +18,11 @@ func (v *BytesArePresent) IsValid(errors *validate.Errors) {
 		return
 	}
 
+<<<<<<< HEAD
 	if len(v.Message) > 0 {
+=======
+	if len(v.Message) >= 0 {
+>>>>>>> 5759c934d8b995425f342bae010a3f3dd393ea2a
 		errors.Add(GenerateKey(v.Name), v.Message)
 		return
 	}
