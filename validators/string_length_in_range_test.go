@@ -33,4 +33,10 @@ func Test_StringLengthInRange(t *testing.T) {
 		v.IsValid(errors)
 		r.Equal(test.expected, !errors.HasAny(), fmt.Sprintf("Value: %s, Min:%d, Max:%d", test.value, test.min, test.max))
 	}
+	v := StringLengthInRange{Name: "email", Field: "1234567", Min: 40, Max: 50, Message: "Value length not between 40 and 50."}
+	errors := validate.NewErrors()
+	v.IsValid(errors)
+	r.Equal(errors.Count(), 1)
+	r.Equal(errors.Get("email"), []string{"Value length not between 40 and 50."})
+
 }

@@ -33,4 +33,9 @@ func Test_URLIsPresent(t *testing.T) {
 		v.IsValid(errors)
 		r.Equal(test.valid, !errors.HasAny(), test.url, errors.Error())
 	}
+	v := URLIsPresent{Name: "URL", Field: "http://", Message: "URL isn't valid."}
+	errors := validate.NewErrors()
+	v.IsValid(errors)
+	r.Equal(errors.Count(), 1)
+	r.Equal(errors.Get("url"), []string{"URL isn't valid."})
 }

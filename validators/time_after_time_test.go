@@ -17,13 +17,21 @@ func Test_TimeAfterTime(t *testing.T) {
 		SecondName: "Now", SecondTime: now,
 	}
 
-	es := validate.NewErrors()
-	v.IsValid(es)
-	r.Equal(0, es.Count())
+	errors := validate.NewErrors()
+	v.IsValid(errors)
+	r.Equal(0, errors.Count())
 
 	v.SecondTime = now.Add(200000)
-	v.IsValid(es)
+	v.IsValid(errors)
 
-	r.Equal(1, es.Count())
-	r.Equal(es.Get("opens_at"), []string{"Opens At must be after Now."})
+	r.Equal(1, errors.Count())
+	r.Equal(errors.Get("opens_at"), []string{"Opens At must be after Now."})
+
+	errors = validate.NewErrors()
+	v.Message = "OpensAt must be later than Now."
+
+	v.IsValid(errors)
+
+	r.Equal(1, errors.Count())
+	r.Equal(errors.Get("opens_at"), []string{"OpensAt must be later than Now."})
 }

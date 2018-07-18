@@ -27,6 +27,13 @@ func Test_StringsMatch_IsValid(t *testing.T) {
 		v.IsValid(errors)
 		r.Equal(test_case.expected, !errors.HasAny(), "Str1: %s, Str2: %s", test_case.str1, test_case.str2)
 	}
+
+	v := validators.StringsMatch{Name: "strings", Field: "test_fail", Field2: "test", Message: "String doesn't match."}
+	errors := validate.NewErrors()
+	v.IsValid(errors)
+	r.Equal(errors.Count(), 1)
+	r.Equal(errors.Get("strings"), []string{"String doesn't match."})
+
 }
 
 func BenchmarkStringsMatch_IsValid_Valid(b *testing.B) {

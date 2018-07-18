@@ -20,4 +20,10 @@ func Test_IntIsGreaterThan(t *testing.T) {
 	v.IsValid(errors)
 	r.Equal(1, errors.Count())
 	r.Equal(errors.Get("number"), []string{"1 is not greater than 2."})
+
+	v = IntIsGreaterThan{Name: "number", Field: 1, Compared: 2, Message: "number isn't greater than 2."}
+	errors = validate.NewErrors()
+	v.IsValid(errors)
+	r.Equal(1, errors.Count())
+	r.Equal(errors.Get("number"), []string{"number isn't greater than 2."})
 }

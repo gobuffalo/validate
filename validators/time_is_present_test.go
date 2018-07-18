@@ -11,13 +11,25 @@ import (
 
 func Test_TimeIsPresent(t *testing.T) {
 	r := require.New(t)
-	v := TimeIsPresent{"Created At", time.Now()}
-	es := validate.NewErrors()
-	v.IsValid(es)
-	r.Equal(0, es.Count())
+	v := TimeIsPresent{Name: "Created At", Field: time.Now()}
+	errors := validate.NewErrors()
+	v.IsValid(errors)
+	r.Equal(0, errors.Count())
 
-	v = TimeIsPresent{"Created At", time.Time{}}
-	v.IsValid(es)
-	r.Equal(1, es.Count())
-	r.Equal(es.Get("created_at"), []string{"Created At can not be blank."})
+	v = TimeIsPresent{Name: "Created At", Field: time.Time{}}
+	v.IsValid(errors)
+	r.Equal(1, errors.Count())
+	r.Equal(errors.Get("created_at"), []string{"Created At can not be blank."})
+
+	errors = validate.NewErrors()
+	v = TimeIsPresent{Name: "Created At", Field: time.Time{}, Message: "Field can't be blank."}
+	v.IsValid(errors)
+	r.Equal(errors.Count(), 1)
+	r.Equal(errors.Get("created_at"), []string{"Field can't be blank."})
+
+	errors = validate.NewErrors()
+	v = TimeIsPresent{"Created At", time.Time{}, "Field can't be blank."}
+	v.IsValid(errors)
+	r.Equal(errors.Count(), 1)
+	r.Equal(errors.Get("created_at"), []string{"Field can't be blank."})
 }

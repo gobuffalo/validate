@@ -17,13 +17,21 @@ func Test_TimeIsBeforeTime(t *testing.T) {
 		SecondName: "Closes At", SecondTime: now.Add(100000),
 	}
 
-	es := validate.NewErrors()
-	v.IsValid(es)
-	r.Equal(0, es.Count())
+	errors := validate.NewErrors()
+	v.IsValid(errors)
+	r.Equal(0, errors.Count())
 
 	v.SecondTime = now.Add(-100000)
-	v.IsValid(es)
+	v.IsValid(errors)
 
-	r.Equal(1, es.Count())
-	r.Equal(es.Get("opens_at"), []string{"Opens At must be before Closes At."})
+	r.Equal(1, errors.Count())
+	r.Equal(errors.Get("opens_at"), []string{"Opens At must be before Closes At."})
+
+	errors = validate.NewErrors()
+	v.Message = "OpensAt must be earlier than ClosesAt."
+
+	v.IsValid(errors)
+
+	r.Equal(1, errors.Count())
+	r.Equal(errors.Get("opens_at"), []string{"OpensAt must be earlier than ClosesAt."})
 }
