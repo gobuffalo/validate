@@ -23,9 +23,9 @@ jhw.*
 node_modules/
 dist/
 generated/
-.idea
 .vendor/
 bin/*
 gin-bin
+.idea/
 go.mod
 go.sum
