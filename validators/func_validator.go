@@ -20,6 +20,6 @@ func (f *FuncValidator) IsValid(verrs *validate.Errors) {
 		f.Name = f.Field
 	}
 	if !f.Fn() {
-		verrs.Add(GenerateKey(f.Name), fmt.Sprintf(f.Message, f.Field))
+		verrs.Add(GenerateKey(f.Name), fmt.Sprintf(f.Message))
 	}
 }
