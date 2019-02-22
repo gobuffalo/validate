@@ -3,25 +3,26 @@ package validators
 import (
 	"fmt"
 
-	"github.com/gobuffalo/validate"
+	"github.com/s3rj1k/validator"
 )
 
+// IntArrayIsPresent is a validator object
 type IntArrayIsPresent struct {
 	Name    string
 	Field   []int
 	Message string
 }
 
-// IsValid adds an error if the field is an empty array.
-func (v *IntArrayIsPresent) IsValid(errors *validate.Errors) {
+// Validate adds an error if the field is an empty array.
+func (v *IntArrayIsPresent) Validate(e *validator.Errors) {
 	if len(v.Field) > 0 {
 		return
 	}
 
 	if len(v.Message) > 0 {
-		errors.Add(GenerateKey(v.Name), v.Message)
+		e.Add(v.Name, v.Message)
 		return
 	}
 
-	errors.Add(GenerateKey(v.Name), fmt.Sprintf("%s can not be empty.", v.Name))
+	e.Add(v.Name, fmt.Sprintf("%s can not be empty.", v.Name))
 }

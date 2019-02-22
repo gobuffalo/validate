@@ -1,0 +1,33 @@
+run:
+  deadline: 5m
+  skip-dirs:
+    - autogen/.*
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+  govet:
+    check-shadowing: true
+  gocyclo:
+    min-complexity: 26
+  maligned:
+    suggest-new: true
+  depguard:
+    list-type: blacklist
+    include-go-root: true
+    packages:
+      - github.com/davecgh/go-spew/spew
+  misspell:
+    locale: US
+  lll:
+    line-length: 200
+  unparam:
+    # call graph construction algorithm (cha, rta). In general, use cha for libraries,
+    # and rta for programs with main packages. Default is cha.
+    algo: cha
+  prealloc:
+    for-loops: true
+linters:
+  enable-all: true
+  disable:
+    - dupl
+    - goimports

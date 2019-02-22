@@ -3,9 +3,10 @@ package validators
 import (
 	"fmt"
 
-	"github.com/gobuffalo/validate"
+	"github.com/s3rj1k/validator"
 )
 
+// IntIsGreaterThan is a validator object
 type IntIsGreaterThan struct {
 	Name     string
 	Field    int
@@ -13,16 +14,16 @@ type IntIsGreaterThan struct {
 	Message  string
 }
 
-// IsValid adds an error if the field is not greater than the compared value.
-func (v *IntIsGreaterThan) IsValid(errors *validate.Errors) {
+// Validate adds an error if the field is not greater than the compared value.
+func (v *IntIsGreaterThan) Validate(e *validator.Errors) {
 	if v.Field > v.Compared {
 		return
 	}
 
 	if len(v.Message) > 0 {
-		errors.Add(GenerateKey(v.Name), v.Message)
+		e.Add(v.Name, v.Message)
 		return
 	}
 
-	errors.Add(GenerateKey(v.Name), fmt.Sprintf("%d is not greater than %d.", v.Field, v.Compared))
+	e.Add(v.Name, fmt.Sprintf("%d is not greater than %d.", v.Field, v.Compared))
 }

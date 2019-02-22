@@ -3,25 +3,26 @@ package validators
 import (
 	"fmt"
 
-	"github.com/gobuffalo/validate"
+	"github.com/s3rj1k/validator"
 )
 
+// IntIsPresent is a validator object
 type IntIsPresent struct {
 	Name    string
 	Field   int
 	Message string
 }
 
-// IsValid adds an error if the field equals 0.
-func (v *IntIsPresent) IsValid(errors *validate.Errors) {
+// Validate adds an error if the field equals 0.
+func (v *IntIsPresent) Validate(e *validator.Errors) {
 	if v.Field != 0 {
 		return
 	}
 
 	if len(v.Message) > 0 {
-		errors.Add(GenerateKey(v.Name), v.Message)
+		e.Add(v.Name, v.Message)
 		return
 	}
 
-	errors.Add(GenerateKey(v.Name), fmt.Sprintf("%s can not be blank.", v.Name))
+	e.Add(v.Name, fmt.Sprintf("%s can not be blank.", v.Name))
 }

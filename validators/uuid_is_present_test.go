@@ -1,38 +1,44 @@
-package validators_test
+package validators
 
 import (
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
-	uuid "github.com/gofrs/uuid"
+	u "github.com/gofrs/uuid"
+	"github.com/s3rj1k/validator"
+
 	"github.com/stretchr/testify/require"
 )
 
 func Test_UUIDIsPresent(t *testing.T) {
+
 	r := require.New(t)
 
-	id, err := uuid.NewV4()
+	id, err := u.NewV4()
 	r.NoError(err)
+
 	v := UUIDIsPresent{Name: "Name", Field: id}
-	errors := validate.NewErrors()
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 0)
+	e := validator.NewErrors()
+	v.Validate(e)
 
-	v = UUIDIsPresent{Name: "Name", Field: uuid.UUID{}}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Name can not be blank."})
+	r.Equal(0, e.Count())
 
-	errors = validate.NewErrors()
-	v = UUIDIsPresent{Name: "Name", Field: uuid.UUID{}, Message: "Field can't be blank."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
+	v = UUIDIsPresent{Name: "Name", Field: u.UUID{}}
+	v.Validate(e)
 
-	errors = validate.NewErrors()
-	v = UUIDIsPresent{"Name", uuid.UUID{}, "Field can't be blank."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Name can not be blank."}, e.Get("Name"))
+
+	e = validator.NewErrors()
+	v = UUIDIsPresent{Name: "Name", Field: u.UUID{}, Message: "Field can't be blank."}
+	v.Validate(e)
+
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Field can't be blank."}, e.Get("Name"))
+
+	e = validator.NewErrors()
+	v = UUIDIsPresent{"Name", u.UUID{}, "Field can't be blank."}
+	v.Validate(e)
+
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Field can't be blank."}, e.Get("Name"))
 }

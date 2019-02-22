@@ -3,11 +3,10 @@ package validators
 import (
 	"fmt"
 
-	"github.com/gobuffalo/validate"
+	"github.com/s3rj1k/validator"
 )
 
-// IntsAreEqual is a validator that will compare two integers and add
-// an error if they are not equal
+// IntsAreEqual is a validator object
 type IntsAreEqual struct {
 	ValueOne int
 	ValueTwo int
@@ -15,8 +14,9 @@ type IntsAreEqual struct {
 	Message  string
 }
 
-func (v *IntsAreEqual) IsValid(errors *validate.Errors) {
+// Validate is a validator that will compare two integers and add an error if they are not equal
+func (v *IntsAreEqual) Validate(e *validator.Errors) {
 	if v.ValueOne != v.ValueTwo {
-		errors.Add(GenerateKey(v.Name), fmt.Sprintf("%d is not equal to %d", v.ValueOne, v.ValueTwo))
+		e.Add(v.Name, fmt.Sprintf("%d is not equal to %d", v.ValueOne, v.ValueTwo))
 	}
 }

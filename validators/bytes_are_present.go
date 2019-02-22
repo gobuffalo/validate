@@ -3,25 +3,26 @@ package validators
 import (
 	"fmt"
 
-	"github.com/gobuffalo/validate"
+	"github.com/s3rj1k/validator"
 )
 
+// BytesArePresent is a validator object
 type BytesArePresent struct {
 	Name    string
 	Field   []byte
 	Message string
 }
 
-// IsValid adds an error if the field is not empty.
-func (v *BytesArePresent) IsValid(errors *validate.Errors) {
+// Validate adds an error if the field is not empty.
+func (v *BytesArePresent) Validate(e *validator.Errors) {
 	if len(v.Field) > 0 {
 		return
 	}
 
 	if len(v.Message) > 0 {
-		errors.Add(GenerateKey(v.Name), v.Message)
+		e.Add(v.Name, v.Message)
 		return
 	}
 
-	errors.Add(GenerateKey(v.Name), fmt.Sprintf("%s can not be blank.", v.Name))
+	e.Add(v.Name, fmt.Sprintf("%s can not be blank.", v.Name))
 }

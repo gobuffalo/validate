@@ -1,37 +1,40 @@
-package validators_test
+package validators
 
 import (
 	"testing"
 	"time"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
+	"github.com/s3rj1k/validator"
+
 	"github.com/stretchr/testify/require"
 )
 
 func Test_TimeIsBeforeTime(t *testing.T) {
+
 	r := require.New(t)
+
 	now := time.Now()
 	v := TimeIsBeforeTime{
-		FirstName: "Opens At", FirstTime: now,
-		SecondName: "Closes At", SecondTime: now.Add(100000),
+		FirstName: "OpensAt", FirstTime: now,
+		SecondName: "ClosesAt", SecondTime: now.Add(100000),
 	}
 
-	errors := validate.NewErrors()
-	v.IsValid(errors)
-	r.Equal(0, errors.Count())
+	e := validator.NewErrors()
+	v.Validate(e)
+
+	r.Equal(0, e.Count())
 
 	v.SecondTime = now.Add(-100000)
-	v.IsValid(errors)
+	v.Validate(e)
 
-	r.Equal(1, errors.Count())
-	r.Equal(errors.Get("opens_at"), []string{"Opens At must be before Closes At."})
+	r.Equal(1, e.Count())
+	r.Equal([]string{"OpensAt must be before ClosesAt."}, e.Get("OpensAt"))
 
-	errors = validate.NewErrors()
+	e = validator.NewErrors()
 	v.Message = "OpensAt must be earlier than ClosesAt."
 
-	v.IsValid(errors)
+	v.Validate(e)
 
-	r.Equal(1, errors.Count())
-	r.Equal(errors.Get("opens_at"), []string{"OpensAt must be earlier than ClosesAt."})
+	r.Equal(1, e.Count())
+	r.Equal([]string{"OpensAt must be earlier than ClosesAt."}, e.Get("OpensAt"))
 }

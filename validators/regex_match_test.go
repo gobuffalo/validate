@@ -1,35 +1,40 @@
-package validators_test
+package validators
 
 import (
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
+	"github.com/s3rj1k/validator"
+
 	"github.com/stretchr/testify/require"
 )
 
 func Test_RegexMatch(t *testing.T) {
+
 	r := require.New(t)
 
 	v := RegexMatch{Name: "Phone", Field: "555-555-5555", Expr: "^([0-9]{3}-[0-9]{3}-[0-9]{4})$"}
-	errors := validate.NewErrors()
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 0)
+	e := validator.NewErrors()
+	v.Validate(e)
+
+	r.Equal(0, e.Count())
 
 	v = RegexMatch{Name: "Phone", Field: "123-ab1-1424", Expr: "^([0-9]{3}-[0-9]{3}-[0-9]{4})$"}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("phone"), []string{"Phone does not match the expected format."})
+	v.Validate(e)
 
-	errors = validate.NewErrors()
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Phone does not match the expected format."}, e.Get("Phone"))
+
+	e = validator.NewErrors()
 	v = RegexMatch{Name: "Phone", Field: "123-ab1-1424", Expr: "^([0-9]{3}-[0-9]{3}-[0-9]{4})$", Message: "Phone number does not match the expected format."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("phone"), []string{"Phone number does not match the expected format."})
+	v.Validate(e)
 
-	errors = validate.NewErrors()
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Phone number does not match the expected format."}, e.Get("Phone"))
+
+	e = validator.NewErrors()
 	v = RegexMatch{"Phone", "123-ab1-1424", "^([0-9]{3}-[0-9]{3}-[0-9]{4})$", "Phone number does not match the expected format."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("phone"), []string{"Phone number does not match the expected format."})
+	v.Validate(e)
+
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Phone number does not match the expected format."}, e.Get("Phone"))
 }

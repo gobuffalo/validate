@@ -1,35 +1,40 @@
-package validators_test
+package validators
 
 import (
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
+	"github.com/s3rj1k/validator"
+
 	"github.com/stretchr/testify/require"
 )
 
 func Test_BytesArePresent(t *testing.T) {
+
 	r := require.New(t)
 
 	v := BytesArePresent{Name: "Name", Field: []byte("Mark")}
-	errors := validate.NewErrors()
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 0)
+	e := validator.NewErrors()
+	v.Validate(e)
+
+	r.Equal(0, e.Count())
 
 	v = BytesArePresent{Name: "Name", Field: []byte("")}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Name can not be blank."})
+	v.Validate(e)
 
-	errors = validate.NewErrors()
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Name can not be blank."}, e.Get("Name"))
+
+	e = validator.NewErrors()
 	v = BytesArePresent{Name: "Name", Field: []byte(""), Message: "Field can't be blank."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
+	v.Validate(e)
 
-	errors = validate.NewErrors()
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Field can't be blank."}, e.Get("Name"))
+
+	e = validator.NewErrors()
 	v = BytesArePresent{"Name", []byte(""), "Field can't be blank."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
+	v.Validate(e)
+
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Field can't be blank."}, e.Get("Name"))
 }

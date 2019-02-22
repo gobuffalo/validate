@@ -1,4 +1,5 @@
-Copyright (c) 2018 Mark Bates
+Original work Copyright (c) 2018 Mark Bates
+Modified work Copyright 2019 s3rj1k
 
 MIT License
 

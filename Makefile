@@ -1,55 +1,30 @@
-TAGS ?= "sqlite"
 GO_BIN ?= go
+CURL_BIN ?= curl
+SHELL_BIN ?= sh
 
-install:
-	packr
-	$(GO_BIN) install -tags ${TAGS} -v .
-	make tidy
+deps: check-gopath
+	$(GO_BIN) get -u github.com/Jeffail/gabs
+	$(GO_BIN) get -u github.com/gofrs/uuid
 
-tidy:
-ifeq ($(GO111MODULE),on)
-	$(GO_BIN) mod tidy
-else
-	echo skipping go mod tidy
-endif
-
-deps:
-	$(GO_BIN) get github.com/gobuffalo/release
-	$(GO_BIN) get github.com/gobuffalo/packr/packr
-	$(GO_BIN) get -tags ${TAGS} -t ./...
-	make tidy
-
-build:
-	packr
-	$(GO_BIN) build -v .
-	make tidy
+	$(CURL_BIN) -sfL https://raw.githubusercontent.com/alecthomas/gometalinter/master/scripts/install.sh | $(SHELL_BIN) -s -- -b $GOPATH/bin
+	$(CURL_BIN) -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | $(SHELL_BIN) -s -- -b $GOPATH/bin v1.12.2
+	$(GO_BIN) get -u github.com/go-critic/go-critic/...
+	$(GO_BIN) get -u github.com/Quasilyte/go-consistent
 
 test:
-	packr
-	$(GO_BIN) test -tags ${TAGS} ./...
-	make tidy
-
-ci-test:
-	$(GO_BIN) test -tags ${TAGS} -race ./...
-	make tidy
+	$(GO_BIN) test -v ./...
+	cd validators
+	$(GO_BIN) test -v ./...
 
 lint:
-	gometalinter --vendor ./... --deadline=1m --skip=internal
-	make tidy
+	golangci-lint run
+	gometalinter
 
-update:
-	$(GO_BIN) get -u -tags ${TAGS}
-	make tidy
-	packr
-	make test
-	make install
-	make tidy
+	cd validators
+	golangci-lint run
+	gometalinter
 
-release-test:
-	$(GO_BIN) test -tags ${TAGS} -race ./...
-	make tidy
-
-release:
-	make tidy
-	release -y -f version.go
-	make tidy
+check-gopath:
+ifndef GOPATHs
+	$(error GOPATH is undefined)
+endif

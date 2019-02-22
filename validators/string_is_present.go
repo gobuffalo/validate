@@ -4,25 +4,26 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gobuffalo/validate"
+	"github.com/s3rj1k/validator"
 )
 
+// StringIsPresent is a validator object
 type StringIsPresent struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// IsValid adds an error if the field is empty.
-func (v *StringIsPresent) IsValid(errors *validate.Errors) {
+// Validate adds an error if the field is empty.
+func (v *StringIsPresent) Validate(e *validator.Errors) {
 	if strings.TrimSpace(v.Field) != "" {
 		return
 	}
 
 	if len(v.Message) > 0 {
-		errors.Add(GenerateKey(v.Name), v.Message)
+		e.Add(v.Name, v.Message)
 		return
 	}
 
-	errors.Add(GenerateKey(v.Name), fmt.Sprintf("%s can not be blank.", v.Name))
+	e.Add(v.Name, fmt.Sprintf("%s can not be blank.", v.Name))
 }

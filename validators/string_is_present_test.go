@@ -1,35 +1,40 @@
-package validators_test
+package validators
 
 import (
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
+	"github.com/s3rj1k/validator"
+
 	"github.com/stretchr/testify/require"
 )
 
 func Test_StringIsPresent(t *testing.T) {
+
 	r := require.New(t)
 
 	v := StringIsPresent{Name: "Name", Field: "Mark"}
-	errors := validate.NewErrors()
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 0)
+	e := validator.NewErrors()
+	v.Validate(e)
+
+	r.Equal(0, e.Count())
 
 	v = StringIsPresent{Name: "Name", Field: ""}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Name can not be blank."})
+	v.Validate(e)
 
-	errors = validate.NewErrors()
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Name can not be blank."}, e.Get("Name"))
+
+	e = validator.NewErrors()
 	v = StringIsPresent{Name: "Name", Field: "", Message: "Field can't be blank."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
+	v.Validate(e)
 
-	errors = validate.NewErrors()
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Field can't be blank."}, e.Get("Name"))
+
+	e = validator.NewErrors()
 	v = StringIsPresent{"Name", "", "Field can't be blank."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
+	v.Validate(e)
+
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Field can't be blank."}, e.Get("Name"))
 }

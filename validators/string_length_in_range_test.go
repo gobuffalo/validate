@@ -1,16 +1,18 @@
-package validators_test
+package validators
 
 import (
 	"fmt"
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
+	"github.com/s3rj1k/validator"
+
 	"github.com/stretchr/testify/require"
 )
 
 func Test_StringLengthInRange(t *testing.T) {
+
 	r := require.New(t)
+
 	var tests = []struct {
 		value    string
 		min      int
@@ -29,14 +31,16 @@ func Test_StringLengthInRange(t *testing.T) {
 
 	for _, test := range tests {
 		v := StringLengthInRange{Name: "email", Field: test.value, Min: test.min, Max: test.max}
-		errors := validate.NewErrors()
-		v.IsValid(errors)
-		r.Equal(test.expected, !errors.HasAny(), fmt.Sprintf("Value: %s, Min:%d, Max:%d", test.value, test.min, test.max))
-	}
-	v := StringLengthInRange{Name: "email", Field: "1234567", Min: 40, Max: 50, Message: "Value length not between 40 and 50."}
-	errors := validate.NewErrors()
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("email"), []string{"Value length not between 40 and 50."})
+		e := validator.NewErrors()
+		v.Validate(e)
 
+		r.Equal(test.expected, !e.HasAny(), fmt.Sprintf("Value: %s, Min:%d, Max:%d", test.value, test.min, test.max))
+	}
+
+	v := StringLengthInRange{Name: "email", Field: "1234567", Min: 40, Max: 50, Message: "Value length not between 40 and 50."}
+	e := validator.NewErrors()
+	v.Validate(e)
+
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Value length not between 40 and 50."}, e.Get("email"))
 }

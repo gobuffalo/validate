@@ -1,14 +1,15 @@
-package validators_test
+package validators
 
 import (
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
+	"github.com/s3rj1k/validator"
+
 	"github.com/stretchr/testify/require"
 )
 
 func Test_EmailIsPresent(t *testing.T) {
+
 	r := require.New(t)
 
 	var tests = []struct {
@@ -31,24 +32,28 @@ func Test_EmailIsPresent(t *testing.T) {
 		{"NathAn.daVIeS@DomaIn.cOM", true},
 		{"NATHAN.DAVIES@DOMAIN.CO.UK", true},
 	}
+
 	for _, test := range tests {
 		v := EmailIsPresent{Name: "email", Field: test.email}
-		errors := validate.NewErrors()
-		v.IsValid(errors)
-		r.Equal(test.valid, !errors.HasAny())
+		e := validator.NewErrors()
+		v.Validate(e)
+
+		r.Equal(test.valid, !e.HasAny())
 		if !test.valid {
-			r.Equal(errors.Get("email"), []string{"email does not match the email format."})
+			r.Equal([]string{"email does not match the email format."}, e.Get("email"))
 		}
 	}
-	v := EmailIsPresent{Name: "email", Field: "", Message: "Email don't match the right format."}
-	errors := validate.NewErrors()
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("email"), []string{"Email don't match the right format."})
 
+	v := EmailIsPresent{Name: "email", Field: "", Message: "Email don't match the right format."}
+	e := validator.NewErrors()
+	v.Validate(e)
+
+	r.Equal(e.Count(), 1)
+	r.Equal([]string{"Email don't match the right format."}, e.Get("email"))
 }
 
 func Test_EmailLike(t *testing.T) {
+
 	r := require.New(t)
 
 	var tests = []struct {
@@ -72,39 +77,45 @@ func Test_EmailLike(t *testing.T) {
 		{"NathAn.daVIeS@DomaIn.cOM", true},
 		{"NATHAN.DAVIES@DOMAIN.CO.UK", true},
 	}
+
 	for _, test := range tests {
 		v := EmailLike{Name: "email", Field: test.email}
-		errors := validate.NewErrors()
-		v.IsValid(errors)
-		r.Equal(test.valid, !errors.HasAny(), test.email)
+		e := validator.NewErrors()
+		v.Validate(e)
+
+		r.Equal(test.valid, !e.HasAny(), test.email)
 		if !test.valid {
-			r.Equal(errors.Get("email"), []string{"email does not match the email format."})
+			r.Equal(e.Get("email"), []string{"email does not match the email format."})
 		}
 	}
+
 	v := EmailLike{Name: "email", Field: "foo@bar"}
-	errors := validate.NewErrors()
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("email"), []string{"email does not match the email format (email domain)."})
+	e := validator.NewErrors()
+	v.Validate(e)
+
+	r.Equal(e.Count(), 1)
+	r.Equal(e.Get("email"), []string{"email does not match the email format (email domain)."})
+
 	v = EmailLike{Name: "email", Field: "", Message: "Email don't match the right format."}
-	errors = validate.NewErrors()
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("email"), []string{"Email don't match the right format."})
+	e = validator.NewErrors()
+	v.Validate(e)
+
+	r.Equal(e.Count(), 1)
+	r.Equal(e.Get("email"), []string{"Email don't match the right format."})
 }
 
 func BenchmarkEmailIsPresent_IsValid(b *testing.B) {
-	errors := validate.NewErrors()
+	e := validator.NewErrors()
 	for i := 0; i <= b.N; i++ {
 		v := EmailLike{Name: "email", Field: "email@gmail.com"}
-		v.IsValid(errors)
+		v.Validate(e)
 	}
 }
 
 func BenchmarkEmailLike_IsValid(b *testing.B) {
-	errors := validate.NewErrors()
+	e := validator.NewErrors()
 	for i := 0; i <= b.N; i++ {
 		v := EmailIsPresent{Name: "email", Field: "email@gmail.com"}
-		v.IsValid(errors)
+		v.Validate(e)
 	}
 }

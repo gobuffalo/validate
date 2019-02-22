@@ -1,17 +1,17 @@
-# github.com/gobuffalo/validate
-[![Build Status](https://travis-ci.org/gobuffalo/validate.svg?branch=master)](https://travis-ci.org/gobuffalo/validate) [![GoDoc](https://godoc.org/github.com/gobuffalo/validate?status.svg)](https://godoc.org/github.com/gobuffalo/validate)
+# github.com/s3rj1k/validator
 
-This package provides a framework for writing validations for Go applications. It does provide you with few validators, but if you need others you can easly build them.
+This package provides a framework for writing validations for Go applications. 
+It does provide you with few validators, but if you need others you can easly build them.
 
 ## Installation
 
 ```bash
-$ go get github.com/gobuffalo/validate
+$ go get github.com/s3rj1k/validator
 ```
 
 ## Usage
 
-Using validate is pretty easy, just define some `Validator` objects and away you go.
+Using validate is pretty easy, just define `Validate` object for a struct.
 
 Here is a pretty simple example:
 
@@ -19,71 +19,70 @@ Here is a pretty simple example:
 package main
 
 import (
-	"log"
+        "fmt"
 
-	v "github.com/gobuffalo/validate"
+        v "github.com/s3rj1k/validator"
 )
 
 type User struct {
-	Name  string
-	Email string
+        Name  string
+        Email string
 }
 
-func (u *User) IsValid(errors *v.Errors) {
-	if u.Name == "" {
-		errors.Add("name", "Name must not be blank!")
-	}
-	if u.Email == "" {
-		errors.Add("email", "Email must not be blank!")
-	}
+func (u *User) Validate(errors *v.Errors) {
+        if u.Name == "" {
+                errors.Add("name", "Name must not be blank!")
+        }
+        if u.Email == "" {
+                errors.Add("email", "Email must not be blank!")
+        }
 }
 
 func main() {
-	u := User{Name: "", Email: ""}
-	errors := v.Validate(&u)
-	log.Println(errors.Errors)
-  // map[name:[Name must not be blank!] email:[Email must not be blank!]]
+        err := v.Validate(&User{})
+        if err != nil {
+                fmt.Println(err)
+        }
 }
 ```
 
-In the previous example I wrote a single `Validator` for the `User` struct. To really get the benefit of using go-validator, as well as the Go language, I would recommend creating distinct validators for each thing you want to validate, that way they can be run concurrently.
+In the previous example a single `Validator` for the `User` struct was used. 
+To really get the benefit of using validator, one can create custom validators.
 
 ```go
 package main
 
 import (
-	"fmt"
-	"log"
-	"strings"
+        "fmt"
+        "strings"
 
-	v "github.com/gobuffalo/validate"
+        v "github.com/s3rj1k/validator"
 )
 
 type User struct {
-	Name  string
-	Email string
+        Name  string
+        Email string
 }
 
 type PresenceValidator struct {
-	Field string
-	Value string
+        Field string
+        Value string
 }
 
-func (v *PresenceValidator) IsValid(errors *v.Errors) {
-	if v.Value == "" {
-		errors.Add(strings.ToLower(v.Field), fmt.Sprintf("%s must not be blank!", v.Field))
-	}
+func (v *PresenceValidator) Validate(errors *v.Errors) {
+        if v.Value == "" {
+                errors.Add(strings.ToLower(v.Field), fmt.Sprintf("%s must not be blank!", v.Field))
+        }
 }
 
 func main() {
-	u := User{Name: "", Email: ""}
-	errors := v.Validate(&PresenceValidator{"Email", u.Email}, &PresenceValidator{"Name", u.Name})
-	log.Println(errors.Errors)
-        // map[name:[Name must not be blank!] email:[Email must not be blank!]]
+        u := User{Name: "", Email: ""}
+        err := v.Validate(&PresenceValidator{"Email", u.Email}, &PresenceValidator{"Name", u.Name})
+        if err != nil {
+                fmt.Println(err)
+        }
 }
 ```
-
-That's really it. Pretty simple and straight-forward Just a nice clean framework for writing your own validators. Use in good health.
 
 ## Built-in Validators
 
@@ -93,31 +92,35 @@ To make it even simpler, this package has a children package with some nice buil
 package main
 
 import (
-	"log"
+        "fmt"
 
-	"github.com/gobuffalo/validate"
-	"github.com/gobuffalo/validate/validators"
+        "github.com/s3rj1k/validator"
+        "github.com/s3rj1k/validator/validators"
 )
 
 type User struct {
-	Name  string
-	Email string
+        Name  string
+        Email string
 }
 
 
 func main() {
-	u := User{Name: "", Email: ""}
-	errors := validate.Validate(
-		&validators.EmailIsPresent{Name: "Email", Field: u.Email, Message: "Mail is not in the right format."},
-		&validators.StringIsPresent{Field: u.Name, Name: "Name"},
-	)
-	log.Println(errors.Errors)
-	// map[name:[Name can not be blank.] email:[Mail is not in the right format.]]
+        u := User{Name: "", Email: ""}
+        err := validator.Validate(
+                &validators.EmailIsPresent{Name: "Email", Field: u.Email, Message: "Mail is not in the right format."},
+                &validators.StringIsPresent{Field: u.Name, Name: "Name"},
+        )
+        if err != nil {
+                fmt.Println(err)
+        }
 }
 ```
 
 All fields are required for each validators, except Message (every validator has a default error message).
 
-### Available Validators
-
-A full list of available validators can be found at [https://godoc.org/github.com/gobuffalo/validate/validators](https://godoc.org/github.com/gobuffalo/validate/validators).
+## Todo
+* update docs with fork details
+* port more validators from `https://github.com/asaskevich/govalidator`
+* add list of build-in validators
+* add contributors list
+* GoDoc?

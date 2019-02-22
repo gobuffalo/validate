@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gobuffalo/validate"
+	"github.com/s3rj1k/validator"
 )
 
+// FuncValidator is a validator object
 type FuncValidator struct {
 	Fn      func() bool
 	Field   string
@@ -14,12 +15,14 @@ type FuncValidator struct {
 	Message string
 }
 
-func (f *FuncValidator) IsValid(verrs *validate.Errors) {
-	// for backwards compatability
+// Validate is a validation method wrapper
+func (f *FuncValidator) Validate(e *validator.Errors) {
+	// for backwards compatibility
 	if strings.TrimSpace(f.Name) == "" {
 		f.Name = f.Field
 	}
+
 	if !f.Fn() {
-		verrs.Add(GenerateKey(f.Name), fmt.Sprintf(f.Message, f.Field))
+		e.Add(f.Name, fmt.Sprintf(f.Message, f.Field))
 	}
 }

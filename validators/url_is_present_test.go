@@ -3,7 +3,8 @@ package validators
 import (
 	"testing"
 
-	"github.com/gobuffalo/validate"
+	"github.com/s3rj1k/validator"
+
 	"github.com/stretchr/testify/require"
 )
 
@@ -27,15 +28,19 @@ func Test_URLIsPresent(t *testing.T) {
 		{"https://golang.Org", true},
 		{"https://invalid#$%#$@.Org", false},
 	}
+
 	for _, test := range tests {
 		v := URLIsPresent{Name: "URL", Field: test.url}
-		errors := validate.NewErrors()
-		v.IsValid(errors)
-		r.Equal(test.valid, !errors.HasAny(), test.url, errors.Error())
+		e := validator.NewErrors()
+		v.Validate(e)
+
+		r.Equal(test.valid, !e.HasAny(), test.url, e.Error())
 	}
+
 	v := URLIsPresent{Name: "URL", Field: "http://", Message: "URL isn't valid."}
-	errors := validate.NewErrors()
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("url"), []string{"URL isn't valid."})
+	e := validator.NewErrors()
+	v.Validate(e)
+
+	r.Equal(1, e.Count())
+	r.Equal([]string{"URL isn't valid."}, e.Get("URL"))
 }

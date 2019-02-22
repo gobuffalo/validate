@@ -1,37 +1,42 @@
-package validators_test
+package validators
 
 import (
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
+	"github.com/s3rj1k/validator"
+
 	"github.com/stretchr/testify/require"
 )
 
 func Test_StringInclusion(t *testing.T) {
+
 	r := require.New(t)
 
 	l := []string{"Mark", "Bates"}
 
 	v := StringInclusion{Name: "Name", Field: "Mark", List: l}
-	errors := validate.NewErrors()
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 0)
+	e := validator.NewErrors()
+	v.Validate(e)
+
+	r.Equal(0, e.Count())
 
 	v = StringInclusion{Name: "Name", Field: "Foo", List: l}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Name is not in the list [Mark, Bates]."})
+	v.Validate(e)
 
-	errors = validate.NewErrors()
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Name is not in the list [Mark, Bates]."}, e.Get("Name"))
+
+	e = validator.NewErrors()
 	v = StringInclusion{Name: "Name", Field: "Foo", Message: "Name is not in the list (Mark, Bates).", List: l}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Name is not in the list (Mark, Bates)."})
+	v.Validate(e)
 
-	errors = validate.NewErrors()
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Name is not in the list (Mark, Bates)."}, e.Get("Name"))
+
+	e = validator.NewErrors()
 	v = StringInclusion{"Name", "Foo", l, "Name is not in the list (Mark, Bates)."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Name is not in the list (Mark, Bates)."})
+	v.Validate(e)
+
+	r.Equal(1, e.Count())
+	r.Equal([]string{"Name is not in the list (Mark, Bates)."}, e.Get("Name"))
 }

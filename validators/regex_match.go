@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/gobuffalo/validate"
+	"github.com/s3rj1k/validator"
 )
 
 // RegexMatch specifies the properties needed by the validation.
@@ -15,17 +15,17 @@ type RegexMatch struct {
 	Message string
 }
 
-// IsValid performs the validation based on the regexp match.
-func (v *RegexMatch) IsValid(errors *validate.Errors) {
+// Validate performs the validation based on the regexp match.
+func (v *RegexMatch) Validate(e *validator.Errors) {
 	r := regexp.MustCompile(v.Expr)
 	if r.Match([]byte(v.Field)) {
 		return
 	}
 
 	if len(v.Message) > 0 {
-		errors.Add(GenerateKey(v.Name), v.Message)
+		e.Add(v.Name, v.Message)
 		return
 	}
 
-	errors.Add(GenerateKey(v.Name), fmt.Sprintf("%s does not match the expected format.", v.Name))
+	e.Add(v.Name, fmt.Sprintf("%s does not match the expected format.", v.Name))
 }
