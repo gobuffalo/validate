@@ -16,7 +16,6 @@ type IsAbsPath struct {
 
 // Validate adds an error if path is not absolute.
 func (v *IsAbsPath) Validate(e *validator.Errors) {
-
 	if v.Path == filepath.Clean(v.Path) && filepath.IsAbs(v.Path) {
 		return
 	}

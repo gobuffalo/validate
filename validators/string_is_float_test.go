@@ -11,48 +11,37 @@ import (
 func Test_StringIsFloat(t *testing.T) {
 
 	r := require.New(t)
+
 	e := validator.NewErrors()
-
-	// must be float
-	v := StringIsFloat{Name: "Name", Field: "15.22"}
+	v := StringIsFloat{Name: "Name", Field: "15.22"} // must be float
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// must be float
-	v = StringIsFloat{Name: "Name", Field: "-0.0"}
+	v = StringIsFloat{Name: "Name", Field: "-0.0"} // must be float
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// empty string is valid
-	v = StringIsFloat{Name: "Name", Field: ""}
+	v = StringIsFloat{Name: "Name", Field: ""} // empty string is valid
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// int is valid
-	v = StringIsFloat{Name: "Name", Field: "135"}
+	v = StringIsFloat{Name: "Name", Field: "135"} // int is valid
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// string is invalid
-	v = StringIsFloat{Name: "Name", Field: "baby"}
+	v = StringIsFloat{Name: "Name", Field: "baby"} // string is invalid
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be a float"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// whitespaces are not allowed
-	v = StringIsFloat{Name: "Name", Field: "123.2 "}
+	v = StringIsFloat{Name: "Name", Field: "123.2 "} // whitespaces are not allowed
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be a float"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// only whitespaces are not allowed
-	v = StringIsFloat{Name: "Name", Field: "   "}
+	v = StringIsFloat{Name: "Name", Field: "   "} // only whitespaces are not allowed
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be a float"}, e.Get("Name"))

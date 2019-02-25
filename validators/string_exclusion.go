@@ -18,7 +18,8 @@ type StringExclusion struct {
 // Validate adds an error if the field is one of the values from the blacklist.
 func (v *StringExclusion) Validate(e *validator.Errors) {
 
-	found := false
+	var found = false
+
 	for _, l := range v.Blacklist {
 		if l == v.Field {
 			found = true

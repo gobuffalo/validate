@@ -11,34 +11,27 @@ import (
 func Test_StringHasLowerCase(t *testing.T) {
 
 	r := require.New(t)
+
 	e := validator.NewErrors()
-
-	// at least 1 lowercase
-	v := StringHasLowerCase{Name: "Name", Field: "3w4ASF^^#"}
+	v := StringHasLowerCase{Name: "Name", Field: "3w4ASF^^#"} // at least 1 lowercase
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// empty string is valid
-	v = StringHasLowerCase{Name: "Name", Field: ""}
+	v = StringHasLowerCase{Name: "Name", Field: ""} // empty string is valid
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// outer and inner whitespaces are allowed
-	v = StringHasLowerCase{Name: "Name", Field: " space inside "}
+	v = StringHasLowerCase{Name: "Name", Field: " space inside "} // outer and inner whitespaces are allowed
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// must contain lowercase
-	v = StringHasLowerCase{Name: "Name", Field: "ABC123"}
+	v = StringHasLowerCase{Name: "Name", Field: "ABC123"} // must contain lowercase
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must contain at least 1 lowercase"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// only spaces are not allowed
-	v = StringHasLowerCase{Name: "Name", Field: "    "}
+	v = StringHasLowerCase{Name: "Name", Field: "    "} // only spaces are not allowed
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must contain at least 1 lowercase"}, e.Get("Name"))

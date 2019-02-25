@@ -13,13 +13,12 @@ func Test_IsDir(t *testing.T) {
 
 	r := require.New(t)
 
-	err := os.MkdirAll("/tmp/test_dir", 666)
+	err := os.MkdirAll("/tmp/test_dir", 0666)
 	r.Nil(err)
 
 	v := IsDir{Name: "Name", Path: "/tmp/test_dir"}
 	e := validator.NewErrors()
 	v.Validate(e)
-
 	r.Equal(0, e.Count())
 
 	err = os.Remove("/tmp/test_dir")
@@ -27,21 +26,18 @@ func Test_IsDir(t *testing.T) {
 
 	v = IsDir{Name: "Name", Path: "/tmp/test_dir"}
 	v.Validate(e)
-
 	r.Equal(1, e.Count())
 	r.Equal([]string{"path '/tmp/test_dir' is not dir"}, e.Get("Name"))
 
 	e = validator.NewErrors()
 	v = IsDir{Name: "Name", Path: "/tmp/test_dir", Message: "path is not dir"}
 	v.Validate(e)
-
 	r.Equal(1, e.Count())
 	r.Equal([]string{"path is not dir"}, e.Get("Name"))
 
 	e = validator.NewErrors()
 	v = IsDir{"Name", "/tmp/test_dir", "path is not dir"}
 	v.Validate(e)
-
 	r.Equal(1, e.Count())
 	r.Equal([]string{"path is not dir"}, e.Get("Name"))
 }

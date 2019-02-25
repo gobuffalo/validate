@@ -23,7 +23,7 @@ func (v *StringIsUTFNumeric) Validate(e *validator.Errors) {
 	var field = v.Field
 
 	// null string is valid
-	if IsNull(field) {
+	if isNullString(field) {
 		return
 	}
 
@@ -51,6 +51,7 @@ func (v *StringIsUTFNumeric) Validate(e *validator.Errors) {
 		e.Add(v.Name, v.Message)
 		return
 	}
+
 	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must contain only unicode numbers", v.Name))
 }

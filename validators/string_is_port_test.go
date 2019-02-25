@@ -11,29 +11,23 @@ import (
 func Test_StringIsPort(t *testing.T) {
 
 	r := require.New(t)
+
 	e := validator.NewErrors()
-
-	// Port is OK > 0
-	v := StringIsPort{Name: "Name", Field: "1"}
+	v := StringIsPort{Name: "Name", Field: "1"} // Port is OK > 0
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// Port is OK < 65536
-	v = StringIsPort{Name: "Name", Field: "65535"}
+	v = StringIsPort{Name: "Name", Field: "65535"} // Port is OK < 65536
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// empty string is invalid
-	v = StringIsPort{Name: "Name", Field: ""}
+	v = StringIsPort{Name: "Name", Field: ""} // empty string is invalid
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must represent a valid port"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// outer whitespaces are not allowed
-	v = StringIsPort{Name: "Name", Field: " 13 "}
+	v = StringIsPort{Name: "Name", Field: " 13 "} // outer whitespaces are not allowed
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must represent a valid port"}, e.Get("Name"))

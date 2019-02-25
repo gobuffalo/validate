@@ -11,34 +11,27 @@ import (
 func Test_StringHasUpperCase(t *testing.T) {
 
 	r := require.New(t)
+
 	e := validator.NewErrors()
-
-	// at least 1 upper case
-	v := StringHasUpperCase{Name: "Name", Field: "3w4asF@`"}
+	v := StringHasUpperCase{Name: "Name", Field: "3w4asF@`"} // at least 1 upper case
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// empty string is valid
-	v = StringHasUpperCase{Name: "Name", Field: ""}
+	v = StringHasUpperCase{Name: "Name", Field: ""} // empty string is valid
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// outer and inner whitespaces are allowed
-	v = StringHasUpperCase{Name: "Name", Field: " Space Inside "}
+	v = StringHasUpperCase{Name: "Name", Field: " Space Inside "} // outer and inner whitespaces are allowed
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// must contain uppercase
-	v = StringHasUpperCase{Name: "Name", Field: "abc123"}
+	v = StringHasUpperCase{Name: "Name", Field: "abc123"} // must contain uppercase
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must contain at least 1 uppercase"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// only spaces are not allowed
-	v = StringHasUpperCase{Name: "Name", Field: "    "}
+	v = StringHasUpperCase{Name: "Name", Field: "    "} // only spaces are not allowed
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must contain at least 1 uppercase"}, e.Get("Name"))

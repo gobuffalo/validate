@@ -17,7 +17,7 @@ type StringHasUpperCase struct {
 func (v *StringHasUpperCase) Validate(e *validator.Errors) {
 
 	// null string is valid
-	if IsNull(v.Field) {
+	if isNullString(v.Field) {
 		return
 	}
 
@@ -30,6 +30,7 @@ func (v *StringHasUpperCase) Validate(e *validator.Errors) {
 		e.Add(v.Name, v.Message)
 		return
 	}
+
 	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must contain at least 1 uppercase", v.Name))
 }

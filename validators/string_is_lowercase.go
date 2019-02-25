@@ -18,7 +18,7 @@ type StringIsLowerCase struct {
 func (v *StringIsLowerCase) Validate(e *validator.Errors) {
 
 	// null string is valid
-	if IsNull(v.Field) {
+	if isNullString(v.Field) {
 		return
 	}
 
@@ -31,6 +31,7 @@ func (v *StringIsLowerCase) Validate(e *validator.Errors) {
 		e.Add(v.Name, v.Message)
 		return
 	}
+
 	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must be lowercase", v.Name))
 }

@@ -11,37 +11,29 @@ import (
 func Test_StringIsUTFLetters(t *testing.T) {
 
 	r := require.New(t)
-	e := validator.NewErrors()
 
+	e := validator.NewErrors()
 	v := StringIsUTFLetters{Name: "Name", Field: "asd品ʂля"}
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// empty string is valid
-	v = StringIsUTFLetters{Name: "Name", Field: ""}
+	v = StringIsUTFLetters{Name: "Name", Field: ""} // empty string is valid
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// any other characters except for UTF letters are not allowed
-	v = StringIsUTFLetters{Name: "Name", Field: "123~$"}
+	v = StringIsUTFLetters{Name: "Name", Field: "123~$"} // any other characters except for UTF letters are not allowed
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must contain only unicode letter characters"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// inner/outer whitespaces are not allowed
-	v = StringIsUTFLetters{Name: "Name", Field: " ля 品ʂ "}
+	v = StringIsUTFLetters{Name: "Name", Field: " ля 品ʂ "} // inner/outer whitespaces are not allowed
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must contain only unicode letter characters"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// only whitespaces are not allowed
-	v = StringIsUTFLetters{Name: "Name", Field: "   "}
+	v = StringIsUTFLetters{Name: "Name", Field: "   "} // only whitespaces are not allowed
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must contain only unicode letter characters"}, e.Get("Name"))

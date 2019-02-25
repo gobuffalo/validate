@@ -16,10 +16,8 @@ type IsDir struct {
 
 // Validate adds an error if path exists and is not dir.
 func (v *IsDir) Validate(e *validator.Errors) {
-
 	if fi, err := os.Stat(v.Path); !os.IsNotExist(err) {
-		switch mode := fi.Mode(); {
-		case mode.IsDir():
+		if mode := fi.Mode(); mode.IsDir() {
 			return
 		}
 	}

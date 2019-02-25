@@ -14,14 +14,7 @@ type StringIsMAC struct {
 	Message string
 }
 
-// Validate if a string is valid MAC address.
-// Possible MAC formats:
-// 01:23:45:67:89:ab
-// 01:23:45:67:89:ab:cd:ef
-// 01-23-45-67-89-ab
-// 01-23-45-67-89-ab-cd-ef
-// 0123.4567.89ab
-// 0123.4567.89ab.cdef
+// Validate if the string is MAC.
 func (v *StringIsMAC) Validate(e *validator.Errors) {
 
 	// using net ParseMAC
@@ -35,6 +28,7 @@ func (v *StringIsMAC) Validate(e *validator.Errors) {
 		e.Add(v.Name, v.Message)
 		return
 	}
+
 	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must be valid MAC address", v.Name))
 }

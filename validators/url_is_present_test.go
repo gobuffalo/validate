@@ -9,6 +9,7 @@ import (
 )
 
 func Test_URLIsPresent(t *testing.T) {
+
 	r := require.New(t)
 
 	var tests = []struct {
@@ -40,7 +41,6 @@ func Test_URLIsPresent(t *testing.T) {
 	v := URLIsPresent{Name: "URL", Field: "http://", Message: "URL isn't valid"}
 	e := validator.NewErrors()
 	v.Validate(e)
-
 	r.Equal(1, e.Count())
 	r.Equal([]string{"URL isn't valid"}, e.Get("URL"))
 }

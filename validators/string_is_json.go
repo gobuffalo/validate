@@ -30,6 +30,7 @@ func (v *StringIsJSON) Validate(e *validator.Errors) {
 		e.Add(v.Name, v.Message)
 		return
 	}
+
 	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must be a valid JSON", v.Name))
 }

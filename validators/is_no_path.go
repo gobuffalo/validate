@@ -16,7 +16,6 @@ type IsNoPath struct {
 
 // Validate adds an error if path exists.
 func (v *IsNoPath) Validate(e *validator.Errors) {
-
 	if _, err := os.Stat(v.Path); os.IsNotExist(err) {
 		return
 	}

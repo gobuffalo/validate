@@ -11,47 +11,35 @@ import (
 func Test_StringIsRGBcolor(t *testing.T) {
 
 	r := require.New(t)
+
 	e := validator.NewErrors()
-
-	// hexcolor here
-	v := StringIsRGBcolor{Name: "Name", Field: "rgb(0,0,0)"}
+	v := StringIsRGBcolor{Name: "Name", Field: "rgb(0,0,0)"} // hexcolor here
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// hexcolor here also (3-6 0-F chars)
-	v = StringIsRGBcolor{Name: "Name", Field: "rgb(255,255,255)"}
+	v = StringIsRGBcolor{Name: "Name", Field: "rgb(255,255,255)"} // hexcolor here also (3-6 0-F chars)
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// rgb must be lowercased
-	v = StringIsRGBcolor{Name: "Name", Field: "RGB(0,15,25)"}
+	v = StringIsRGBcolor{Name: "Name", Field: "RGB(0,15,25)"} // rgb must be lowercased
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be a RGB color in form rgb(RRR, GGG, BBB)"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// values 0-255
-	v = StringIsRGBcolor{Name: "Name", Field: "rgb(0,0,256)"}
+	v = StringIsRGBcolor{Name: "Name", Field: "rgb(0,0,256)"} // values 0-255
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be a RGB color in form rgb(RRR, GGG, BBB)"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// empty string or only whitespaces are invalid
-	v = StringIsRGBcolor{Name: "Name", Field: "    "}
+	v = StringIsRGBcolor{Name: "Name", Field: "    "} // empty string or only whitespaces are invalid
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be a RGB color in form rgb(RRR, GGG, BBB)"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// whitespaces are not trimmed
-	v = StringIsRGBcolor{Name: "Name", Field: "ffd762 "}
+	v = StringIsRGBcolor{Name: "Name", Field: "ffd762 "} // whitespaces are not trimmed
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be a RGB color in form rgb(RRR, GGG, BBB)"}, e.Get("Name"))

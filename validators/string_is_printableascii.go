@@ -17,7 +17,7 @@ type StringIsPrintableASCII struct {
 func (v *StringIsPrintableASCII) Validate(e *validator.Errors) {
 
 	// null string is valid
-	if IsNull(v.Field) {
+	if isNullString(v.Field) {
 		return
 	}
 
@@ -31,6 +31,7 @@ func (v *StringIsPrintableASCII) Validate(e *validator.Errors) {
 		e.Add(v.Name, v.Message)
 		return
 	}
+
 	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must contain printable ASCII chars only", v.Name))
 }

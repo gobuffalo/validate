@@ -11,44 +11,35 @@ import (
 func Test_StringIsPrintableASCII(t *testing.T) {
 
 	r := require.New(t)
+
 	e := validator.NewErrors()
-
-	// must be ASCII
-	v := StringIsPrintableASCII{Name: "Name", Field: "abc123"}
+	v := StringIsPrintableASCII{Name: "Name", Field: "abc123"} // must be ASCII
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// must be ASCII
-	v = StringIsPrintableASCII{Name: "Name", Field: "!$#%()-=<>etc...,@"}
+	v = StringIsPrintableASCII{Name: "Name", Field: "!$#%()-=<>etc...,@"} // must be ASCII
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// empty string is valid
-	v = StringIsPrintableASCII{Name: "Name", Field: ""}
+	v = StringIsPrintableASCII{Name: "Name", Field: ""} // empty string is valid
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// outer whitespaces are allowed
-	v = StringIsPrintableASCII{Name: "Name", Field: " 123 "}
+	v = StringIsPrintableASCII{Name: "Name", Field: " 123 "} // outer whitespaces are allowed
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// only whitespaces are allowed
-	v = StringIsPrintableASCII{Name: "Name", Field: "   "}
+	v = StringIsPrintableASCII{Name: "Name", Field: "   "} // only whitespaces are allowed
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// non-printable in invalid
-	v = StringIsPrintableASCII{Name: "Name", Field: string(rune(10))}
+	v = StringIsPrintableASCII{Name: "Name", Field: string(rune(10))} // non-printable in invalid
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must contain printable ASCII chars only"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// non-ascii in invalid
-	v = StringIsPrintableASCII{Name: "Name", Field: "опа"}
+	v = StringIsPrintableASCII{Name: "Name", Field: "опа"} // non-ascii in invalid
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must contain printable ASCII chars only"}, e.Get("Name"))

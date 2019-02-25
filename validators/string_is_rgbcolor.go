@@ -25,6 +25,7 @@ func (v *StringIsRGBcolor) Validate(e *validator.Errors) {
 		e.Add(v.Name, v.Message)
 		return
 	}
+
 	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must be a RGB color in form rgb(RRR, GGG, BBB)", v.Name))
 }

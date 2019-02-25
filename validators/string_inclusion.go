@@ -17,7 +17,9 @@ type StringInclusion struct {
 
 // Validate adds an error if the field is not one of the allowed values.
 func (v *StringInclusion) Validate(e *validator.Errors) {
-	found := false
+
+	var found = false
+
 	for _, l := range v.List {
 		if l == v.Field {
 			found = true

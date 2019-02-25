@@ -27,14 +27,12 @@ func Test_StringsMatch_Validate(t *testing.T) {
 		v := StringsMatch{Name: "strings", Field: testCase.str1, Field2: testCase.str2}
 		e := validator.NewErrors()
 		v.Validate(e)
-
 		r.Equal(testCase.expected, !e.HasAny(), "Str1: %s, Str2: %s", testCase.str1, testCase.str2)
 	}
 
 	v := StringsMatch{Name: "strings", Field: "test_fail", Field2: "test", Message: "String doesn't match"}
 	e := validator.NewErrors()
 	v.Validate(e)
-
 	r.Equal(1, e.Count())
 	r.Equal([]string{"String doesn't match"}, e.Get("strings"))
 }

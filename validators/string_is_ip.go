@@ -27,6 +27,7 @@ func (v *StringIsIP) Validate(e *validator.Errors) {
 		e.Add(v.Name, v.Message)
 		return
 	}
+
 	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must be either IP version 4 or 6", v.Name))
 }

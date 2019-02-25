@@ -11,52 +11,39 @@ import (
 func Test_StringIsInt(t *testing.T) {
 
 	r := require.New(t)
+
 	e := validator.NewErrors()
-
-	// must be int
-	v := StringIsInt{Name: "Name", Field: "1988"}
+	v := StringIsInt{Name: "Name", Field: "1988"} // must be int
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// must be int
-	v = StringIsInt{Name: "Name", Field: "-0"}
+	v = StringIsInt{Name: "Name", Field: "-0"} // must be int
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// empty string is valid
-	v = StringIsInt{Name: "Name", Field: ""}
+	v = StringIsInt{Name: "Name", Field: ""} // empty string is valid
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// float is invalid
-	v = StringIsInt{Name: "Name", Field: "13.5"}
+	v = StringIsInt{Name: "Name", Field: "13.5"} // float is invalid
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be an integer"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// string is invalid
-	v = StringIsInt{Name: "Name", Field: "baby"}
+	v = StringIsInt{Name: "Name", Field: "baby"} // string is invalid
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be an integer"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// whitespaces are not allowed
-	v = StringIsInt{Name: "Name", Field: "123 "}
+	v = StringIsInt{Name: "Name", Field: "123 "} // whitespaces are not allowed
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be an integer"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-
-	// only whitespaces are not allowed
-	v = StringIsInt{Name: "Name", Field: "   "}
+	v = StringIsInt{Name: "Name", Field: "   "} // only whitespaces are not allowed
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be an integer"}, e.Get("Name"))

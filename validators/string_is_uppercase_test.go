@@ -11,29 +11,25 @@ import (
 func Test_StringIsUpperCase(t *testing.T) {
 
 	r := require.New(t)
-	e := validator.NewErrors()
 
+	e := validator.NewErrors()
 	v := StringIsUpperCase{Name: "Name", Field: "ASFADG44"}
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// empty string is valid, spaces are trimmed
-	v = StringIsUpperCase{Name: "Name", Field: "   "}
+	v = StringIsUpperCase{Name: "Name", Field: "   "} // empty string is valid, spaces are trimmed
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// outer whitespaces are allowed
-	v = StringIsUpperCase{Name: "Name", Field: " A5555 "}
+	v = StringIsUpperCase{Name: "Name", Field: " A5555 "} // outer whitespaces are allowed
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// inner whitespaces are allowed
-	v = StringIsUpperCase{Name: "Name", Field: "AD GGGG"}
+	v = StringIsUpperCase{Name: "Name", Field: "AD GGGG"} // inner whitespaces are allowed
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// lowercase is invalid
-	v = StringIsUpperCase{Name: "Name", Field: "Abcd"}
+	v = StringIsUpperCase{Name: "Name", Field: "Abcd"} // lowercase is invalid
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be uppercase"}, e.Get("Name"))

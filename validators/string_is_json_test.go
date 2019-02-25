@@ -11,19 +11,17 @@ import (
 func Test_StringIsJSON(t *testing.T) {
 
 	r := require.New(t)
-	e := validator.NewErrors()
 
+	e := validator.NewErrors()
 	v := StringIsJSON{Name: "Name", Field: "{\"test\": \"sure\"}"}
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// outer whitespaces are valid
-	v = StringIsJSON{Name: "Name", Field: "   {\"test\": \"sure\"}    "}
+	v = StringIsJSON{Name: "Name", Field: "   {\"test\": \"sure\"}    "} // outer whitespaces are valid
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	// empty string is invalid
-	v = StringIsJSON{Name: "Name", Field: ""}
+	v = StringIsJSON{Name: "Name", Field: ""} // empty string is invalid
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name must be a valid JSON"}, e.Get("Name"))

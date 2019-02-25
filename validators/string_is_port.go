@@ -26,6 +26,7 @@ func (v *StringIsPort) Validate(e *validator.Errors) {
 		e.Add(v.Name, v.Message)
 		return
 	}
+
 	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must represent a valid port", v.Name))
 }

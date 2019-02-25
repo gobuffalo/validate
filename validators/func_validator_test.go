@@ -23,7 +23,6 @@ func Test_FuncValidator(t *testing.T) {
 
 	e := validator.NewErrors()
 	fv.Validate(e)
-
 	r.Equal([]string{"Field is an invalid name"}, e.Get("Name"))
 }
 
@@ -41,6 +40,5 @@ func Test_FuncValidatorNoName(t *testing.T) {
 
 	e := validator.NewErrors()
 	fv.Validate(e)
-
 	r.Equal([]string{"Name is invalid"}, e.Get("Name"))
 }
