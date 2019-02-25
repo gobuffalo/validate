@@ -24,5 +24,5 @@ func (v *BytesArePresent) Validate(e *validator.Errors) {
 		return
 	}
 
-	e.Add(v.Name, fmt.Sprintf("%s can not be blank.", v.Name))
+	e.Add(v.Name, fmt.Sprintf("%s can not be blank", v.Name))
 }

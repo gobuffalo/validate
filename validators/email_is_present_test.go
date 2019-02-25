@@ -40,16 +40,16 @@ func Test_EmailIsPresent(t *testing.T) {
 
 		r.Equal(test.valid, !e.HasAny())
 		if !test.valid {
-			r.Equal([]string{"email does not match the email format."}, e.Get("email"))
+			r.Equal([]string{"email does not match the email format"}, e.Get("email"))
 		}
 	}
 
-	v := EmailIsPresent{Name: "email", Field: "", Message: "Email don't match the right format."}
+	v := EmailIsPresent{Name: "email", Field: "", Message: "Email don't match the right format"}
 	e := validator.NewErrors()
 	v.Validate(e)
 
 	r.Equal(e.Count(), 1)
-	r.Equal([]string{"Email don't match the right format."}, e.Get("email"))
+	r.Equal([]string{"Email don't match the right format"}, e.Get("email"))
 }
 
 func Test_EmailLike(t *testing.T) {
@@ -85,7 +85,7 @@ func Test_EmailLike(t *testing.T) {
 
 		r.Equal(test.valid, !e.HasAny(), test.email)
 		if !test.valid {
-			r.Equal(e.Get("email"), []string{"email does not match the email format."})
+			r.Equal(e.Get("email"), []string{"email does not match the email format"})
 		}
 	}
 
@@ -94,14 +94,14 @@ func Test_EmailLike(t *testing.T) {
 	v.Validate(e)
 
 	r.Equal(e.Count(), 1)
-	r.Equal(e.Get("email"), []string{"email does not match the email format (email domain)."})
+	r.Equal(e.Get("email"), []string{"email does not match the email format (email domain)"})
 
-	v = EmailLike{Name: "email", Field: "", Message: "Email don't match the right format."}
+	v = EmailLike{Name: "email", Field: "", Message: "Email don't match the right format"}
 	e = validator.NewErrors()
 	v.Validate(e)
 
 	r.Equal(e.Count(), 1)
-	r.Equal(e.Get("email"), []string{"Email don't match the right format."})
+	r.Equal(e.Get("email"), []string{"Email don't match the right format"})
 }
 
 func BenchmarkEmailIsPresent_IsValid(b *testing.B) {

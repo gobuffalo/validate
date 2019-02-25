@@ -22,19 +22,19 @@ func Test_IntIsPresent(t *testing.T) {
 	v.Validate(e)
 
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Name can not be blank."}, e.Get("Name"))
+	r.Equal([]string{"Name can not be blank"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = IntIsPresent{Name: "Name", Field: 0, Message: "Field can't be blank."}
+	v = IntIsPresent{Name: "Name", Field: 0, Message: "Field can't be blank"}
 	v.Validate(e)
 
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Field can't be blank."}, e.Get("Name"))
+	r.Equal([]string{"Field can't be blank"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = IntIsPresent{"Name", 0, "Field can't be blank."}
+	v = IntIsPresent{"Name", 0, "Field can't be blank"}
 	v.Validate(e)
 
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Field can't be blank."}, e.Get("Name"))
+	r.Equal([]string{"Field can't be blank"}, e.Get("Name"))
 }

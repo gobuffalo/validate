@@ -30,6 +30,6 @@ func (v *StringInclusion) Validate(e *validator.Errors) {
 			return
 		}
 
-		e.Add(v.Name, fmt.Sprintf("%s is not in the list [%s].", v.Name, strings.Join(v.List, ", ")))
+		e.Add(v.Name, fmt.Sprintf("%s is not in the list [%s]", v.Name, strings.Join(v.List, ", ")))
 	}
 }

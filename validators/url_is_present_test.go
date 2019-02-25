@@ -37,10 +37,10 @@ func Test_URLIsPresent(t *testing.T) {
 		r.Equal(test.valid, !e.HasAny(), test.url, e.Error())
 	}
 
-	v := URLIsPresent{Name: "URL", Field: "http://", Message: "URL isn't valid."}
+	v := URLIsPresent{Name: "URL", Field: "http://", Message: "URL isn't valid"}
 	e := validator.NewErrors()
 	v.Validate(e)
 
 	r.Equal(1, e.Count())
-	r.Equal([]string{"URL isn't valid."}, e.Get("URL"))
+	r.Equal([]string{"URL isn't valid"}, e.Get("URL"))
 }

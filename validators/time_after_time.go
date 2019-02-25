@@ -27,5 +27,5 @@ func (v *TimeAfterTime) Validate(e *validator.Errors) {
 		return
 	}
 
-	e.Add(v.FirstName, fmt.Sprintf("%s must be after %s.", v.FirstName, v.SecondName))
+	e.Add(v.FirstName, fmt.Sprintf("%s must be after %s", v.FirstName, v.SecondName))
 }

@@ -25,5 +25,5 @@ func (v *IntIsLessThan) Validate(e *validator.Errors) {
 		return
 	}
 
-	e.Add(v.Name, fmt.Sprintf("%d is not less than %d.", v.Field, v.Compared))
+	e.Add(v.Name, fmt.Sprintf("%d is not less than %d", v.Field, v.Compared))
 }

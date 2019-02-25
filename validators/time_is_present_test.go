@@ -23,19 +23,19 @@ func Test_TimeIsPresent(t *testing.T) {
 	v.Validate(e)
 
 	r.Equal(1, e.Count())
-	r.Equal([]string{"CreatedAt can not be blank."}, e.Get("CreatedAt"))
+	r.Equal([]string{"CreatedAt can not be blank"}, e.Get("CreatedAt"))
 
 	e = validator.NewErrors()
-	v = TimeIsPresent{Name: "CreatedAt", Field: time.Time{}, Message: "Field can't be blank."}
+	v = TimeIsPresent{Name: "CreatedAt", Field: time.Time{}, Message: "Field can't be blank"}
 	v.Validate(e)
 
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Field can't be blank."}, e.Get("CreatedAt"))
+	r.Equal([]string{"Field can't be blank"}, e.Get("CreatedAt"))
 
 	e = validator.NewErrors()
-	v = TimeIsPresent{"CreatedAt", time.Time{}, "Field can't be blank."}
+	v = TimeIsPresent{"CreatedAt", time.Time{}, "Field can't be blank"}
 	v.Validate(e)
 
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Field can't be blank."}, e.Get("CreatedAt"))
+	r.Equal([]string{"Field can't be blank"}, e.Get("CreatedAt"))
 }

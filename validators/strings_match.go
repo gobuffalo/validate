@@ -19,7 +19,7 @@ type StringsMatch struct {
 func (v *StringsMatch) Validate(e *validator.Errors) {
 	if strings.TrimSpace(v.Field) != strings.TrimSpace(v.Field2) {
 		if v.Message == "" {
-			v.Message = fmt.Sprintf("%s does not equal %s.", v.Field, v.Field2)
+			v.Message = fmt.Sprintf("%s does not equal %s", v.Field, v.Field2)
 		}
 
 		e.Add(v.Name, v.Message)

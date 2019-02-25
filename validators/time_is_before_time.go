@@ -27,5 +27,5 @@ func (v *TimeIsBeforeTime) Validate(e *validator.Errors) {
 		return
 	}
 
-	e.Add(v.FirstName, fmt.Sprintf("%s must be before %s.", v.FirstName, v.SecondName))
+	e.Add(v.FirstName, fmt.Sprintf("%s must be before %s", v.FirstName, v.SecondName))
 }

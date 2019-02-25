@@ -25,7 +25,7 @@ type EmailIsPresent struct {
 func (v *EmailIsPresent) Validate(e *validator.Errors) {
 	if !rxEmail.Match([]byte(v.Field)) {
 		if v.Message == "" {
-			v.Message = fmt.Sprintf("%s does not match the email format.", v.Name)
+			v.Message = fmt.Sprintf("%s does not match the email format", v.Name)
 		}
 
 		e.Add(v.Name, v.Message)
@@ -45,7 +45,7 @@ func (v *EmailLike) Validate(e *validator.Errors) {
 	parts := strings.Split(v.Field, "@")
 	if len(parts) != 2 || len(parts[0]) == 0 || len(parts[1]) == 0 {
 		if v.Message == "" {
-			v.Message = fmt.Sprintf("%s does not match the email format.", v.Name)
+			v.Message = fmt.Sprintf("%s does not match the email format", v.Name)
 		}
 
 		e.Add(v.Name, v.Message)
@@ -54,7 +54,7 @@ func (v *EmailLike) Validate(e *validator.Errors) {
 		// Check that domain is valid
 		if len(strings.Split(domain, ".")) < 2 {
 			if v.Message == "" {
-				v.Message = fmt.Sprintf("%s does not match the email format (email domain).", v.Name)
+				v.Message = fmt.Sprintf("%s does not match the email format (email domain)", v.Name)
 			}
 
 			e.Add(v.Name, v.Message)

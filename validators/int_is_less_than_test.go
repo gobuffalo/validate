@@ -22,12 +22,12 @@ func Test_IntIsLessThan(t *testing.T) {
 	v.Validate(e)
 
 	r.Equal(1, e.Count())
-	r.Equal([]string{"1 is not less than 0."}, e.Get("Number"))
+	r.Equal([]string{"1 is not less than 0"}, e.Get("Number"))
 
-	v = IntIsLessThan{Name: "Number", Field: 1, Compared: 0, Message: "number is not less than 0."}
+	v = IntIsLessThan{Name: "Number", Field: 1, Compared: 0, Message: "number is not less than 0"}
 	e = validator.NewErrors()
 	v.Validate(e)
 
 	r.Equal(1, e.Count())
-	r.Equal([]string{"number is not less than 0."}, e.Get("Number"))
+	r.Equal([]string{"number is not less than 0"}, e.Get("Number"))
 }

@@ -25,5 +25,5 @@ func (v *IntIsGreaterThan) Validate(e *validator.Errors) {
 		return
 	}
 
-	e.Add(v.Name, fmt.Sprintf("%d is not greater than %d.", v.Field, v.Compared))
+	e.Add(v.Name, fmt.Sprintf("%d is not greater than %d", v.Field, v.Compared))
 }

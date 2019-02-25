@@ -27,5 +27,5 @@ func (v *RegexMatch) Validate(e *validator.Errors) {
 		return
 	}
 
-	e.Add(v.Name, fmt.Sprintf("%s does not match the expected format.", v.Name))
+	e.Add(v.Name, fmt.Sprintf("%s does not match the expected format", v.Name))
 }

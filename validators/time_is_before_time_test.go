@@ -28,13 +28,13 @@ func Test_TimeIsBeforeTime(t *testing.T) {
 	v.Validate(e)
 
 	r.Equal(1, e.Count())
-	r.Equal([]string{"OpensAt must be before ClosesAt."}, e.Get("OpensAt"))
+	r.Equal([]string{"OpensAt must be before ClosesAt"}, e.Get("OpensAt"))
 
 	e = validator.NewErrors()
-	v.Message = "OpensAt must be earlier than ClosesAt."
+	v.Message = "OpensAt must be earlier than ClosesAt"
 
 	v.Validate(e)
 
 	r.Equal(1, e.Count())
-	r.Equal([]string{"OpensAt must be earlier than ClosesAt."}, e.Get("OpensAt"))
+	r.Equal([]string{"OpensAt must be earlier than ClosesAt"}, e.Get("OpensAt"))
 }
