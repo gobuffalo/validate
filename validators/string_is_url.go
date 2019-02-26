@@ -27,18 +27,22 @@ func (v *StringIsURL) Validate(e *validator.Errors) {
 
 	parsedURI, err := url.ParseRequestURI(v.Field)
 	if err != nil {
+
 		if v.Message == "" {
 			v.Message = fmt.Sprintf("%s does not match url format, %v", v.Name, err)
 		}
 
 		e.Add(v.Name, v.Message)
-	} else {
-		if parsedURI.Scheme != "" && parsedURI.Scheme != "http" && parsedURI.Scheme != "https" {
-			if v.Message == "" {
-				v.Message = fmt.Sprintf("%s invalid url scheme", v.Name)
-			}
 
-			e.Add(v.Name, v.Message)
+		return
+	}
+
+	if parsedURI.Scheme != "" && parsedURI.Scheme != "http" && parsedURI.Scheme != "https" {
+
+		if v.Message == "" {
+			v.Message = fmt.Sprintf("%s invalid url scheme", v.Name)
 		}
+
+		e.Add(v.Name, v.Message)
 	}
 }
