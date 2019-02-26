@@ -1,6 +1,8 @@
 package validators
 
-import "regexp"
+import (
+	"regexp"
+)
 
 // Basic regular expressions for validating strings
 // nolint: lll

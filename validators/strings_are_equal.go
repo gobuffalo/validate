@@ -15,11 +15,11 @@ type StringsAreEqual struct {
 	Message  string
 }
 
-// Validate adds an error if the field and field2 are not equal.
+// Validate adds an error if the field and compared are not equal.
 func (v *StringsAreEqual) Validate(e *validator.Errors) {
 	if strings.TrimSpace(v.Field) != strings.TrimSpace(v.Compared) {
 		if v.Message == "" {
-			v.Message = fmt.Sprintf("%s does not equal %s", v.Field, v.Compared)
+			v.Message = fmt.Sprintf("%s does not equal to %s", v.Field, v.Compared)
 		}
 
 		e.Add(v.Name, v.Message)
