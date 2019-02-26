@@ -13,7 +13,7 @@ func Test_UUIDIsPresent(t *testing.T) {
 
 	r := require.New(t)
 
-	id, err := u.NewV4()
+	id, err := uuid.NewV4()
 	r.NoError(err)
 
 	v := UUIDIsPresent{Name: "Name", Field: id}
