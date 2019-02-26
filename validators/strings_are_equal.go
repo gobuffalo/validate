@@ -2,23 +2,36 @@ package validators
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/s3rj1k/validator"
 )
 
 // StringsAreEqual is a validator object.
 type StringsAreEqual struct {
-	Name          string
-	Field         string
-	ComparedName  string
-	ComparedField string
-	Message       string
+	Name            string
+	Field           string
+	ComparedName    string
+	ComparedField   string
+	CaseInsensitive bool
+	Message         string
 }
 
 // Validate adds an error if the field and compared are not equal.
 func (v *StringsAreEqual) Validate(e *validator.Errors) {
-	if v.Field == v.ComparedField {
-		return
+
+	var caseName string
+
+	if v.CaseInsensitive {
+		caseName = "iequal"
+		if strings.EqualFold(v.Field, v.ComparedField) {
+			return
+		}
+	} else {
+		caseName = "equal"
+		if v.Field == v.ComparedField {
+			return
+		}
 	}
 
 	if v.Message != "" {
@@ -26,7 +39,7 @@ func (v *StringsAreEqual) Validate(e *validator.Errors) {
 		return
 	}
 
-	e.Add(v.Name, fmt.Sprintf("%s does not equal %s", v.Field, v.ComparedField))
+	e.Add(v.Name, fmt.Sprintf("%s does not %s %s", v.Field, caseName, v.ComparedField))
 }
 
 // SetField sets validator field.
