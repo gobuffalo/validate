@@ -2,6 +2,7 @@ package validators
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 
 	"github.com/s3rj1k/validator"
@@ -45,4 +46,9 @@ func (v *StringsAreEqual) Validate(e *validator.Errors) {
 // SetField sets validator field.
 func (v *StringsAreEqual) SetField(s string) {
 	v.Field = s
+}
+
+// SetNameIndex sets index of slice element on Name.
+func (v *StringsAreEqual) SetNameIndex(i int) {
+	v.Name = fmt.Sprintf("%s[%d]", regexp.MustCompile(`\[[0-9]+\]$`).ReplaceAllString(v.Name, ""), i)
 }

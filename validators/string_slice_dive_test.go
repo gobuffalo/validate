@@ -14,7 +14,7 @@ func Test_StringSliceDive(t *testing.T) {
 
 	sl := []string{"Foo", "Bar", "Bob", "What?"}
 
-	e := validator.NewErrors()
+	e := validator.NewErrorsP()
 	v := StringSliceDive{
 		Validator: &StringsAreEqual{Name: "Slice", ComparedField: "Bar"},
 		Field:     sl,
