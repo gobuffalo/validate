@@ -6,9 +6,7 @@ deps: check-gopath
 	$(GO_BIN) get -u github.com/Jeffail/gabs
 	$(GO_BIN) get -u github.com/gofrs/uuid
 
-	$(CURL_BIN) -sfL https://raw.githubusercontent.com/alecthomas/gometalinter/master/scripts/install.sh | $(SHELL_BIN) -s -- -b $GOPATH/bin
-	$(CURL_BIN) -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | $(SHELL_BIN) -s -- -b $GOPATH/bin v1.12.2
-	$(GO_BIN) get -u github.com/go-critic/go-critic/...
+	$(CURL_BIN) -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | $(SHELL_BIN) -s -- -b ${GOPATH}/bin v1.15.0
 	$(GO_BIN) get -u github.com/Quasilyte/go-consistent
 
 test:
@@ -18,13 +16,9 @@ test:
 
 lint:
 	golangci-lint run
-	gometalinter
-
-	cd validators
-	golangci-lint run
-	gometalinter
+	go-consistent -v ./...
 
 check-gopath:
-ifndef GOPATHs
+ifndef GOPATH
 	$(error GOPATH is undefined)
 endif

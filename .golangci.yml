@@ -30,4 +30,3 @@ linters:
   enable-all: true
   disable:
     - dupl
-    - goimports
