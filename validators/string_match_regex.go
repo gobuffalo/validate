@@ -11,13 +11,13 @@ import (
 type StringMatchRegex struct {
 	Name    string
 	Field   string
-	Expr    string
+	Regex   string
 	Message string
 }
 
 // Validate adds an error if the field does not match regular expression expr.
 func (v *StringMatchRegex) Validate(e *validator.Errors) {
-	r := regexp.MustCompile(v.Expr)
+	r := regexp.MustCompile(v.Regex)
 	if r.Match([]byte(v.Field)) {
 		return
 	}
