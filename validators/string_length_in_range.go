@@ -7,7 +7,7 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringLengthInRange is a validator object
+// StringLengthInRange is a validator object.
 type StringLengthInRange struct {
 	Name    string
 	Field   string
@@ -16,8 +16,8 @@ type StringLengthInRange struct {
 	Message string
 }
 
-// Validate checks that string in range of min:max
-// if max not present or it equal to 0 it will be equal to string length
+// Validate adds an error if the field length is not in range between min and max (inclusive).
+// It is possible to provide either both or one of the min/max values.
 func (v *StringLengthInRange) Validate(e *validator.Errors) {
 	strLength := utf8.RuneCountInString(v.Field)
 	if v.Max == 0 {

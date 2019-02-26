@@ -15,7 +15,7 @@ type StringInclusion struct {
 	Message string
 }
 
-// Validate adds an error if the field is not one of the allowed values.
+// Validate adds an error if the field is not one of the values from the list.
 func (v *StringInclusion) Validate(e *validator.Errors) {
 
 	var found = false

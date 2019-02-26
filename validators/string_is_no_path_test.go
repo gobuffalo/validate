@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_IsPath(t *testing.T) {
+func Test_StringIsNoPath(t *testing.T) {
 
 	r := require.New(t)
 
@@ -24,25 +24,25 @@ func Test_IsPath(t *testing.T) {
 		r.Nil(err)
 	}(r)
 
-	v := IsPath{Name: "Name", Field: "/tmp/test"}
+	v := StringIsNoPath{Name: "Name", Field: "/tmp/doesnotexist"}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	v = IsPath{Name: "Name", Field: "/tmp/doesnotexist"}
+	v = StringIsNoPath{Name: "Name", Field: "/tmp/test"}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"path '/tmp/doesnotexist' must exist"}, e.Get("Name"))
+	r.Equal([]string{"path '/tmp/test' must not exist"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = IsPath{Name: "Name", Field: "", Message: "path must exist"}
+	v = StringIsNoPath{Name: "Name", Field: "/tmp/test", Message: "path must not exist"}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"path must exist"}, e.Get("Name"))
+	r.Equal([]string{"path must not exist"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = IsPath{"Name", "", "path must exist"}
+	v = StringIsNoPath{"Name", "/tmp/test", "path must not exist"}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"path must exist"}, e.Get("Name"))
+	r.Equal([]string{"path must not exist"}, e.Get("Name"))
 }

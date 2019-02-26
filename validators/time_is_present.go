@@ -7,7 +7,7 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// TimeIsPresent is a validator object
+// TimeIsPresent is a validator object.
 type TimeIsPresent struct {
 	Name    string
 	Field   time.Time

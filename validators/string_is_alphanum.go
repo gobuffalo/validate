@@ -6,14 +6,15 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsAlphaNum is a validator object
+// StringIsAlphaNum is a validator object.
 type StringIsAlphaNum struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if the string contains only numbers and letters. Empty string is valid.
+// Validate adds an error if the field contains symbols except for arabic numerals and latin letters.
+// Empty string is valid.
 func (v *StringIsAlphaNum) Validate(e *validator.Errors) {
 
 	// null string is valid

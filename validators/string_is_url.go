@@ -7,16 +7,15 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// URLIsPresent is a validator object
-type URLIsPresent struct {
+// StringIsURL is a validator object
+type StringIsURL struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate performs the validation to check if URL is formatted correctly
-// uses net/url ParseRequestURI to check validity
-func (v *URLIsPresent) Validate(e *validator.Errors) {
+// Validate adds an error if the field is not a correctly formatted URL.
+func (v *StringIsURL) Validate(e *validator.Errors) {
 
 	if v.Field == "http://" || v.Field == "https://" {
 		if v.Message == "" {

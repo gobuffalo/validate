@@ -7,14 +7,14 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsIP is a validator object
+// StringIsIP is a validator object.
 type StringIsIP struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if a string is either IP version 4 or 6.
+// Validate adds an error if the field is not formatted as IP version 4 or 6.
 func (v *StringIsIP) Validate(e *validator.Errors) {
 
 	// ParseIP has to return a non-nil value

@@ -6,7 +6,7 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// Int64ArrayIsPresent is a validator object
+// Int64ArrayIsPresent is a validator object.
 type Int64ArrayIsPresent struct {
 	Name    string
 	Field   []int64

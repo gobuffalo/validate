@@ -6,7 +6,7 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// Int64IsLessThan is a validator object
+// Int64IsLessThan is a validator object.
 type Int64IsLessThan struct {
 	Name     string
 	Field    int64

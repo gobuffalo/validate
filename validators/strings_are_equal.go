@@ -7,16 +7,16 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringsMatch is a validator object
-type StringsMatch struct {
+// StringsAreEqual is a validator object.
+type StringsAreEqual struct {
 	Name     string
 	Field    string
 	Compared string
 	Message  string
 }
 
-// Validate performs the validation equality of two strings.
-func (v *StringsMatch) Validate(e *validator.Errors) {
+// Validate adds an error if the field and field2 are not equal.
+func (v *StringsAreEqual) Validate(e *validator.Errors) {
 	if strings.TrimSpace(v.Field) != strings.TrimSpace(v.Compared) {
 		if v.Message == "" {
 			v.Message = fmt.Sprintf("%s does not equal %s", v.Field, v.Compared)

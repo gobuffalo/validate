@@ -1,9 +1,13 @@
 package validators
 
-import "github.com/s3rj1k/validator"
+import (
+	"fmt"
 
-// IsNullString is a validator object
-type IsNullString struct {
+	"github.com/s3rj1k/validator"
+)
+
+// StringIsNull is a validator object.
+type StringIsNull struct {
 	Name    string
 	Field   string
 	Message string
@@ -18,8 +22,8 @@ func isNullString(str string) bool {
 	return false
 }
 
-// Validate adds an error if string is not (empty).
-func (v *IsNullString) Validate(e *validator.Errors) {
+// Validate adds an error if the field is not empty.
+func (v *StringIsNull) Validate(e *validator.Errors) {
 	if isNullString(v.Field) {
 		return
 	}
@@ -29,5 +33,5 @@ func (v *IsNullString) Validate(e *validator.Errors) {
 		return
 	}
 
-	e.Add(v.Name, "string must be emtpy")
+	e.Add(v.Name, fmt.Sprintf("%s must be empty", v.Name))
 }

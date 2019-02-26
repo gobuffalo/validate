@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_EmailIsPresent(t *testing.T) {
+func Test_StringIsEmail(t *testing.T) {
 
 	r := require.New(t)
 
@@ -34,7 +34,7 @@ func Test_EmailIsPresent(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		v := EmailIsPresent{Name: "email", Field: test.email}
+		v := StringIsEmail{Name: "email", Field: test.email}
 		e := validator.NewErrors()
 		v.Validate(e)
 		r.Equal(test.valid, !e.HasAny())
@@ -43,14 +43,14 @@ func Test_EmailIsPresent(t *testing.T) {
 		}
 	}
 
-	v := EmailIsPresent{Name: "email", Field: "", Message: "Email don't match the right format"}
+	v := StringIsEmail{Name: "email", Field: "", Message: "Email don't match the right format"}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(e.Count(), 1)
 	r.Equal([]string{"Email don't match the right format"}, e.Get("email"))
 }
 
-func Test_EmailLike(t *testing.T) {
+func Test_StringIsEmailLike(t *testing.T) {
 
 	r := require.New(t)
 
@@ -77,7 +77,7 @@ func Test_EmailLike(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		v := EmailLike{Name: "email", Field: test.email}
+		v := StringIsEmailLike{Name: "email", Field: test.email}
 		e := validator.NewErrors()
 		v.Validate(e)
 		r.Equal(test.valid, !e.HasAny(), test.email)
@@ -86,31 +86,31 @@ func Test_EmailLike(t *testing.T) {
 		}
 	}
 
-	v := EmailLike{Name: "email", Field: "foo@bar"}
+	v := StringIsEmailLike{Name: "email", Field: "foo@bar"}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(e.Count(), 1)
 	r.Equal(e.Get("email"), []string{"email does not match the email format (email domain)"})
 
-	v = EmailLike{Name: "email", Field: "", Message: "Email don't match the right format"}
+	v = StringIsEmailLike{Name: "email", Field: "", Message: "Email don't match the right format"}
 	e = validator.NewErrors()
 	v.Validate(e)
 	r.Equal(e.Count(), 1)
 	r.Equal(e.Get("email"), []string{"Email don't match the right format"})
 }
 
-func BenchmarkEmailIsPresent_IsValid(b *testing.B) {
+func BenchmarkStringIsEmailLike(b *testing.B) {
 	e := validator.NewErrors()
 	for i := 0; i <= b.N; i++ {
-		v := EmailLike{Name: "email", Field: "email@gmail.com"}
+		v := StringIsEmailLike{Name: "email", Field: "email@gmail.com"}
 		v.Validate(e)
 	}
 }
 
-func BenchmarkEmailLike_IsValid(b *testing.B) {
+func BenchmarkStringIsEmail(b *testing.B) {
 	e := validator.NewErrors()
 	for i := 0; i <= b.N; i++ {
-		v := EmailIsPresent{Name: "email", Field: "email@gmail.com"}
+		v := StringIsEmail{Name: "email", Field: "email@gmail.com"}
 		v.Validate(e)
 	}
 }

@@ -7,14 +7,14 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsPort is a validator object
+// StringIsPort is a validator object.
 type StringIsPort struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if a string represents a valid port
+// Validate adds an error if the field does not represent a valid port.
 func (v *StringIsPort) Validate(e *validator.Errors) {
 
 	if i, err := strconv.Atoi(v.Field); err == nil && i > 0 && i < 65536 {

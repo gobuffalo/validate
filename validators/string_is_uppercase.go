@@ -7,14 +7,14 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsUpperCase is a validator object
+// StringIsUpperCase is a validator object.
 type StringIsUpperCase struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if the string is uppercase. Empty string is valid.
+// Validate adds an error if the field is not uppercased. Empty string is valid.
 func (v *StringIsUpperCase) Validate(e *validator.Errors) {
 
 	// null string is valid
