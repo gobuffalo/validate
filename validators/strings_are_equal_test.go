@@ -19,8 +19,8 @@ func Test_StringsAreEqual(t *testing.T) {
 	}{
 		{"test", "test", true},
 		{"test_fail", "test_true", false},
-		{"test with space", " test with space ", true},
-		{" test with space second", " test with space second       ", true},
+		{"test with space", " test with space ", false},
+		{" test with space second", " test with space second       ", false},
 	}
 
 	for _, testCase := range cases {

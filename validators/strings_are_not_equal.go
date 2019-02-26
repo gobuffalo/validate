@@ -2,7 +2,6 @@ package validators
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/s3rj1k/validator"
 )
@@ -18,7 +17,7 @@ type StringsAreNotEqual struct {
 
 // Validate adds an error if the field and compared are equal.
 func (v *StringsAreNotEqual) Validate(e *validator.Errors) {
-	if strings.TrimSpace(v.Field) != strings.TrimSpace(v.ComparedField) {
+	if v.Field != v.ComparedField {
 		return
 	}
 
