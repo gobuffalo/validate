@@ -24,13 +24,13 @@ func Test_StringsMatch_Validate(t *testing.T) {
 	}
 
 	for _, testCase := range cases {
-		v := StringsMatch{Name: "strings", Field: testCase.str1, Field2: testCase.str2}
+		v := StringsMatch{Name: "strings", Field: testCase.str1, Compared: testCase.str2}
 		e := validator.NewErrors()
 		v.Validate(e)
 		r.Equal(testCase.expected, !e.HasAny(), "Str1: %s, Str2: %s", testCase.str1, testCase.str2)
 	}
 
-	v := StringsMatch{Name: "strings", Field: "test_fail", Field2: "test", Message: "String doesn't match"}
+	v := StringsMatch{Name: "strings", Field: "test_fail", Compared: "test", Message: "String doesn't match"}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())
@@ -40,7 +40,7 @@ func Test_StringsMatch_Validate(t *testing.T) {
 func BenchmarkStringsMatch_IsValid_Valid(b *testing.B) {
 	e := validator.NewErrors()
 	for i := 0; i <= b.N; i++ {
-		v := StringsMatch{Name: "strings", Field: " Some string ", Field2: " Some string "}
+		v := StringsMatch{Name: "strings", Field: " Some string ", Compared: " Some string "}
 		v.Validate(e)
 	}
 }
@@ -48,7 +48,7 @@ func BenchmarkStringsMatch_IsValid_Valid(b *testing.B) {
 func BenchmarkStringsMatch_IsValid_InValid(b *testing.B) {
 	e := validator.NewErrors()
 	for i := 0; i <= b.N; i++ {
-		v := StringsMatch{Name: "strings", Field: " Some string ", Field2: " Some string failure"}
+		v := StringsMatch{Name: "strings", Field: " Some string ", Compared: " Some string failure"}
 		v.Validate(e)
 	}
 }

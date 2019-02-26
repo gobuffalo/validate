@@ -5,7 +5,7 @@ import "github.com/s3rj1k/validator"
 // IsNullString is a validator object
 type IsNullString struct {
 	Name    string
-	String  string
+	Field   string
 	Message string
 }
 
@@ -20,7 +20,7 @@ func isNullString(str string) bool {
 
 // Validate adds an error if string is not (empty).
 func (v *IsNullString) Validate(e *validator.Errors) {
-	if isNullString(v.String) {
+	if isNullString(v.Field) {
 		return
 	}
 

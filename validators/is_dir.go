@@ -10,13 +10,13 @@ import (
 // IsDir is a validator object
 type IsDir struct {
 	Name    string
-	Path    string
+	Field   string
 	Message string
 }
 
 // Validate adds an error if path exists and is not dir.
 func (v *IsDir) Validate(e *validator.Errors) {
-	if fi, err := os.Stat(v.Path); !os.IsNotExist(err) {
+	if fi, err := os.Stat(v.Field); !os.IsNotExist(err) {
 		if mode := fi.Mode(); mode.IsDir() {
 			return
 		}
@@ -27,5 +27,5 @@ func (v *IsDir) Validate(e *validator.Errors) {
 		return
 	}
 
-	e.Add(v.Name, fmt.Sprintf("path '%s' is not dir", v.Path))
+	e.Add(v.Name, fmt.Sprintf("path '%s' is not dir", v.Field))
 }

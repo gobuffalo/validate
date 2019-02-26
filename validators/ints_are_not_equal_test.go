@@ -12,12 +12,12 @@ func Test_IntsAreNotEqual(t *testing.T) {
 
 	r := require.New(t)
 
-	v := IntsAreNotEqual{Name: "Number", ValueOne: 2, ValueTwo: 1}
+	v := IntsAreNotEqual{Name: "Number", Field: 2, Compared: 1}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	v = IntsAreNotEqual{Name: "Number", ValueOne: 2, ValueTwo: 2}
+	v = IntsAreNotEqual{Name: "Number", Field: 2, Compared: 2}
 	e = validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())

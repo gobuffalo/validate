@@ -12,12 +12,12 @@ func Test_Int64sAreEqual(t *testing.T) {
 
 	r := require.New(t)
 
-	v := Int64sAreEqual{Name: "Number", ValueOne: 1, ValueTwo: 1}
+	v := Int64sAreEqual{Name: "Number", Field: 1, Compared: 1}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	v = Int64sAreEqual{Name: "Number", ValueOne: 1, ValueTwo: 2}
+	v = Int64sAreEqual{Name: "Number", Field: 1, Compared: 2}
 	e = validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())

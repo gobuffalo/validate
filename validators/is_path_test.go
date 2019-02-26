@@ -24,18 +24,18 @@ func Test_IsPath(t *testing.T) {
 		r.Nil(err)
 	}(r)
 
-	v := IsPath{Name: "Name", Path: "/tmp/test"}
+	v := IsPath{Name: "Name", Field: "/tmp/test"}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	v = IsPath{Name: "Name", Path: "/tmp/doesnotexist"}
+	v = IsPath{Name: "Name", Field: "/tmp/doesnotexist"}
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"path '/tmp/doesnotexist' must exist"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = IsPath{Name: "Name", Path: "", Message: "path must exist"}
+	v = IsPath{Name: "Name", Field: "", Message: "path must exist"}
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"path must exist"}, e.Get("Name"))

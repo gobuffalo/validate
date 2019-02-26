@@ -10,8 +10,8 @@ import (
 // FuncValidator is a validator object
 type FuncValidator struct {
 	Fn      func() bool
-	Field   string
 	Name    string
+	Field   string
 	Message string
 }
 

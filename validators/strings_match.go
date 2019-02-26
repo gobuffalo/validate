@@ -9,17 +9,17 @@ import (
 
 // StringsMatch is a validator object
 type StringsMatch struct {
-	Name    string
-	Field   string
-	Field2  string
-	Message string
+	Name     string
+	Field    string
+	Compared string
+	Message  string
 }
 
 // Validate performs the validation equality of two strings.
 func (v *StringsMatch) Validate(e *validator.Errors) {
-	if strings.TrimSpace(v.Field) != strings.TrimSpace(v.Field2) {
+	if strings.TrimSpace(v.Field) != strings.TrimSpace(v.Compared) {
 		if v.Message == "" {
-			v.Message = fmt.Sprintf("%s does not equal %s", v.Field, v.Field2)
+			v.Message = fmt.Sprintf("%s does not equal %s", v.Field, v.Compared)
 		}
 
 		e.Add(v.Name, v.Message)

@@ -10,13 +10,13 @@ import (
 // IsPath is a validator object
 type IsPath struct {
 	Name    string
-	Path    string
+	Field   string
 	Message string
 }
 
 // Validate adds an error if the path does not exist.
 func (v *IsPath) Validate(e *validator.Errors) {
-	if _, err := os.Stat(v.Path); !os.IsNotExist(err) {
+	if _, err := os.Stat(v.Field); !os.IsNotExist(err) {
 		return
 	}
 
@@ -25,5 +25,5 @@ func (v *IsPath) Validate(e *validator.Errors) {
 		return
 	}
 
-	e.Add(v.Name, fmt.Sprintf("path '%s' must exist", v.Path))
+	e.Add(v.Name, fmt.Sprintf("path '%s' must exist", v.Field))
 }

@@ -10,13 +10,13 @@ import (
 // IsAbsPath is a validator object
 type IsAbsPath struct {
 	Name    string
-	Path    string
+	Field   string
 	Message string
 }
 
 // Validate adds an error if path is not absolute.
 func (v *IsAbsPath) Validate(e *validator.Errors) {
-	if v.Path == filepath.Clean(v.Path) && filepath.IsAbs(v.Path) {
+	if v.Field == filepath.Clean(v.Field) && filepath.IsAbs(v.Field) {
 		return
 	}
 
@@ -25,5 +25,5 @@ func (v *IsAbsPath) Validate(e *validator.Errors) {
 		return
 	}
 
-	e.Add(v.Name, fmt.Sprintf("path '%s' must be absolute", v.Path))
+	e.Add(v.Name, fmt.Sprintf("path '%s' must be absolute", v.Field))
 }
