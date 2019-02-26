@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_StringsMatch_Validate(t *testing.T) {
+func Test_StringsAreEqual(t *testing.T) {
 
 	r := require.New(t)
 
@@ -24,31 +24,31 @@ func Test_StringsMatch_Validate(t *testing.T) {
 	}
 
 	for _, testCase := range cases {
-		v := StringsMatch{Name: "strings", Field: testCase.str1, Compared: testCase.str2}
+		v := StringsAreEqual{Name: "strings", Field: testCase.str1, Compared: testCase.str2}
 		e := validator.NewErrors()
 		v.Validate(e)
 		r.Equal(testCase.expected, !e.HasAny(), "Str1: %s, Str2: %s", testCase.str1, testCase.str2)
 	}
 
-	v := StringsMatch{Name: "strings", Field: "test_fail", Compared: "test", Message: "String doesn't match"}
+	v := StringsAreEqual{Name: "strings", Field: "test_fail", Compared: "test", Message: "String doesn't match"}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"String doesn't match"}, e.Get("strings"))
 }
 
-func BenchmarkStringsMatch_IsValid_Valid(b *testing.B) {
+func BenchmarkStringsAreEqual_Valid(b *testing.B) {
 	e := validator.NewErrors()
 	for i := 0; i <= b.N; i++ {
-		v := StringsMatch{Name: "strings", Field: " Some string ", Compared: " Some string "}
+		v := StringsAreEqual{Name: "strings", Field: " Some string ", Compared: " Some string "}
 		v.Validate(e)
 	}
 }
 
-func BenchmarkStringsMatch_IsValid_InValid(b *testing.B) {
+func BenchmarkStringsAreEqual_InValid(b *testing.B) {
 	e := validator.NewErrors()
 	for i := 0; i <= b.N; i++ {
-		v := StringsMatch{Name: "strings", Field: " Some string ", Compared: " Some string failure"}
+		v := StringsAreEqual{Name: "strings", Field: " Some string ", Compared: " Some string failure"}
 		v.Validate(e)
 	}
 }

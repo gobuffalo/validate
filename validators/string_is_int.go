@@ -6,14 +6,15 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsInt is a validator object
+// StringIsInt is a validator object.
 type StringIsInt struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if the string is an integer. Empty string is valid.
+// Validate adds an error if the field is not an integer.
+// Leading sign is allowed. Empty string is valid.
 func (v *StringIsInt) Validate(e *validator.Errors) {
 
 	// null string is valid

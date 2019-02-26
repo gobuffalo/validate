@@ -7,14 +7,14 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsJSON is a validator object
+// StringIsJSON is a validator object.
 type StringIsJSON struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if the string is valid JSON (note: uses json.Unmarshal).
+// Validate adds an error if the field is not a valid JSON.
 func (v *StringIsJSON) Validate(e *validator.Errors) {
 
 	var js json.RawMessage

@@ -7,15 +7,15 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// IsDir is a validator object
-type IsDir struct {
+// StringIsDir is a validator object
+type StringIsDir struct {
 	Name    string
 	Field   string
 	Message string
 }
 
 // Validate adds an error if path exists and is not dir.
-func (v *IsDir) Validate(e *validator.Errors) {
+func (v *StringIsDir) Validate(e *validator.Errors) {
 	if fi, err := os.Stat(v.Field); !os.IsNotExist(err) {
 		if mode := fi.Mode(); mode.IsDir() {
 			return

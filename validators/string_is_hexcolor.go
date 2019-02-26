@@ -6,14 +6,15 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsHexcolor is a validator object
+// StringIsHexcolor is a validator object.
 type StringIsHexcolor struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if the string is a hexadecimal color.
+// Validate adds an error if the field is not formatted as a hexadecimal color.
+// Leading '#' is required (e.g. "#1f1f1F", "#F00").
 func (v *StringIsHexcolor) Validate(e *validator.Errors) {
 
 	if rxHexcolor.MatchString(v.Field) {

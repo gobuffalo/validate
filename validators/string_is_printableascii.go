@@ -6,14 +6,15 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsPrintableASCII is a validator object
+// StringIsPrintableASCII is a validator object.
 type StringIsPrintableASCII struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if the string contains printable ASCII chars only. Empty string is valid.
+// Validate adds an error if the field contains anything except for printable ASCII characters.
+// Empty string is valid.
 func (v *StringIsPrintableASCII) Validate(e *validator.Errors) {
 
 	// null string is valid

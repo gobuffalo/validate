@@ -7,15 +7,15 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// IsAbsPath is a validator object
-type IsAbsPath struct {
+// StringIsAbsPath is a validator object
+type StringIsAbsPath struct {
 	Name    string
 	Field   string
 	Message string
 }
 
 // Validate adds an error if path is not absolute.
-func (v *IsAbsPath) Validate(e *validator.Errors) {
+func (v *StringIsAbsPath) Validate(e *validator.Errors) {
 	if v.Field == filepath.Clean(v.Field) && filepath.IsAbs(v.Field) {
 		return
 	}

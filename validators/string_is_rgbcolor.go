@@ -6,14 +6,15 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsRGBcolor is a validator object
+// StringIsRGBcolor is a validator object.
 type StringIsRGBcolor struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if the string is a RGB color in form rgb(RRR, GGG, BBB).
+// Validate adds an error if the field is not formatted as an RGB color.
+// Expected format is "rgb(RRR, GGG, BBB)".
 func (v *StringIsRGBcolor) Validate(e *validator.Errors) {
 
 	if rxRGBcolor.MatchString(v.Field) {

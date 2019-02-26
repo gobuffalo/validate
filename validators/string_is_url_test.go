@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_URLIsPresent(t *testing.T) {
+func Test_StringIsURL(t *testing.T) {
 
 	r := require.New(t)
 
@@ -31,14 +31,14 @@ func Test_URLIsPresent(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		v := URLIsPresent{Name: "URL", Field: test.url}
+		v := StringIsURL{Name: "URL", Field: test.url}
 		e := validator.NewErrors()
 		v.Validate(e)
 
 		r.Equal(test.valid, !e.HasAny(), test.url, e.Error())
 	}
 
-	v := URLIsPresent{Name: "URL", Field: "http://", Message: "URL isn't valid"}
+	v := StringIsURL{Name: "URL", Field: "http://", Message: "URL isn't valid"}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())

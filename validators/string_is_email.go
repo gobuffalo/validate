@@ -7,15 +7,15 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// EmailIsPresent is a validator object
-type EmailIsPresent struct {
+// StringIsEmail is a validator object.
+type StringIsEmail struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate performs the validation based on the email regexp match.
-func (v *EmailIsPresent) Validate(e *validator.Errors) {
+// Validate adds an error if the field does not match email regexp. See Email const.
+func (v *StringIsEmail) Validate(e *validator.Errors) {
 	if !rxEmail.Match([]byte(v.Field)) {
 		if v.Message == "" {
 			v.Message = fmt.Sprintf("%s does not match the email format", v.Name)
@@ -25,16 +25,16 @@ func (v *EmailIsPresent) Validate(e *validator.Errors) {
 	}
 }
 
-// EmailLike checks that email has two parts (username and domain separated by @)
-// Also it check that domain have domain zone (don`t check that zone is valid)
-type EmailLike struct {
+// StringIsEmailLike is a validator object.
+type StringIsEmailLike struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate performs the validation based on email struct (username@domain)
-func (v *EmailLike) Validate(e *validator.Errors) {
+// Validate adds an error if the field does not correspond to "username@domain" structure.
+// It also checks that domain has a domain zone (but does not check if the zone is valid).
+func (v *StringIsEmailLike) Validate(e *validator.Errors) {
 	parts := strings.Split(v.Field, "@")
 	if len(parts) != 2 || len(parts[0]) == 0 || len(parts[1]) == 0 {
 		if v.Message == "" {

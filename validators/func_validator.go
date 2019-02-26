@@ -7,7 +7,7 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// FuncValidator is a validator object
+// FuncValidator is a validator object.
 type FuncValidator struct {
 	Fn      func() bool
 	Name    string
@@ -15,7 +15,7 @@ type FuncValidator struct {
 	Message string
 }
 
-// Validate is a validation method wrapper
+// Validate is a validation method wrapper.
 func (f *FuncValidator) Validate(e *validator.Errors) {
 	// for backwards compatibility
 	if strings.TrimSpace(f.Name) == "" {

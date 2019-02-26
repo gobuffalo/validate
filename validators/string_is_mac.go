@@ -7,14 +7,14 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsMAC is a validator object
+// StringIsMAC is a validator object.
 type StringIsMAC struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if the string is MAC.
+// Validate adds an error if the field is not formatted as a MAC address.
 func (v *StringIsMAC) Validate(e *validator.Errors) {
 
 	// using net ParseMAC

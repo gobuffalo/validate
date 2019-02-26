@@ -15,8 +15,8 @@ type StringIsUTFNumeric struct {
 	Message string
 }
 
-// Validate if the string contains only unicode numbers of any kind (category N).
-// Numbers can be 0-9 but also Fractions ¾,Roman Ⅸ and Hangzhou 〩. Empty string is valid.
+// Validate adds an error if the field contains anything except unicode numbers (category N).
+// Leading sign is allowed. Empty string is valid.
 func (v *StringIsUTFNumeric) Validate(e *validator.Errors) {
 
 	var failed bool

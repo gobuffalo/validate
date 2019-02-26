@@ -7,15 +7,15 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// IsNoPath is a validator object
-type IsNoPath struct {
+// StringIsNoPath is a validator object
+type StringIsNoPath struct {
 	Name    string
 	Field   string
 	Message string
 }
 
 // Validate adds an error if path exists.
-func (v *IsNoPath) Validate(e *validator.Errors) {
+func (v *StringIsNoPath) Validate(e *validator.Errors) {
 	if _, err := os.Stat(v.Field); os.IsNotExist(err) {
 		return
 	}

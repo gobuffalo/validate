@@ -7,7 +7,7 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringExclusion is a validator object
+// StringExclusion is a validator object.
 type StringExclusion struct {
 	Name      string
 	Field     string

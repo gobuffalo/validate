@@ -6,7 +6,7 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsFloat is a validator object
+// StringIsFloat is a validator object.
 type StringIsFloat struct {
 	Name    string
 	Field   string
@@ -21,7 +21,7 @@ func (v *StringIsFloat) Validate(e *validator.Errors) {
 		return
 	}
 
-	// Int is valid
+	// float is valid
 	if rxFloat.MatchString(v.Field) {
 		return
 	}

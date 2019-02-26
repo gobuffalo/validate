@@ -7,7 +7,7 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsPresent is a validator object
+// StringIsPresent is a validator object.
 type StringIsPresent struct {
 	Name    string
 	Field   string

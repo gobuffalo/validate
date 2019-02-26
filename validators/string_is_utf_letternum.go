@@ -8,14 +8,14 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsUTFLetterNum is a validator object
+// StringIsUTFLetterNum is a validator object.
 type StringIsUTFLetterNum struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if the string contains only unicode letters/numbers (category L/N).
+// Validate adds an error if the field contains anything except unicode letters/numbers (category L/N).
 // Empty string is valid.
 func (v *StringIsUTFLetterNum) Validate(e *validator.Errors) {
 

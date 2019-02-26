@@ -7,14 +7,14 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// StringIsLowerCase is a validator object
+// StringIsLowerCase is a validator object.
 type StringIsLowerCase struct {
 	Name    string
 	Field   string
 	Message string
 }
 
-// Validate if the string is lowercase. Empty string is valid.
+// Validate adds an error if the field is not lowercased. Empty string is valid.
 func (v *StringIsLowerCase) Validate(e *validator.Errors) {
 
 	// null string is valid

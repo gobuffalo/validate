@@ -7,7 +7,7 @@ import (
 	"github.com/s3rj1k/validator"
 )
 
-// TimeIsBeforeTime is a validator object
+// TimeIsBeforeTime is a validator object.
 type TimeIsBeforeTime struct {
 	FirstName  string
 	FirstTime  time.Time
