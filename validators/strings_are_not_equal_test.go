@@ -24,13 +24,13 @@ func Test_StringsAreNotEqual(t *testing.T) {
 	}
 
 	for _, testCase := range cases {
-		v := StringsAreNotEqual{Name: "strings", Field: testCase.str1, Compared: testCase.str2}
+		v := StringsAreNotEqual{Name: "strings", Field: testCase.str1, ComparedField: testCase.str2}
 		e := validator.NewErrors()
 		v.Validate(e)
 		r.Equal(testCase.expected, !e.HasAny(), "Str1: %s, Str2: %s", testCase.str1, testCase.str2)
 	}
 
-	v := StringsAreNotEqual{Name: "strings", Field: "test", Compared: "test", Message: "Strings match"}
+	v := StringsAreNotEqual{Name: "strings", Field: "test", ComparedField: "test", Message: "Strings match"}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())
@@ -40,7 +40,7 @@ func Test_StringsAreNotEqual(t *testing.T) {
 func BenchmarkStringsAreNotEqual_Valid(b *testing.B) {
 	e := validator.NewErrors()
 	for i := 0; i <= b.N; i++ {
-		v := StringsAreNotEqual{Name: "strings", Field: " Some string ", Compared: " Some string "}
+		v := StringsAreNotEqual{Name: "strings", Field: " Some string ", ComparedField: " Some string "}
 		v.Validate(e)
 	}
 }
@@ -48,7 +48,7 @@ func BenchmarkStringsAreNotEqual_Valid(b *testing.B) {
 func BenchmarkStringsAreNotEqual_InValid(b *testing.B) {
 	e := validator.NewErrors()
 	for i := 0; i <= b.N; i++ {
-		v := StringsAreNotEqual{Name: "strings", Field: " Some string ", Compared: " Some string failure"}
+		v := StringsAreNotEqual{Name: "strings", Field: " Some string ", ComparedField: " Some string failure"}
 		v.Validate(e)
 	}
 }
