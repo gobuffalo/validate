@@ -30,6 +30,16 @@ func Test_StringsAreEqual(t *testing.T) {
 		r.Equal(testCase.expected, !e.HasAny(), "Str1: %s, Str2: %s", testCase.str1, testCase.str2)
 	}
 
+	for _, testCase := range cases {
+		v := StringsAreEqual{Name: "strings1", Field: testCase.str1, ComparedField: testCase.str2, ComparedName: "strings2"}
+		e := validator.NewErrors()
+		v.Validate(e)
+		r.Equal(testCase.expected, !e.HasAny(), "Str1: %s, Str2: %s", testCase.str1, testCase.str2)
+		if !testCase.expected {
+			r.Contains(e.Get("strings1"), "strings1 does not equal strings2")
+		}
+	}
+
 	v := StringsAreEqual{Name: "strings", Field: "test_fail", ComparedField: "test", Message: "String doesn't match"}
 	e := validator.NewErrors()
 	v.Validate(e)
@@ -57,6 +67,16 @@ func Test_StringsAreIEqual(t *testing.T) {
 		e := validator.NewErrors()
 		v.Validate(e)
 		r.Equal(testCase.expected, !e.HasAny(), "Str1: %s, Str2: %s", testCase.str1, testCase.str2)
+	}
+
+	for _, testCase := range cases {
+		v := StringsAreEqual{Name: "strings1", Field: testCase.str1, ComparedField: testCase.str2, ComparedName: "strings2", CaseInsensitive: true}
+		e := validator.NewErrors()
+		v.Validate(e)
+		r.Equal(testCase.expected, !e.HasAny(), "Str1: %s, Str2: %s", testCase.str1, testCase.str2)
+		if !testCase.expected {
+			r.Contains(e.Get("strings1"), "strings1 does not iequal strings2")
+		}
 	}
 
 	v := StringsAreEqual{Name: "strings", Field: "test_fail", ComparedField: "test", CaseInsensitive: true, Message: "String doesn't match"}
