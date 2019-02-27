@@ -13,7 +13,7 @@ type StringIsEmail struct {
 	Field string
 }
 
-// Validate adds an error if the field does not match email regexp. See Email const.
+// Validate adds an error if the Field does not match email regexp. See Email const.
 func (v *StringIsEmail) Validate(e *validator.Errors) {
 	if rxEmail.Match([]byte(v.Field)) {
 		return
@@ -29,7 +29,7 @@ type StringIsEmailLike struct {
 	Field string
 }
 
-// Validate adds an error if the field does not correspond to "username@domain" structure.
+// Validate adds an error if the Field does not correspond to "username@domain" structure.
 // It also checks that domain has a domain zone (but does not check if the zone is valid).
 func (v *StringIsEmailLike) Validate(e *validator.Errors) {
 	var validStructure = false

@@ -9,17 +9,17 @@ import (
 
 // TimeIsBeforeTime is a validator object.
 type TimeIsBeforeTime struct {
-	FirstName  string
-	FirstTime  time.Time
-	SecondName string
-	SecondTime time.Time
+	Name          string
+	Field         time.Time
+	ComparedName  string
+	ComparedField time.Time
 }
 
-// Validate adds an error if the FirstTime is after the SecondTime.
+// Validate adds an error if the Field time is not before the ComparedField time.
 func (v *TimeIsBeforeTime) Validate(e *validator.Errors) {
-	if v.FirstTime.UnixNano() <= v.SecondTime.UnixNano() {
+	if v.Field.UnixNano() < v.ComparedField.UnixNano() {
 		return
 	}
 
-	e.Add(v.FirstName, fmt.Sprintf("%s must be before %s", v.FirstName, v.SecondName))
+	e.Add(v.Name, fmt.Sprintf("%s must be before %s", v.Name, v.ComparedName))
 }

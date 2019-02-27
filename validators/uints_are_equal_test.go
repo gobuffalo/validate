@@ -12,12 +12,12 @@ func Test_UintsAreEqual(t *testing.T) {
 
 	r := require.New(t)
 
-	v := UintsAreEqual{Name: "Number", Field: 1, Compared: 1}
+	v := UintsAreEqual{Name: "Number", Field: 1, ComparedField: 1}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	v = UintsAreEqual{Name: "Number", Field: 1, Compared: 2}
+	v = UintsAreEqual{Name: "Number", Field: 1, ComparedField: 2}
 	e = validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())

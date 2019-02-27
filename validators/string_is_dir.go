@@ -13,7 +13,7 @@ type StringIsDir struct {
 	Field string
 }
 
-// Validate adds an error if the field is a path that exists and is not dir.
+// Validate adds an error if the Field is not a path to directory.
 func (v *StringIsDir) Validate(e *validator.Errors) {
 	if fi, err := os.Stat(v.Field); !os.IsNotExist(err) {
 		if mode := fi.Mode(); mode.IsDir() {

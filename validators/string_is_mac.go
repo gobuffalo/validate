@@ -13,7 +13,7 @@ type StringIsMAC struct {
 	Field string
 }
 
-// Validate adds an error if the field is not formatted as a MAC address.
+// Validate adds an error if the Field is not a MAC address.
 func (v *StringIsMAC) Validate(e *validator.Errors) {
 
 	// using net ParseMAC

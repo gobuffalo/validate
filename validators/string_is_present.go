@@ -13,7 +13,8 @@ type StringIsPresent struct {
 	Field string
 }
 
-// Validate adds an error if the field is empty or has only whitespaces.
+// Validate adds an error if the Field is empty or has only whitespaces.
+// If you don't want whitespaces - see StringIsNull validator.
 func (v *StringIsPresent) Validate(e *validator.Errors) {
 	if strings.TrimSpace(v.Field) != "" {
 		return

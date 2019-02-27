@@ -13,7 +13,7 @@ type StringIsURL struct {
 	Field string
 }
 
-// Validate adds an error if the field is not a correctly formatted URL.
+// Validate adds an error if the Field is not a correctly formatted URL.
 func (v *StringIsURL) Validate(e *validator.Errors) {
 
 	if v.Field == "http://" || v.Field == "https://" {

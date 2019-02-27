@@ -13,7 +13,7 @@ type StringIsUpperCase struct {
 	Field string
 }
 
-// Validate adds an error if the field is not uppercased. Empty string is valid.
+// Validate adds an error if the Field is not uppercased. Empty string is valid.
 func (v *StringIsUpperCase) Validate(e *validator.Errors) {
 
 	// null string is valid

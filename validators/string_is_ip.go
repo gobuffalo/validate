@@ -13,7 +13,7 @@ type StringIsIP struct {
 	Field string
 }
 
-// Validate adds an error if the field is not formatted as IP version 4 or 6.
+// Validate adds an error if the Field is a valid IP address version 4 or 6.
 func (v *StringIsIP) Validate(e *validator.Errors) {
 
 	// ParseIP has to return a non-nil value

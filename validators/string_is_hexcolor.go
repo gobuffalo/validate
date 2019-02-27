@@ -12,7 +12,7 @@ type StringIsHexcolor struct {
 	Field string
 }
 
-// Validate adds an error if the field is not formatted as a hexadecimal color.
+// Validate adds an error if the Field is not formatted as a hexadecimal color.
 // Leading '#' is required (e.g. "#1f1f1F", "#F00").
 func (v *StringIsHexcolor) Validate(e *validator.Errors) {
 

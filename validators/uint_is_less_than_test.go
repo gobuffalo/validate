@@ -12,17 +12,17 @@ func Test_UintIsLessThan(t *testing.T) {
 
 	r := require.New(t)
 
-	v := UintIsLessThan{Name: "Number", Field: 1, Compared: 2}
+	v := UintIsLessThan{Name: "Number", Field: 1, ComparedField: 2}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	v = UintIsLessThan{Name: "Number", Field: 1, Compared: 0}
+	v = UintIsLessThan{Name: "Number", Field: 1, ComparedField: 0}
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"1 is not less than 0"}, e.Get("Number"))
 
-	v = UintIsLessThan{"Number", 0, 0}
+	v = UintIsLessThan{"Number", 0, "Number2", 0}
 	e = validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())

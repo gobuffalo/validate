@@ -12,7 +12,7 @@ type StringIsBase64 struct {
 	Field string
 }
 
-// Validate adds an error if the field is not base64 encoded.
+// Validate adds an error if the Field is not base64 encoded.
 func (v *StringIsBase64) Validate(e *validator.Errors) {
 
 	// base64 is valid

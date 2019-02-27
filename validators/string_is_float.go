@@ -12,7 +12,7 @@ type StringIsFloat struct {
 	Field string
 }
 
-// Validate if the field is a float. Empty string is valid.
+// Validate add an error if the Field is not a float. Empty string is valid.
 func (v *StringIsFloat) Validate(e *validator.Errors) {
 
 	// null string is valid

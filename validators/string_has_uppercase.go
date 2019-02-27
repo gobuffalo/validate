@@ -12,7 +12,7 @@ type StringHasUpperCase struct {
 	Field string
 }
 
-// Validate adds an error if the field contains at least 1 uppercase. Empty string is valid.
+// Validate adds an error if the Field contains at least 1 uppercase. Empty string is valid.
 func (v *StringHasUpperCase) Validate(e *validator.Errors) {
 
 	// null string is valid

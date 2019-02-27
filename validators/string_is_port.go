@@ -13,7 +13,7 @@ type StringIsPort struct {
 	Field string
 }
 
-// Validate adds an error if the field does not represent a valid port.
+// Validate adds an error if the Field does not represent a valid port.
 func (v *StringIsPort) Validate(e *validator.Errors) {
 
 	if i, err := strconv.Atoi(v.Field); err == nil && i > 0 && i < 65536 {

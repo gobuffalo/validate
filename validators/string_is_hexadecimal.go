@@ -12,7 +12,7 @@ type StringIsHexadecimal struct {
 	Field string
 }
 
-// Validate adds an error if the field is not in a hexadecimal format.
+// Validate adds an error if the Field is not in a hexadecimal format.
 func (v *StringIsHexadecimal) Validate(e *validator.Errors) {
 
 	if rxHexadecimal.MatchString(v.Field) {

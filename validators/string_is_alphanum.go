@@ -12,7 +12,7 @@ type StringIsAlphaNum struct {
 	Field string
 }
 
-// Validate adds an error if the field contains symbols except for arabic numerals and latin letters.
+// Validate adds an error if the Field contains any symbols except for arabic numerals and latin letters.
 // Empty string is valid.
 func (v *StringIsAlphaNum) Validate(e *validator.Errors) {
 

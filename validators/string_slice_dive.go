@@ -17,7 +17,7 @@ type StringSliceDive struct {
 	Field     []string
 }
 
-// Validate adds an error if the field is one of the values from the blacklist.
+// Validate applies Validator to each value in the Field.
 func (v *StringSliceDive) Validate(e *validator.Errors) {
 	for i, f := range v.Field {
 		v.Validator.SetField(f)

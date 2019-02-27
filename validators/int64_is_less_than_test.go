@@ -12,12 +12,12 @@ func Test_Int64IsLessThan(t *testing.T) {
 
 	r := require.New(t)
 
-	v := Int64IsLessThan{Name: "Number", Field: 1, Compared: 2}
+	v := Int64IsLessThan{Name: "Number", Field: 1, ComparedField: 2}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(0, e.Count())
 
-	v = Int64IsLessThan{Name: "Number", Field: 1, Compared: 0}
+	v = Int64IsLessThan{Name: "Number", Field: 1, ComparedField: 0}
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"1 is not less than 0"}, e.Get("Number"))

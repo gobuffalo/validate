@@ -12,7 +12,7 @@ type Int64IsPresent struct {
 	Field int64
 }
 
-// Validate adds an error if the field equals 0.
+// Validate adds an error if the Field equals to 0.
 func (v *Int64IsPresent) Validate(e *validator.Errors) {
 	if v.Field != 0 {
 		return

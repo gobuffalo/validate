@@ -13,7 +13,7 @@ type TimeIsPresent struct {
 	Field time.Time
 }
 
-// Validate adds an error if the field is not a valid time.
+// Validate adds an error if the Field is the time default value.
 func (v *TimeIsPresent) Validate(e *validator.Errors) {
 	t := time.Time{}
 	if v.Field.UnixNano() != t.UnixNano() {

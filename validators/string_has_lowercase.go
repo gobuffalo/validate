@@ -12,7 +12,7 @@ type StringHasLowerCase struct {
 	Field string
 }
 
-// Validate adds an error if the field contains at least 1 lowercase. Empty string is valid.
+// Validate adds an error if the Field contains at least 1 lowercase. Empty string is valid.
 func (v *StringHasLowerCase) Validate(e *validator.Errors) {
 
 	// null string is valid

@@ -13,7 +13,7 @@ type StringIsLowerCase struct {
 	Field string
 }
 
-// Validate adds an error if the field is not lowercased. Empty string is valid.
+// Validate adds an error if the Field is not lowercased. Empty string is valid.
 func (v *StringIsLowerCase) Validate(e *validator.Errors) {
 
 	// null string is valid

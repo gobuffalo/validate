@@ -12,7 +12,7 @@ type StringIsNumeric struct {
 	Field string
 }
 
-// Validate adds an error if the field is not numeric. Empty string is valid.
+// Validate adds an error if the Field is not numeric. Empty string is valid.
 func (v *StringIsNumeric) Validate(e *validator.Errors) {
 
 	// null string is valid

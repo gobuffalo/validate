@@ -8,16 +8,17 @@ import (
 
 // UintIsGreaterThan is a validator object
 type UintIsGreaterThan struct {
-	Name     string
-	Field    uint
-	Compared uint
+	Name          string
+	Field         uint
+	ComparedName  string
+	ComparedField uint
 }
 
 // Validate adds an error if the field is not greater than the compared value.
 func (v *UintIsGreaterThan) Validate(e *validator.Errors) {
-	if v.Field > v.Compared {
+	if v.Field > v.ComparedField {
 		return
 	}
 
-	e.Add(v.Name, fmt.Sprintf("%d is not greater than %d", v.Field, v.Compared))
+	e.Add(v.Name, fmt.Sprintf("%d is not greater than %d", v.Field, v.ComparedField))
 }

@@ -12,7 +12,7 @@ type StringIsPrintableASCII struct {
 	Field string
 }
 
-// Validate adds an error if the field contains anything except for printable ASCII characters.
+// Validate adds an error if the Field contains anything except for printable ASCII characters.
 // Empty string is valid.
 func (v *StringIsPrintableASCII) Validate(e *validator.Errors) {
 

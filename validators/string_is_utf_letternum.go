@@ -13,7 +13,7 @@ type StringIsUTFLetterNum struct {
 	Field string
 }
 
-// Validate adds an error if the field contains anything except unicode letters/numbers (category L/N).
+// Validate adds an error if the Field contains anything except unicode letters/numbers (category L/N).
 // Empty string is valid.
 func (v *StringIsUTFLetterNum) Validate(e *validator.Errors) {
 	var badRune bool

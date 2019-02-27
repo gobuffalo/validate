@@ -14,7 +14,7 @@ type StringMatchRegex struct {
 	Regex string
 }
 
-// Validate adds an error if the field does not match regular expression expr.
+// Validate adds an error if the Field does not match regular expression Regex.
 func (v *StringMatchRegex) Validate(e *validator.Errors) {
 	r := regexp.MustCompile(v.Regex)
 	if r.Match([]byte(v.Field)) {
