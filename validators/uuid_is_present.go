@@ -14,7 +14,7 @@ type UUIDIsPresent struct {
 	Field uuid.UUID
 }
 
-// Validate adds an error if the field is not a valid uuid.
+// Validate adds an error if the Field is an uuid default value (uuid.Nil).
 func (v *UUIDIsPresent) Validate(e *validator.Errors) {
 	s := v.Field.String()
 	if strings.TrimSpace(s) != "" && v.Field != uuid.Nil {

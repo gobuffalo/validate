@@ -13,7 +13,7 @@ type StringIsJSON struct {
 	Field string
 }
 
-// Validate adds an error if the field is not a valid JSON.
+// Validate adds an error if the Field is not a valid JSON.
 func (v *StringIsJSON) Validate(e *validator.Errors) {
 
 	var js json.RawMessage

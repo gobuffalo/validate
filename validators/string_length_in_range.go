@@ -15,8 +15,8 @@ type StringLengthInRange struct {
 	Max   int
 }
 
-// Validate adds an error if the field length is not in range between min and max (inclusive).
-// It is possible to provide either both or one of the min/max values.
+// Validate adds an error if the Field length is not in range between Min and Max (inclusive).
+// It is possible to provide either both or one of the Min/Max values.
 func (v *StringLengthInRange) Validate(e *validator.Errors) {
 	strLength := utf8.RuneCountInString(v.Field)
 	if v.Max == 0 {

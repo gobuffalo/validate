@@ -12,7 +12,7 @@ type StringIsRGBcolor struct {
 	Field string
 }
 
-// Validate adds an error if the field is not formatted as an RGB color.
+// Validate adds an error if the Field is not formatted as an RGB color.
 // Expected format is "rgb(RRR, GGG, BBB)".
 func (v *StringIsRGBcolor) Validate(e *validator.Errors) {
 

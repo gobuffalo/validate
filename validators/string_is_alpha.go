@@ -12,7 +12,7 @@ type StringIsAlpha struct {
 	Field string
 }
 
-// Validate adds an error if the field contains anything except for latin letters.
+// Validate adds an error if the Field contains anything except for latin letters.
 // Empty string is valid.
 func (v *StringIsAlpha) Validate(e *validator.Errors) {
 

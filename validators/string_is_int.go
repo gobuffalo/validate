@@ -12,7 +12,7 @@ type StringIsInt struct {
 	Field string
 }
 
-// Validate adds an error if the field is not an integer.
+// Validate adds an error if the Field is not an integer.
 // Leading sign is allowed. Empty string is valid.
 func (v *StringIsInt) Validate(e *validator.Errors) {
 

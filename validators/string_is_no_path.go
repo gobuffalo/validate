@@ -13,7 +13,7 @@ type StringIsNoPath struct {
 	Field string
 }
 
-// Validate adds an error if path exists.
+// Validate adds an error if the Field is an existing path.
 func (v *StringIsNoPath) Validate(e *validator.Errors) {
 	if _, err := os.Stat(v.Field); os.IsNotExist(err) {
 		return

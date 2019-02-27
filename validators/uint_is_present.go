@@ -12,7 +12,7 @@ type UintIsPresent struct {
 	Field uint
 }
 
-// Validate adds an error if the field equals 0.
+// Validate adds an error if the Field is equal to 0.
 func (v *UintIsPresent) Validate(e *validator.Errors) {
 	if v.Field != 0 {
 		return

@@ -8,16 +8,17 @@ import (
 
 // IntsAreNotEqual is a validator object.
 type IntsAreNotEqual struct {
-	Name     string
-	Field    int
-	Compared int
+	Name          string
+	Field         int
+	ComparedName  string
+	ComparedField int
 }
 
-// Validate add an error if the field is equal to the compared value.
+// Validate add an error if the Field is equal to the ComparedField.
 func (v *IntsAreNotEqual) Validate(e *validator.Errors) {
-	if v.Field != v.Compared {
+	if v.Field != v.ComparedField {
 		return
 	}
 
-	e.Add(v.Name, fmt.Sprintf("%d is equal to %d", v.Field, v.Compared))
+	e.Add(v.Name, fmt.Sprintf("%d is equal to %d", v.Field, v.ComparedField))
 }

@@ -12,7 +12,7 @@ type Int64ArrayIsPresent struct {
 	Field []int64
 }
 
-// Validate adds an error if the field is an empty array.
+// Validate adds an error if the Field is an empty array.
 func (v *Int64ArrayIsPresent) Validate(e *validator.Errors) {
 	if len(v.Field) > 0 {
 		return

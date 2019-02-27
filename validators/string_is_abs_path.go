@@ -13,7 +13,7 @@ type StringIsAbsPath struct {
 	Field string
 }
 
-// Validate adds an error if path is not absolute.
+// Validate adds an error if Field is not an absolute path.
 func (v *StringIsAbsPath) Validate(e *validator.Errors) {
 	if v.Field == filepath.Clean(v.Field) && filepath.IsAbs(v.Field) {
 		return

@@ -17,7 +17,8 @@ type StringsAreNotEqual struct {
 	CaseInsensitive bool
 }
 
-// Validate adds an error if the field and compared are equal.
+// Validate adds an error if the Field is equal to ComparedField.
+// CaseInsensitive flag can be set to make comparison case insensitive.
 func (v *StringsAreNotEqual) Validate(e *validator.Errors) {
 
 	var caseName string
