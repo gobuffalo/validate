@@ -30,14 +30,8 @@ func Test_StringIsDir(t *testing.T) {
 	r.Equal([]string{"path '/tmp/test_dir' is not dir"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = StringIsDir{Name: "Name", Field: "/tmp/test_dir", Message: "path is not dir"}
+	v = StringIsDir{"Name", "/tmp/test_dir"}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"path is not dir"}, e.Get("Name"))
-
-	e = validator.NewErrors()
-	v = StringIsDir{"Name", "/tmp/test_dir", "path is not dir"}
-	v.Validate(e)
-	r.Equal(1, e.Count())
-	r.Equal([]string{"path is not dir"}, e.Get("Name"))
+	r.Equal([]string{"path '/tmp/test_dir' is not dir"}, e.Get("Name"))
 }

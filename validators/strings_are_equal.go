@@ -15,7 +15,6 @@ type StringsAreEqual struct {
 	ComparedName    string
 	ComparedField   string
 	CaseInsensitive bool
-	Message         string
 }
 
 // Validate adds an error if the field and compared are not equal.
@@ -33,11 +32,6 @@ func (v *StringsAreEqual) Validate(e *validator.Errors) {
 		if v.Field == v.ComparedField {
 			return
 		}
-	}
-
-	if v.Message != "" {
-		e.Add(v.Name, v.Message)
-		return
 	}
 
 	if len(v.ComparedName) == 0 {

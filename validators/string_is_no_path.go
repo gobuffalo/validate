@@ -9,19 +9,13 @@ import (
 
 // StringIsNoPath is a validator object
 type StringIsNoPath struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if path exists.
 func (v *StringIsNoPath) Validate(e *validator.Errors) {
 	if _, err := os.Stat(v.Field); os.IsNotExist(err) {
-		return
-	}
-
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
 		return
 	}
 

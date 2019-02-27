@@ -43,11 +43,11 @@ func Test_StringIsEmail(t *testing.T) {
 		}
 	}
 
-	v := StringIsEmail{Name: "email", Field: "", Message: "Email don't match the right format"}
+	v := StringIsEmail{Name: "email", Field: ""}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(e.Count(), 1)
-	r.Equal([]string{"Email don't match the right format"}, e.Get("email"))
+	r.Equal([]string{"email does not match the email format"}, e.Get("email"))
 }
 
 func Test_StringIsEmailLike(t *testing.T) {
@@ -92,11 +92,11 @@ func Test_StringIsEmailLike(t *testing.T) {
 	r.Equal(e.Count(), 1)
 	r.Equal(e.Get("email"), []string{"email does not match the email format (email domain)"})
 
-	v = StringIsEmailLike{Name: "email", Field: "", Message: "Email don't match the right format"}
+	v = StringIsEmailLike{Name: "email", Field: ""}
 	e = validator.NewErrors()
 	v.Validate(e)
 	r.Equal(e.Count(), 1)
-	r.Equal(e.Get("email"), []string{"Email don't match the right format"})
+	r.Equal(e.Get("email"), []string{"email does not match the email format"})
 }
 
 func BenchmarkStringIsEmailLike(b *testing.B) {

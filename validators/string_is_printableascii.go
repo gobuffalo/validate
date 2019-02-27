@@ -8,9 +8,8 @@ import (
 
 // StringIsPrintableASCII is a validator object.
 type StringIsPrintableASCII struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if the field contains anything except for printable ASCII characters.
@@ -27,12 +26,5 @@ func (v *StringIsPrintableASCII) Validate(e *validator.Errors) {
 		return
 	}
 
-	// adding custom error message
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
-		return
-	}
-
-	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must contain printable ASCII chars only", v.Name))
 }

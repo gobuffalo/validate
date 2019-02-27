@@ -35,14 +35,8 @@ func Test_StringIsAbsPath(t *testing.T) {
 	r.Equal([]string{"path './test' must be absolute"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = StringIsAbsPath{Name: "Name", Field: "test", Message: "path must be absolute"}
+	v = StringIsAbsPath{"Name", "test"}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"path must be absolute"}, e.Get("Name"))
-
-	e = validator.NewErrors()
-	v = StringIsAbsPath{"Name", "test", "path must be absolute"}
-	v.Validate(e)
-	r.Equal(1, e.Count())
-	r.Equal([]string{"path must be absolute"}, e.Get("Name"))
+	r.Equal([]string{"path 'test' must be absolute"}, e.Get("Name"))
 }

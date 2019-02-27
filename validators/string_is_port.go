@@ -9,9 +9,8 @@ import (
 
 // StringIsPort is a validator object.
 type StringIsPort struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if the field does not represent a valid port.
@@ -21,12 +20,5 @@ func (v *StringIsPort) Validate(e *validator.Errors) {
 		return
 	}
 
-	// adding custom error message
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
-		return
-	}
-
-	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must represent a valid port", v.Name))
 }

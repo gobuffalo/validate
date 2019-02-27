@@ -9,20 +9,14 @@ import (
 
 // TimeIsPresent is a validator object.
 type TimeIsPresent struct {
-	Name    string
-	Field   time.Time
-	Message string
+	Name  string
+	Field time.Time
 }
 
 // Validate adds an error if the field is not a valid time.
 func (v *TimeIsPresent) Validate(e *validator.Errors) {
 	t := time.Time{}
 	if v.Field.UnixNano() != t.UnixNano() {
-		return
-	}
-
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
 		return
 	}
 

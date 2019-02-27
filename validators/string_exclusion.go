@@ -12,7 +12,6 @@ type StringExclusion struct {
 	Name      string
 	Field     string
 	Blacklist []string
-	Message   string
 }
 
 // Validate adds an error if the field is one of the values from the blacklist.
@@ -26,12 +25,8 @@ func (v *StringExclusion) Validate(e *validator.Errors) {
 			break
 		}
 	}
-	if found {
-		if len(v.Message) > 0 {
-			e.Add(v.Name, v.Message)
-			return
-		}
 
+	if found {
 		e.Add(v.Name, fmt.Sprintf("%s is in the blacklist [%s]", v.Name, strings.Join(v.Blacklist, ", ")))
 	}
 }

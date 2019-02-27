@@ -22,9 +22,9 @@ func Test_UintIsGreaterThan(t *testing.T) {
 	r.Equal(1, e.Count())
 	r.Equal([]string{"1 is not greater than 2"}, e.Get("Number"))
 
-	v = UintIsGreaterThan{Name: "Number", Field: 1, Compared: 2, Message: "number isn't greater than 2"}
+	v = UintIsGreaterThan{"Number", 0, 0}
 	e = validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"number isn't greater than 2"}, e.Get("Number"))
+	r.Equal([]string{"0 is not greater than 0"}, e.Get("Number"))
 }

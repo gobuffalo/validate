@@ -27,10 +27,4 @@ func Test_TimeIsAfterTime(t *testing.T) {
 	v.Validate(e)
 	r.Equal(1, e.Count())
 	r.Equal([]string{"OpensAt must be after Now"}, e.Get("OpensAt"))
-
-	e = validator.NewErrors()
-	v.Message = "OpensAt must be later than Now"
-	v.Validate(e)
-	r.Equal(1, e.Count())
-	r.Equal([]string{"OpensAt must be later than Now"}, e.Get("OpensAt"))
 }

@@ -24,17 +24,9 @@ func Test_StringExclusion(t *testing.T) {
 	r.Equal(1, e.Count())
 	r.Equal([]string{"Name is in the blacklist [Mark, Bates]"}, e.Get("Name"))
 
-	// reset
 	e = validator.NewErrors()
-	v = StringExclusion{Name: "Name", Field: "Mark", Message: "Name is in the blacklist (Mark, Bates)", Blacklist: l}
+	v = StringExclusion{"Name", "Bates", l}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Name is in the blacklist (Mark, Bates)"}, e.Get("Name"))
-
-	// reset
-	e = validator.NewErrors()
-	v = StringExclusion{"Name", "Bates", l, "Name is in the blacklist (Mark, Bates)"}
-	v.Validate(e)
-	r.Equal(1, e.Count())
-	r.Equal([]string{"Name is in the blacklist (Mark, Bates)"}, e.Get("Name"))
+	r.Equal([]string{"Name is in the blacklist [Mark, Bates]"}, e.Get("Name"))
 }

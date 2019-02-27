@@ -23,14 +23,8 @@ func Test_Int64IsPresent(t *testing.T) {
 	r.Equal([]string{"Name can not be blank"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = Int64IsPresent{Name: "Name", Field: 0, Message: "Field can't be blank"}
+	v = Int64IsPresent{Name: "Name"}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Field can't be blank"}, e.Get("Name"))
-
-	e = validator.NewErrors()
-	v = Int64IsPresent{"Name", 0, "Field can't be blank"}
-	v.Validate(e)
-	r.Equal(1, e.Count())
-	r.Equal([]string{"Field can't be blank"}, e.Get("Name"))
+	r.Equal([]string{"Name can not be blank"}, e.Get("Name"))
 }

@@ -25,14 +25,8 @@ func Test_StringInclusion(t *testing.T) {
 	r.Equal([]string{"Name is not in the list [Mark, Bates]"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = StringInclusion{Name: "Name", Field: "Foo", Message: "Name is not in the list (Mark, Bates)", List: l}
+	v = StringInclusion{"Name", "Foo", l}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Name is not in the list (Mark, Bates)"}, e.Get("Name"))
-
-	e = validator.NewErrors()
-	v = StringInclusion{"Name", "Foo", l, "Name is not in the list (Mark, Bates)"}
-	v.Validate(e)
-	r.Equal(1, e.Count())
-	r.Equal([]string{"Name is not in the list (Mark, Bates)"}, e.Get("Name"))
+	r.Equal([]string{"Name is not in the list [Mark, Bates]"}, e.Get("Name"))
 }

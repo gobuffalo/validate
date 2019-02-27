@@ -35,14 +35,14 @@ func Test_StringIsPath(t *testing.T) {
 	r.Equal([]string{"path '/tmp/doesnotexist' must exist"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = StringIsPath{Name: "Name", Field: "", Message: "path must exist"}
+	v = StringIsPath{Name: "Name", Field: ""}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"path must exist"}, e.Get("Name"))
+	r.Equal([]string{"path '' must exist"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = StringIsPath{"Name", "", "path must exist"}
+	v = StringIsPath{"Name", ""}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"path must exist"}, e.Get("Name"))
+	r.Equal([]string{"path '' must exist"}, e.Get("Name"))
 }

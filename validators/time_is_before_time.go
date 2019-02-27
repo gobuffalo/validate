@@ -13,17 +13,11 @@ type TimeIsBeforeTime struct {
 	FirstTime  time.Time
 	SecondName string
 	SecondTime time.Time
-	Message    string
 }
 
 // Validate adds an error if the FirstTime is after the SecondTime.
 func (v *TimeIsBeforeTime) Validate(e *validator.Errors) {
 	if v.FirstTime.UnixNano() <= v.SecondTime.UnixNano() {
-		return
-	}
-
-	if len(v.Message) > 0 {
-		e.Add(v.FirstName, v.Message)
 		return
 	}
 

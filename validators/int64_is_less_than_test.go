@@ -22,9 +22,9 @@ func Test_Int64IsLessThan(t *testing.T) {
 	r.Equal(1, e.Count())
 	r.Equal([]string{"1 is not less than 0"}, e.Get("Number"))
 
-	v = Int64IsLessThan{Name: "Number", Field: 1, Compared: 0, Message: "number is not less than 0"}
+	v = Int64IsLessThan{Name: "Number"}
 	e = validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"number is not less than 0"}, e.Get("Number"))
+	r.Equal([]string{"0 is not less than 0"}, e.Get("Number"))
 }

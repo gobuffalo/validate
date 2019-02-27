@@ -9,21 +9,15 @@ import (
 
 // StringMatchRegex is a validator object.
 type StringMatchRegex struct {
-	Name    string
-	Field   string
-	Regex   string
-	Message string
+	Name  string
+	Field string
+	Regex string
 }
 
 // Validate adds an error if the field does not match regular expression expr.
 func (v *StringMatchRegex) Validate(e *validator.Errors) {
 	r := regexp.MustCompile(v.Regex)
 	if r.Match([]byte(v.Field)) {
-		return
-	}
-
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
 		return
 	}
 

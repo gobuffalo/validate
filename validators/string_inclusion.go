@@ -9,10 +9,9 @@ import (
 
 // StringInclusion is a validator object
 type StringInclusion struct {
-	Name    string
-	Field   string
-	List    []string
-	Message string
+	Name  string
+	Field string
+	List  []string
 }
 
 // Validate adds an error if the field is not one of the values from the list.
@@ -26,12 +25,8 @@ func (v *StringInclusion) Validate(e *validator.Errors) {
 			break
 		}
 	}
-	if !found {
-		if len(v.Message) > 0 {
-			e.Add(v.Name, v.Message)
-			return
-		}
 
+	if !found {
 		e.Add(v.Name, fmt.Sprintf("%s is not in the list [%s]", v.Name, strings.Join(v.List, ", ")))
 	}
 }

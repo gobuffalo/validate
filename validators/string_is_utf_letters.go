@@ -3,21 +3,20 @@ package validators
 import (
 	"fmt"
 	"unicode"
-	"unicode/utf8"
 
 	"github.com/s3rj1k/validator"
 )
 
 // StringIsUTFLetters is a validator object.
 type StringIsUTFLetters struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if the field contains anything except unicode letters (category L)
 // Similar to StringIsAlpha but for all languages. Empty string is valid.
 func (v *StringIsUTFLetters) Validate(e *validator.Errors) {
+	var badRune bool
 
 	// null string is valid
 	if isNullString(v.Field) {
@@ -25,21 +24,14 @@ func (v *StringIsUTFLetters) Validate(e *validator.Errors) {
 	}
 
 	// checking each rune
-	for i, c := range v.Field {
+	for _, c := range v.Field {
 		if !unicode.IsLetter(c) {
+			badRune = true
 			break
 		}
-		if i == utf8.RuneCountInString(v.Field)-1 {
-			return
-		}
 	}
 
-	// adding custom error message
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
-		return
+	if badRune {
+		e.Add(v.Name, fmt.Sprintf("%s must contain only unicode letter characters", v.Name))
 	}
-
-	// or standard message
-	e.Add(v.Name, fmt.Sprintf("%s must contain only unicode letter characters", v.Name))
 }
