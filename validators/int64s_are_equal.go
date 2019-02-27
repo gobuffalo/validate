@@ -11,7 +11,6 @@ type Int64sAreEqual struct {
 	Name     string
 	Field    int64
 	Compared int64
-	Message  string
 }
 
 // Validate add an error if the field is not equal to the compared value.

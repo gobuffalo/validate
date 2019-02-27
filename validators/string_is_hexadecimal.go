@@ -8,9 +8,8 @@ import (
 
 // StringIsHexadecimal is a validator object.
 type StringIsHexadecimal struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if the field is not in a hexadecimal format.
