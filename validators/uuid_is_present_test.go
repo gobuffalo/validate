@@ -27,14 +27,8 @@ func Test_UUIDIsPresent(t *testing.T) {
 	r.Equal([]string{"Name can not be blank"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = UUIDIsPresent{Name: "Name", Field: uuid.UUID{}, Message: "Field can't be blank"}
+	v = UUIDIsPresent{"Name", uuid.UUID{}}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Field can't be blank"}, e.Get("Name"))
-
-	e = validator.NewErrors()
-	v = UUIDIsPresent{"Name", uuid.UUID{}, "Field can't be blank"}
-	v.Validate(e)
-	r.Equal(1, e.Count())
-	r.Equal([]string{"Field can't be blank"}, e.Get("Name"))
+	r.Equal([]string{"Name can not be blank"}, e.Get("Name"))
 }

@@ -9,9 +9,8 @@ import (
 
 // StringIsIP is a validator object.
 type StringIsIP struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if the field is not formatted as IP version 4 or 6.
@@ -22,12 +21,5 @@ func (v *StringIsIP) Validate(e *validator.Errors) {
 		return
 	}
 
-	// adding custom error message
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
-		return
-	}
-
-	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must be either IP version 4 or 6", v.Name))
 }

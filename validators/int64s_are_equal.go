@@ -14,9 +14,11 @@ type Int64sAreEqual struct {
 	Message  string
 }
 
-// Validate is a validator that will compare two integers and add an error if they are not equal.
+// Validate add an error if the field is not equal to the compared value.
 func (v *Int64sAreEqual) Validate(e *validator.Errors) {
-	if v.Field != v.Compared {
-		e.Add(v.Name, fmt.Sprintf("%d is not equal to %d", v.Field, v.Compared))
+	if v.Field == v.Compared {
+		return
 	}
+
+	e.Add(v.Name, fmt.Sprintf("%d is not equal to %d", v.Field, v.Compared))
 }

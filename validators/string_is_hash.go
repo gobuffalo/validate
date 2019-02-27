@@ -12,7 +12,6 @@ import (
 type StringIsHash struct {
 	Name      string
 	Field     string
-	Message   string
 	Algorithm string
 }
 
@@ -50,12 +49,5 @@ func (v *StringIsHash) Validate(e *validator.Errors) {
 		return
 	}
 
-	// adding custom error message
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
-		return
-	}
-
-	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s was not evaluated as valid %s hash", v.Name, v.Algorithm))
 }

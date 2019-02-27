@@ -8,12 +8,11 @@ import (
 
 // StringIsFloat is a validator object.
 type StringIsFloat struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
-// Validate if the string is a float. Empty string is valid.
+// Validate if the field is a float. Empty string is valid.
 func (v *StringIsFloat) Validate(e *validator.Errors) {
 
 	// null string is valid
@@ -26,12 +25,5 @@ func (v *StringIsFloat) Validate(e *validator.Errors) {
 		return
 	}
 
-	// adding custom error message
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
-		return
-	}
-
-	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must be a float", v.Name))
 }

@@ -9,19 +9,13 @@ import (
 
 // StringIsAbsPath is a validator object
 type StringIsAbsPath struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if path is not absolute.
 func (v *StringIsAbsPath) Validate(e *validator.Errors) {
 	if v.Field == filepath.Clean(v.Field) && filepath.IsAbs(v.Field) {
-		return
-	}
-
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
 		return
 	}
 

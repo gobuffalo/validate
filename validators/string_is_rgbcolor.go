@@ -8,9 +8,8 @@ import (
 
 // StringIsRGBcolor is a validator object.
 type StringIsRGBcolor struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if the field is not formatted as an RGB color.
@@ -21,12 +20,5 @@ func (v *StringIsRGBcolor) Validate(e *validator.Errors) {
 		return
 	}
 
-	// adding custom error message
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
-		return
-	}
-
-	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must be a RGB color in form rgb(RRR, GGG, BBB)", v.Name))
 }

@@ -40,11 +40,11 @@ func Test_StringsAreNotEqual(t *testing.T) {
 		}
 	}
 
-	v := StringsAreNotEqual{Name: "strings", Field: "test", ComparedField: "test", Message: "Strings match"}
+	v := StringsAreNotEqual{Name: "strings", Field: "test", ComparedField: "test"}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Strings match"}, e.Get("strings"))
+	r.Equal([]string{"test is equal to test"}, e.Get("strings"))
 }
 
 func Test_StringsAreNotIEqual(t *testing.T) {
@@ -79,11 +79,11 @@ func Test_StringsAreNotIEqual(t *testing.T) {
 		}
 	}
 
-	v := StringsAreNotEqual{Name: "strings", Field: "test", ComparedField: "test", CaseInsensitive: true, Message: "Strings match"}
+	v := StringsAreNotEqual{Name: "strings", Field: "test", ComparedField: "test", CaseInsensitive: true}
 	e := validator.NewErrors()
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Strings match"}, e.Get("strings"))
+	r.Equal([]string{"test is iequal to test"}, e.Get("strings"))
 }
 
 func BenchmarkStringsAreNotEqual_Valid(b *testing.B) {

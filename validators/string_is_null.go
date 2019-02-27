@@ -8,9 +8,8 @@ import (
 
 // StringIsNull is a validator object.
 type StringIsNull struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // isNullString is wrapper func
@@ -25,11 +24,6 @@ func isNullString(str string) bool {
 // Validate adds an error if the field is not empty.
 func (v *StringIsNull) Validate(e *validator.Errors) {
 	if isNullString(v.Field) {
-		return
-	}
-
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
 		return
 	}
 

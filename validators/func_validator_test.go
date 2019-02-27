@@ -13,9 +13,8 @@ func Test_FuncValidator(t *testing.T) {
 	r := require.New(t)
 
 	fv := &FuncValidator{
-		Name:    "Name",
-		Field:   "Field",
-		Message: "%s is an invalid name",
+		Name:  "CustomFunc",
+		Field: "Field",
 		Fn: func() bool {
 			return false
 		},
@@ -23,7 +22,7 @@ func Test_FuncValidator(t *testing.T) {
 
 	e := validator.NewErrors()
 	fv.Validate(e)
-	r.Equal([]string{"Field is an invalid name"}, e.Get("Name"))
+	r.Equal([]string{"CustomFunc result is false"}, e.Get("CustomFunc"))
 }
 
 func Test_FuncValidatorNoName(t *testing.T) {
@@ -31,8 +30,7 @@ func Test_FuncValidatorNoName(t *testing.T) {
 	r := require.New(t)
 
 	fv := &FuncValidator{
-		Field:   "Name",
-		Message: "%s is invalid",
+		Field: "FuncName",
 		Fn: func() bool {
 			return false
 		},
@@ -40,5 +38,5 @@ func Test_FuncValidatorNoName(t *testing.T) {
 
 	e := validator.NewErrors()
 	fv.Validate(e)
-	r.Equal([]string{"Name is invalid"}, e.Get("Name"))
+	r.Equal([]string{"FuncName result is false"}, e.Get("FuncName"))
 }

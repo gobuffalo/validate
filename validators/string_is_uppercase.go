@@ -9,9 +9,8 @@ import (
 
 // StringIsUpperCase is a validator object.
 type StringIsUpperCase struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if the field is not uppercased. Empty string is valid.
@@ -26,12 +25,5 @@ func (v *StringIsUpperCase) Validate(e *validator.Errors) {
 		return
 	}
 
-	// adding custom error message
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
-		return
-	}
-
-	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must be uppercase", v.Name))
 }

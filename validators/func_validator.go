@@ -9,10 +9,9 @@ import (
 
 // FuncValidator is a validator object.
 type FuncValidator struct {
-	Fn      func() bool
-	Name    string
-	Field   string
-	Message string
+	Fn    func() bool
+	Name  string
+	Field string
 }
 
 // Validate is a validation method wrapper.
@@ -22,7 +21,9 @@ func (f *FuncValidator) Validate(e *validator.Errors) {
 		f.Name = f.Field
 	}
 
-	if !f.Fn() {
-		e.Add(f.Name, fmt.Sprintf(f.Message, f.Field))
+	if f.Fn() {
+		return
 	}
+
+	e.Add(f.Name, fmt.Sprintf("%s result is false", f.Name))
 }

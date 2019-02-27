@@ -8,9 +8,8 @@ import (
 
 // StringHasLowerCase is a validator object
 type StringHasLowerCase struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if the field contains at least 1 lowercase. Empty string is valid.
@@ -25,12 +24,5 @@ func (v *StringHasLowerCase) Validate(e *validator.Errors) {
 		return
 	}
 
-	// adding custom error message
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
-		return
-	}
-
-	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must contain at least 1 lowercase", v.Name))
 }

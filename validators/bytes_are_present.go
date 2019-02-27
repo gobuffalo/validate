@@ -8,19 +8,13 @@ import (
 
 // BytesArePresent is a validator object.
 type BytesArePresent struct {
-	Name    string
-	Field   []byte
-	Message string
+	Name  string
+	Field []byte
 }
 
 // Validate adds an error if the field is empty.
 func (v *BytesArePresent) Validate(e *validator.Errors) {
 	if len(v.Field) > 0 {
-		return
-	}
-
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
 		return
 	}
 

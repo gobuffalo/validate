@@ -8,19 +8,13 @@ import (
 
 // Int64ArrayIsPresent is a validator object.
 type Int64ArrayIsPresent struct {
-	Name    string
-	Field   []int64
-	Message string
+	Name  string
+	Field []int64
 }
 
 // Validate adds an error if the field is an empty array.
 func (v *Int64ArrayIsPresent) Validate(e *validator.Errors) {
 	if len(v.Field) > 0 {
-		return
-	}
-
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
 		return
 	}
 

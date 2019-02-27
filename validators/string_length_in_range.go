@@ -9,11 +9,10 @@ import (
 
 // StringLengthInRange is a validator object.
 type StringLengthInRange struct {
-	Name    string
-	Field   string
-	Min     int
-	Max     int
-	Message string
+	Name  string
+	Field string
+	Min   int
+	Max   int
 }
 
 // Validate adds an error if the field length is not in range between min and max (inclusive).
@@ -24,11 +23,9 @@ func (v *StringLengthInRange) Validate(e *validator.Errors) {
 		v.Max = strLength
 	}
 
-	if v.Message == "" {
-		v.Message = fmt.Sprintf("%s not in range(%d, %d)", v.Name, v.Min, v.Max)
+	if strLength >= v.Min && strLength <= v.Max {
+		return
 	}
 
-	if !(strLength >= v.Min && strLength <= v.Max) {
-		e.Add(v.Name, v.Message)
-	}
+	e.Add(v.Name, fmt.Sprintf("%s not in range(%d, %d)", v.Name, v.Min, v.Max))
 }

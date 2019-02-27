@@ -22,14 +22,14 @@ func Test_StringIsNull(t *testing.T) {
 	r.Equal(0, e.Count())
 
 	e = validator.NewErrors()
-	v = StringIsNull{Name: "Name", Field: " ", Message: "Field must be empty"} // whitespaces are not allowed
+	v = StringIsNull{Name: "Name", Field: " "} // whitespaces are not allowed
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Field must be empty"}, e.Get("Name"))
+	r.Equal([]string{"Name must be empty"}, e.Get("Name"))
 
 	e = validator.NewErrors()
-	v = StringIsNull{"Name", ",", "Field must be empty"}
+	v = StringIsNull{"Name", ","}
 	v.Validate(e)
 	r.Equal(1, e.Count())
-	r.Equal([]string{"Field must be empty"}, e.Get("Name"))
+	r.Equal([]string{"Name must be empty"}, e.Get("Name"))
 }

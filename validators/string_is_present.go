@@ -9,19 +9,13 @@ import (
 
 // StringIsPresent is a validator object.
 type StringIsPresent struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if the field is empty or has only whitespaces.
 func (v *StringIsPresent) Validate(e *validator.Errors) {
 	if strings.TrimSpace(v.Field) != "" {
-		return
-	}
-
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
 		return
 	}
 

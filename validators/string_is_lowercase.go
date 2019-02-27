@@ -9,9 +9,8 @@ import (
 
 // StringIsLowerCase is a validator object.
 type StringIsLowerCase struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if the field is not lowercased. Empty string is valid.
@@ -26,12 +25,5 @@ func (v *StringIsLowerCase) Validate(e *validator.Errors) {
 		return
 	}
 
-	// adding custom error message
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
-		return
-	}
-
-	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must be lowercase", v.Name))
 }

@@ -8,19 +8,13 @@ import (
 
 // UintIsPresent is a validator object
 type UintIsPresent struct {
-	Name    string
-	Field   uint
-	Message string
+	Name  string
+	Field uint
 }
 
 // Validate adds an error if the field equals 0.
 func (v *UintIsPresent) Validate(e *validator.Errors) {
 	if v.Field != 0 {
-		return
-	}
-
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
 		return
 	}
 

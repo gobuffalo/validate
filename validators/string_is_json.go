@@ -9,9 +9,8 @@ import (
 
 // StringIsJSON is a validator object.
 type StringIsJSON struct {
-	Name    string
-	Field   string
-	Message string
+	Name  string
+	Field string
 }
 
 // Validate adds an error if the field is not a valid JSON.
@@ -25,12 +24,5 @@ func (v *StringIsJSON) Validate(e *validator.Errors) {
 		return
 	}
 
-	// adding custom error message
-	if len(v.Message) > 0 {
-		e.Add(v.Name, v.Message)
-		return
-	}
-
-	// or standard message
 	e.Add(v.Name, fmt.Sprintf("%s must be a valid JSON", v.Name))
 }
