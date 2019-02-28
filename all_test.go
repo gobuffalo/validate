@@ -365,7 +365,7 @@ func TestString(t *testing.T) {
 	b, err := json.Marshal(e.Data())
 	r.Nil(err)
 
-	r.JSONEq(`{"d.d":[["d"]]}`, e.JSON())
+	r.JSONEq(`{"d.d":["d"]}`, e.JSON())
 	r.Exactly(string(b), e.JSON())
 
 	e = Validate(&z{})
@@ -381,7 +381,7 @@ func TestStringP(t *testing.T) {
 	b, err := json.Marshal(e.Data())
 	r.Nil(err)
 
-	r.JSONEq(`{"d":{"d":[["d"]]}}`, e.JSON())
+	r.JSONEq(`{"d":{"d":["d"]}}`, e.JSON())
 	r.Exactly(string(b), e.JSON())
 
 	e = ValidateP(&z{})

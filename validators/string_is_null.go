@@ -21,7 +21,7 @@ func isNullString(str string) bool {
 	return false
 }
 
-// Validate adds an error if the Field is an empty string. 
+// Validate adds an error if the Field is an empty string.
 // Emptry string is defined as such with length 0.
 // If you want to allow whitespaces - see StringIsPresent validator.
 func (v *StringIsNull) Validate(e *validator.Errors) {

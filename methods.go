@@ -127,19 +127,22 @@ func (e *Errors) sync() *gabs.Container {
 
 		var err error
 
-		val, ok := e.m[path]
+		// get all errors
+		values, ok := e.m[path]
 		if !ok {
 			panic("internal map error, path does not exist") // WTF?!
 		}
 
-		if e.dot { // use JSON dot paths
-			err = c.ArrayAppendP(val, path)
-		} else { // use plain JSON paths
-			err = c.ArrayAppend(val, path)
-		}
-
-		if err != nil {
-			panic(err) // WTF?!
+		// loop-over errors and append them one-by-one
+		for _, val := range values {
+			if e.dot { // use JSON dot paths
+				err = c.ArrayAppendP(val, path)
+			} else { // use plain JSON paths
+				err = c.ArrayAppend(val, path)
+			}
+			if err != nil {
+				panic(err) // WTF?!
+			}
 		}
 	}
 
