@@ -2,6 +2,7 @@ package validators
 
 import (
 	"fmt"
+	"regexp"
 
 	"github.com/s3rj1k/validator"
 )
@@ -27,4 +28,14 @@ func (v *StringIsAlpha) Validate(e *validator.Errors) {
 	}
 
 	e.Add(v.Name, fmt.Sprintf("%s must contain only letters (a-zA-Z)", v.Name))
+}
+
+// SetField sets validator field.
+func (v *StringIsAlpha) SetField(s string) {
+	v.Field = s
+}
+
+// SetNameIndex sets index of slice element on Name.
+func (v *StringIsAlpha) SetNameIndex(i int) {
+	v.Name = fmt.Sprintf("%s[%d]", regexp.MustCompile(`\[[0-9]+\]$`).ReplaceAllString(v.Name, ""), i)
 }

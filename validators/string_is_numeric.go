@@ -2,6 +2,7 @@ package validators
 
 import (
 	"fmt"
+	"regexp"
 
 	"github.com/s3rj1k/validator"
 )
@@ -26,4 +27,14 @@ func (v *StringIsNumeric) Validate(e *validator.Errors) {
 	}
 
 	e.Add(v.Name, fmt.Sprintf("%s must contain only numbers", v.Name))
+}
+
+// SetField sets validator field.
+func (v *StringIsNumeric) SetField(s string) {
+	v.Field = s
+}
+
+// SetNameIndex sets index of slice element on Name.
+func (v *StringIsNumeric) SetNameIndex(i int) {
+	v.Name = fmt.Sprintf("%s[%d]", regexp.MustCompile(`\[[0-9]+\]$`).ReplaceAllString(v.Name, ""), i)
 }

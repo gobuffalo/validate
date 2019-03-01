@@ -2,6 +2,7 @@ package validators
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 
 	"github.com/s3rj1k/validator"
@@ -29,4 +30,14 @@ func (v *StringExclusion) Validate(e *validator.Errors) {
 	if found {
 		e.Add(v.Name, fmt.Sprintf("%s is in the blacklist [%s]", v.Name, strings.Join(v.Blacklist, ", ")))
 	}
+}
+
+// SetField sets validator field.
+func (v *StringExclusion) SetField(s string) {
+	v.Field = s
+}
+
+// SetNameIndex sets index of slice element on Name.
+func (v *StringExclusion) SetNameIndex(i int) {
+	v.Name = fmt.Sprintf("%s[%d]", regexp.MustCompile(`\[[0-9]+\]$`).ReplaceAllString(v.Name, ""), i)
 }

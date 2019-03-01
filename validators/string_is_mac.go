@@ -3,6 +3,7 @@ package validators
 import (
 	"fmt"
 	"net"
+	"regexp"
 
 	"github.com/s3rj1k/validator"
 )
@@ -23,4 +24,14 @@ func (v *StringIsMAC) Validate(e *validator.Errors) {
 	}
 
 	e.Add(v.Name, fmt.Sprintf("%s must be valid MAC address", v.Name))
+}
+
+// SetField sets validator field.
+func (v *StringIsMAC) SetField(s string) {
+	v.Field = s
+}
+
+// SetNameIndex sets index of slice element on Name.
+func (v *StringIsMAC) SetNameIndex(i int) {
+	v.Name = fmt.Sprintf("%s[%d]", regexp.MustCompile(`\[[0-9]+\]$`).ReplaceAllString(v.Name, ""), i)
 }

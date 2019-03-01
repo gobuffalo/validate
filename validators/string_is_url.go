@@ -3,6 +3,7 @@ package validators
 import (
 	"fmt"
 	"net/url"
+	"regexp"
 
 	"github.com/s3rj1k/validator"
 )
@@ -31,4 +32,14 @@ func (v *StringIsURL) Validate(e *validator.Errors) {
 		e.Add(v.Name, fmt.Sprintf("%s invalid url scheme", v.Name))
 		return
 	}
+}
+
+// SetField sets validator field.
+func (v *StringIsURL) SetField(s string) {
+	v.Field = s
+}
+
+// SetNameIndex sets index of slice element on Name.
+func (v *StringIsURL) SetNameIndex(i int) {
+	v.Name = fmt.Sprintf("%s[%d]", regexp.MustCompile(`\[[0-9]+\]$`).ReplaceAllString(v.Name, ""), i)
 }
