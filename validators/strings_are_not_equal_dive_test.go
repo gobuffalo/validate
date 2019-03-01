@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_StringSliceDive(t *testing.T) {
+func Test_StringAreNotEqualDive(t *testing.T) {
 
 	r := require.New(t)
 
@@ -20,7 +20,7 @@ func Test_StringSliceDive(t *testing.T) {
 		Field:     sl,
 	}
 	v.Validate(e)
-	r.Equal(3, e.Count()) // 3 strings in sl that do not match compared
+	r.Equal(3, e.Count())
 
 	e = validator.NewErrors()
 	v = StringSliceDive{
@@ -28,5 +28,5 @@ func Test_StringSliceDive(t *testing.T) {
 		Field:     []string{"Bar", "Bar", "bar", ""},
 	}
 	v.Validate(e)
-	r.Equal(2, e.Count()) // empty string and lowercased
+	r.Equal(2, e.Count())
 }

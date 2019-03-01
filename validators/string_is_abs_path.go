@@ -3,6 +3,7 @@ package validators
 import (
 	"fmt"
 	"path/filepath"
+	"regexp"
 
 	"github.com/s3rj1k/validator"
 )
@@ -20,4 +21,14 @@ func (v *StringIsAbsPath) Validate(e *validator.Errors) {
 	}
 
 	e.Add(v.Name, fmt.Sprintf("path '%s' must be absolute", v.Field))
+}
+
+// SetField sets validator field.
+func (v *StringIsAbsPath) SetField(s string) {
+	v.Field = s
+}
+
+// SetNameIndex sets index of slice element on Name.
+func (v *StringIsAbsPath) SetNameIndex(i int) {
+	v.Name = fmt.Sprintf("%s[%d]", regexp.MustCompile(`\[[0-9]+\]$`).ReplaceAllString(v.Name, ""), i)
 }

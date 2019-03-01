@@ -2,6 +2,7 @@ package validators
 
 import (
 	"fmt"
+	"regexp"
 
 	"github.com/s3rj1k/validator"
 )
@@ -21,4 +22,14 @@ func (v *StringIsHexcolor) Validate(e *validator.Errors) {
 	}
 
 	e.Add(v.Name, fmt.Sprintf("%s must be a hexadecimal color", v.Name))
+}
+
+// SetField sets validator field.
+func (v *StringIsHexcolor) SetField(s string) {
+	v.Field = s
+}
+
+// SetNameIndex sets index of slice element on Name.
+func (v *StringIsHexcolor) SetNameIndex(i int) {
+	v.Name = fmt.Sprintf("%s[%d]", regexp.MustCompile(`\[[0-9]+\]$`).ReplaceAllString(v.Name, ""), i)
 }

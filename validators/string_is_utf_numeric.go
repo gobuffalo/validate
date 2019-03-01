@@ -2,6 +2,7 @@ package validators
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 	"unicode"
 
@@ -44,4 +45,14 @@ func (v *StringIsUTFNumeric) Validate(e *validator.Errors) {
 	if failed {
 		e.Add(v.Name, fmt.Sprintf("%s must contain only unicode numbers", v.Name))
 	}
+}
+
+// SetField sets validator field.
+func (v *StringIsUTFNumeric) SetField(s string) {
+	v.Field = s
+}
+
+// SetNameIndex sets index of slice element on Name.
+func (v *StringIsUTFNumeric) SetNameIndex(i int) {
+	v.Name = fmt.Sprintf("%s[%d]", regexp.MustCompile(`\[[0-9]+\]$`).ReplaceAllString(v.Name, ""), i)
 }

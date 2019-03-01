@@ -51,3 +51,13 @@ func (v *StringIsHash) Validate(e *validator.Errors) {
 
 	e.Add(v.Name, fmt.Sprintf("%s was not evaluated as valid %s hash", v.Name, v.Algorithm))
 }
+
+// SetField sets validator field.
+func (v *StringIsHash) SetField(s string) {
+	v.Field = s
+}
+
+// SetNameIndex sets index of slice element on Name.
+func (v *StringIsHash) SetNameIndex(i int) {
+	v.Name = fmt.Sprintf("%s[%d]", regexp.MustCompile(`\[[0-9]+\]$`).ReplaceAllString(v.Name, ""), i)
+}
