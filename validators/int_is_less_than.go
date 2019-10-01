@@ -6,6 +6,8 @@ import (
 	"github.com/gobuffalo/validate"
 )
 
+// IntIsLessThan is a validator that will compare two ints and add
+// an error if the field is not less than the compared value
 type IntIsLessThan struct {
 	Name     string
 	Field    int

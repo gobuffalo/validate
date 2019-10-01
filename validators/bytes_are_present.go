@@ -6,13 +6,14 @@ import (
 	"github.com/gobuffalo/validate"
 )
 
+// BytesArePresent is a validator that will adds an error if the array of bytes is empty
 type BytesArePresent struct {
 	Name    string
 	Field   []byte
 	Message string
 }
 
-// IsValid adds an error if the field is not empty.
+// IsValid adds an error if the array of bytes is empty.
 func (v *BytesArePresent) IsValid(errors *validate.Errors) {
 	if len(v.Field) > 0 {
 		return

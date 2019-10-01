@@ -6,6 +6,8 @@ import (
 	"github.com/gobuffalo/validate"
 )
 
+// FloatIsGreaterThanOrEqualTo is a validator that will compare two floats and add
+// an error if the field is not greater than or equal the compared value
 type FloatIsGreaterThanOrEqualTo struct {
 	Name     string
 	Field    float64
@@ -13,7 +15,7 @@ type FloatIsGreaterThanOrEqualTo struct {
 	Message  string
 }
 
-// IsValid adds an error if the field is not greater than the compared value.
+// IsValid adds an error if the field is not greater than or equal the compared value.
 func (v *FloatIsGreaterThanOrEqualTo) IsValid(errors *validate.Errors) {
 	if v.Field >= v.Compared {
 		return

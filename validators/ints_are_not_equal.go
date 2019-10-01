@@ -15,6 +15,7 @@ type IntsAreNotEqual struct {
 	Message  string
 }
 
+// IsValid adds an error if they are equal.
 func (v *IntsAreNotEqual) IsValid(errors *validate.Errors) {
 	if v.ValueOne == v.ValueTwo {
 		errors.Add(GenerateKey(v.Name), fmt.Sprintf("%d is equal to %d", v.ValueOne, v.ValueTwo))

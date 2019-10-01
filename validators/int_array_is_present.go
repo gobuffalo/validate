@@ -6,6 +6,7 @@ import (
 	"github.com/gobuffalo/validate"
 )
 
+// IntArrayIsPresent is a validator that adds an error if the field is an empty array
 type IntArrayIsPresent struct {
 	Name    string
 	Field   []int

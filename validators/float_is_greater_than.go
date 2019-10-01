@@ -6,6 +6,8 @@ import (
 	"github.com/gobuffalo/validate"
 )
 
+// FloatIsGreaterThan is a validator that will compare two floats and add
+// an error if the field is not greater than the compared value
 type FloatIsGreaterThan struct {
 	Name     string
 	Field    float64

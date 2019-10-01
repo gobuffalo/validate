@@ -6,6 +6,8 @@ import (
 	"github.com/gobuffalo/validate"
 )
 
+// IntIsLessThanOrEqualTo is a validator that will compare two ints and add
+// an error if the field is not less than or equal the compared value
 type IntIsLessThanOrEqualTo struct {
 	Name     string
 	Field    int
@@ -13,7 +15,7 @@ type IntIsLessThanOrEqualTo struct {
 	Message  string
 }
 
-// IsValid adds an error if the field is not less than the compared value.
+// IsValid adds an error if the field is not less than or equal the compared value.
 func (v *IntIsLessThanOrEqualTo) IsValid(errors *validate.Errors) {
 	if v.Field <= v.Compared {
 		return

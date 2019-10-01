@@ -6,6 +6,7 @@ import (
 	"github.com/gobuffalo/validate"
 )
 
+// FloatArrayIsPresent is a validator that will add an error if the field is an empty array.
 type FloatArrayIsPresent struct {
 	Name    string
 	Field   []float64

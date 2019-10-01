@@ -6,6 +6,7 @@ import (
 	"github.com/gobuffalo/validate"
 )
 
+// IntIsPresent is a validator that will adds an error if the field equals 0
 type IntIsPresent struct {
 	Name    string
 	Field   int

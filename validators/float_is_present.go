@@ -6,6 +6,7 @@ import (
 	"github.com/gobuffalo/validate"
 )
 
+// FloatIsPresent is a validator that will adds an error if the field equals 0
 type FloatIsPresent struct {
 	Name    string
 	Field   float64
