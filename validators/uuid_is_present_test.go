@@ -3,8 +3,8 @@ package validators_test
 import (
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
+	"github.com/gobuffalo/validate/v2"
+	. "github.com/gobuffalo/validate/v2/validators"
 	uuid "github.com/gofrs/uuid"
 	"github.com/stretchr/testify/require"
 )

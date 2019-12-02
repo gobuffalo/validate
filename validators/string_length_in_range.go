@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"unicode/utf8"
 
-	"github.com/gobuffalo/validate"
+	"github.com/gobuffalo/validate/v2"
 )
 
 type StringLengthInRange struct {

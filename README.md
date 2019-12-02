@@ -21,7 +21,7 @@ package main
 import (
 	"log"
 
-	v "github.com/gobuffalo/validate"
+	v "github.com/gobuffalo/validate/v2"
 )
 
 type User struct {
@@ -56,7 +56,7 @@ import (
 	"log"
 	"strings"
 
-	v "github.com/gobuffalo/validate"
+	v "github.com/gobuffalo/validate/v2"
 )
 
 type User struct {
@@ -95,8 +95,8 @@ package main
 import (
 	"log"
 
-	"github.com/gobuffalo/validate"
-	"github.com/gobuffalo/validate/validators"
+	"github.com/gobuffalo/validate/v2"
+	"github.com/gobuffalo/validate/v2/validators"
 )
 
 type User struct {

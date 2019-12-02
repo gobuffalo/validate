@@ -3,7 +3,7 @@ package validators
 import (
 	"fmt"
 
-	"github.com/gobuffalo/validate"
+	"github.com/gobuffalo/validate/v2"
 )
 
 type BytesArePresent struct {

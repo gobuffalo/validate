@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
+	"github.com/gobuffalo/validate/v2"
+	. "github.com/gobuffalo/validate/v2/validators"
 	"github.com/stretchr/testify/require"
 )
 

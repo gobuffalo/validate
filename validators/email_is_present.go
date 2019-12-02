@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/gobuffalo/validate"
+	"github.com/gobuffalo/validate/v2"
 )
 
 var rxEmail *regexp.Regexp

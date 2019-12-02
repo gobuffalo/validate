@@ -4,7 +4,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	. "github.com/gobuffalo/validate"
+	. "github.com/gobuffalo/validate/v2"
 	"github.com/stretchr/testify/require"
 )
 

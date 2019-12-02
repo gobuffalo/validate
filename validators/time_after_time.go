@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gobuffalo/validate"
+	"github.com/gobuffalo/validate/v2"
 )
 
 type TimeAfterTime struct {
@@ -20,7 +20,6 @@ func (v *TimeAfterTime) IsValid(errors *validate.Errors) {
 	if v.FirstTime.UnixNano() >= v.SecondTime.UnixNano() {
 		return
 	}
-
 
 	if len(v.Message) > 0 {
 		errors.Add(GenerateKey(v.FirstName), v.Message)
