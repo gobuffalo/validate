@@ -1,4 +1,4 @@
-module github.com/gobuffalo/validate
+module github.com/gobuffalo/validate/v2
 
 go 1.13
 
