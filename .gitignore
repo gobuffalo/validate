@@ -1,4 +1,5 @@
 *.log
+cover.out
 .DS_Store
 doc
 tmp
@@ -27,5 +28,3 @@ generated/
 bin/*
 gin-bin
 .idea/
-go.mod
-go.sum
