@@ -1,11 +1,10 @@
-package validators_test
+package validators
 
 import (
 	"fmt"
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
+	"github.com/gobuffalo/validate/v3"
 	"github.com/stretchr/testify/require"
 )
 

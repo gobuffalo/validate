@@ -1,17 +1,16 @@
-package validators_test
+package validators
 
 import (
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	"github.com/gobuffalo/validate/validators"
+	"github.com/gobuffalo/validate/v3"
 	"github.com/stretchr/testify/require"
 )
 
 func Test_FuncValidator(t *testing.T) {
 	r := require.New(t)
 
-	fv := &validators.FuncValidator{
+	fv := &FuncValidator{
 		Name:    "Name",
 		Field:   "Field",
 		Message: "%s is an invalid name",
@@ -29,7 +28,7 @@ func Test_FuncValidator(t *testing.T) {
 func Test_FuncValidatorNoName(t *testing.T) {
 	r := require.New(t)
 
-	fv := &validators.FuncValidator{
+	fv := &FuncValidator{
 		Field:   "Name",
 		Message: "%s is invalid",
 		Fn: func() bool {

@@ -1,10 +1,9 @@
-package validate_test
+package validate
 
 import (
 	"encoding/xml"
 	"testing"
 
-	. "github.com/gobuffalo/validate"
 	"github.com/stretchr/testify/require"
 )
 
