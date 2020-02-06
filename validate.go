@@ -90,6 +90,9 @@ func (v *Errors) Count() int {
 // HasAny returns true/false depending on whether any errors
 // have been tracked.
 func (v *Errors) HasAny() bool {
+	if v == nil {
+		return false
+	}
 	return v.Count() > 0
 }
 
