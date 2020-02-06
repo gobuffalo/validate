@@ -3,7 +3,7 @@ package validators
 import (
 	"fmt"
 
-	"github.com/gobuffalo/validate"
+	"github.com/gobuffalo/validate/v3"
 )
 
 // IntIsPresent is a validator that will adds an error if the field equals 0

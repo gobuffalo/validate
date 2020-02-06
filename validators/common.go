@@ -1,9 +1,7 @@
 package validators
 
 import (
-	"strings"
-
-	"github.com/serenize/snaker"
+	"github.com/gobuffalo/flect"
 )
 
 var CustomKeys = map[string]string{}
@@ -13,8 +11,5 @@ func GenerateKey(s string) string {
 	if key != "" {
 		return key
 	}
-	key = strings.Replace(s, " ", "", -1)
-	key = strings.Replace(key, "-", "", -1)
-	key = snaker.CamelToSnake(key)
-	return key
+	return flect.Underscore(s)
 }

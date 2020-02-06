@@ -3,7 +3,7 @@ package validators
 import (
 	"fmt"
 
-	"github.com/gobuffalo/validate"
+	"github.com/gobuffalo/validate/v3"
 )
 
 // IntArrayIsPresent is a validator that adds an error if the field is an empty array

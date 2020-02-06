@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gobuffalo/validate"
+	"github.com/gobuffalo/validate/v3"
 )
 
 type TimeAfterTime struct {
@@ -17,10 +17,16 @@ type TimeAfterTime struct {
 
 // IsValid adds an error if the FirstTime is not after the SecondTime.
 func (v *TimeAfterTime) IsValid(errors *validate.Errors) {
+
+	// UnixNano wraps around to negative numbers when a time is too far
+	// into the future (e.g. 260 years)
+	if v.FirstTime.Year() > v.SecondTime.Year() {
+		return 
+	}
+
 	if v.FirstTime.UnixNano() >= v.SecondTime.UnixNano() {
 		return
 	}
-
 
 	if len(v.Message) > 0 {
 		errors.Add(GenerateKey(v.FirstName), v.Message)

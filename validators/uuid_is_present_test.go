@@ -1,11 +1,10 @@
-package validators_test
+package validators
 
 import (
 	"testing"
 
-	"github.com/gobuffalo/validate"
-	. "github.com/gobuffalo/validate/validators"
-	uuid "github.com/gofrs/uuid"
+	"github.com/gobuffalo/validate/v3"
+	"github.com/gofrs/uuid"
 	"github.com/stretchr/testify/require"
 )
 
