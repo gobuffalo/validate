@@ -17,6 +17,9 @@ type TimeIsBeforeTime struct {
 
 // IsValid adds an error if the FirstTime is after the SecondTime.
 func (v *TimeIsBeforeTime) IsValid(errors *validate.Errors) {
+	if v.FirstTime.Year() < v.SecondTime.Year() {
+		return
+	}
 	if v.FirstTime.UnixNano() <= v.SecondTime.UnixNano() {
 		return
 	}
