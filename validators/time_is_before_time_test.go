@@ -33,4 +33,14 @@ func Test_TimeIsBeforeTime(t *testing.T) {
 
 	r.Equal(1, errors.Count())
 	r.Equal(errors.Get("opens_at"), []string{"OpensAt must be earlier than ClosesAt."})
+
+	firstTime := now.AddDate(-400, 0, 0)
+	v = TimeIsBeforeTime{
+		FirstName: "Opens At", FirstTime: firstTime,
+		SecondName: "Now", SecondTime: now,
+	}
+
+	errors = validate.NewErrors()
+	v.IsValid(errors)
+	r.Equal(0, errors.Count())
 }
