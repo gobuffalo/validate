@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/gobuffalo/validate/v3"
-	"github.com/gofrs/uuid/v3"
+	"github.com/gofrs/uuid"
 )
 
 type UUIDIsPresent struct {
