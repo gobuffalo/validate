@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/gobuffalo/validate/v3"
-	"github.com/gofrs/uuid"
+	"github.com/gofrs/uuid/v3"
 	"github.com/stretchr/testify/require"
 )
 
