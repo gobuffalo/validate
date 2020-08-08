@@ -25,10 +25,4 @@ func Test_IntIsPresent(t *testing.T) {
 	v.IsValid(errors)
 	r.Equal(errors.Count(), 1)
 	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
-
-	errors = validate.NewErrors()
-	v = IntIsPresent{"Name", 0, "Field can't be blank."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
 }

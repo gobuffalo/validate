@@ -28,10 +28,4 @@ func Test_UUIDIsPresent(t *testing.T) {
 	v.IsValid(errors)
 	r.Equal(errors.Count(), 1)
 	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
-
-	errors = validate.NewErrors()
-	v = UUIDIsPresent{"Name", uuid.UUID{}, "Field can't be blank."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
 }

@@ -25,10 +25,4 @@ func Test_StringIsPresent(t *testing.T) {
 	v.IsValid(errors)
 	r.Equal(errors.Count(), 1)
 	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
-
-	errors = validate.NewErrors()
-	v = StringIsPresent{"Name", "", "Field can't be blank."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("name"), []string{"Field can't be blank."})
 }

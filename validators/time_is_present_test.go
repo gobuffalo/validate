@@ -25,10 +25,4 @@ func Test_TimeIsPresent(t *testing.T) {
 	v.IsValid(errors)
 	r.Equal(errors.Count(), 1)
 	r.Equal(errors.Get("created_at"), []string{"Field can't be blank."})
-
-	errors = validate.NewErrors()
-	v = TimeIsPresent{"Created At", time.Time{}, "Field can't be blank."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("created_at"), []string{"Field can't be blank."})
 }

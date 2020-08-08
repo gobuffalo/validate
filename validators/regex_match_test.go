@@ -25,10 +25,4 @@ func Test_RegexMatch(t *testing.T) {
 	v.IsValid(errors)
 	r.Equal(errors.Count(), 1)
 	r.Equal(errors.Get("phone"), []string{"Phone number does not match the expected format."})
-
-	errors = validate.NewErrors()
-	v = RegexMatch{"Phone", "123-ab1-1424", "^([0-9]{3}-[0-9]{3}-[0-9]{4})$", "Phone number does not match the expected format."}
-	v.IsValid(errors)
-	r.Equal(errors.Count(), 1)
-	r.Equal(errors.Get("phone"), []string{"Phone number does not match the expected format."})
 }
