@@ -120,4 +120,4 @@ All fields are required for each validators, except Message (every validator has
 
 ### Available Validators
 
-A full list of available validators can be found at [https://godoc.org/github.com/gobuffalo/validate/validators](https://godoc.org/github.com/gobuffalo/validate/validators).
+A full list of available validators can be found at [https://pkg.go.dev/github.com/gobuffalo/validate/v3/validators](https://pkg.go.dev/github.com/gobuffalo/validate/v3/validators).
